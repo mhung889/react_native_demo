@@ -8,6 +8,7 @@
 import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Hello from './src/Hello';
+import Cafe from './src/Cafe';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -23,7 +24,9 @@ function App() {
 function AppContent() {
   return (
     <>
-      <Hello />
+      {/* <Hello /> */}
+
+      <Cafe />
     </>
   );
 }
