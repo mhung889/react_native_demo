@@ -13,7 +13,6 @@ function Cat({ name, imageSrc }) {
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
       <Text style={{ flexDirection: 'row' }}>
         Cat 1<Text> Cat 2 </Text>
-        <Text> Cat 3 </Text>
       </Text>
 
       <View>
