@@ -10,6 +10,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Hello from './src/Hello';
 import Cafe from './src/Cafe';
 import PizzaTranslator from './src/PizzaTranslator';
+import TodoApp from './src/screens/TodoApp/TodoApp';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -31,9 +32,10 @@ function AppContent() {
       {/* <Cafe /> */}
 
       {/* handle input  */}
-      <PizzaTranslator />
+      {/* <PizzaTranslator /> */}
 
       {/* Scroll view */}
+      <TodoApp />
     </>
   );
 }
