@@ -2,13 +2,28 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TodoListPage from './TodoListPage';
+import TodoDetail from './TodoDetail';
 
-const Stack = createNativeStackNavigator();
+export type TodoItem = {
+  id: string | number;
+  title: string;
+  isImportant: boolean;
+  isCompleted: boolean;
+};
+
+export type RootStackParamList = {
+  TodoList: undefined;
+  TodoDetail: {
+    item: TodoItem;
+  };
+};
+
+const TodoStack = createNativeStackNavigator<RootStackParamList>();
 
 function RootStack() {
   return (
-    <Stack.Navigator initialRouteName="TodoList">
-      <Stack.Screen
+    <TodoStack.Navigator initialRouteName="TodoList">
+      <TodoStack.Screen
         name="TodoList"
         component={TodoListPage}
         options={{
@@ -18,7 +33,17 @@ function RootStack() {
           headerTitleStyle: { fontWeight: 'bold' },
         }}
       />
-    </Stack.Navigator>
+      <TodoStack.Screen
+        name="TodoDetail"
+        component={TodoDetail}
+        options={{
+          title: 'Todo Detail',
+          headerStyle: { backgroundColor: '#f4511e' },
+          headerTintColor: '#fff',
+          headerTitleStyle: { fontWeight: 'bold' },
+        }}
+      />
+    </TodoStack.Navigator>
   );
 }
 
