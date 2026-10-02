@@ -7,10 +7,7 @@
 
 import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Hello from './src/Hello';
-import Cafe from './src/Cafe';
-import PizzaTranslator from './src/PizzaTranslator';
-import TodoApp from './src/screens/TodoApp/TodoApp';
+import TodoAppV2 from './src/screens/TodoApp/TodoApp';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -23,19 +20,12 @@ function App() {
   );
 }
 
+
 function AppContent() {
   return (
     <>
-      {/* <Hello /> */}
-
-      {/* React Fundamentals */}
-      {/* <Cafe /> */}
-
-      {/* handle input  */}
-      {/* <PizzaTranslator /> */}
-
-      {/* Scroll view */}
-      <TodoApp />
+      {/* Todo App */}
+      <TodoAppV2 />
     </>
   );
 }

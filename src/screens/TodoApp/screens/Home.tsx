@@ -5,6 +5,9 @@ export default function TodoListPage() {
   return (
     <View>
       <Text>TodoListPage</Text>
+      <View>
+        <Text> 123</Text>
+      </View>
     </View>
   );
 }
