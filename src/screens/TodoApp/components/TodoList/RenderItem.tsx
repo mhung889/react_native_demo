@@ -3,13 +3,21 @@ import React from 'react';
 import { TodoItemType } from '../../types';
 import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid/static';
 import { colors } from '../../theme/color';
+import { useNavigation } from '@react-navigation/native';
+import { SCREENS } from '../../navigation/SCREENS';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/type';
 
 type RenderItemProps = {
   item: TodoItemType;
   setTodos: React.Dispatch<React.SetStateAction<TodoItemType[]>>;
 };
 
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 const RenderItem = ({ item, setTodos }: RenderItemProps) => {
+  const navigation = useNavigation<NavigationProp>();
+
   //handle
   const handleImportant = (id: string) => {
     setTodos((prev: TodoItemType[]) => {
@@ -64,6 +72,13 @@ const RenderItem = ({ item, setTodos }: RenderItemProps) => {
     });
   };
 
+  const handleNavigate = (id: string) => {
+    // console.log(id);
+    navigation.navigate(SCREENS.TODO_DETAIL, {
+      todo_id: id,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.item}>
@@ -72,7 +87,9 @@ const RenderItem = ({ item, setTodos }: RenderItemProps) => {
             <FontAwesomeFreeSolid name="check" size={20} color="green" style={[styles.check]} />
           )}
         </Pressable>
-        <Text style={styles.title}> {item.title} </Text>
+        <Text style={styles.title} onPress={() => handleNavigate(item.id)}>
+          {item.title}
+        </Text>
       </View>
       <View style={styles.item}>
         <Pressable onPress={() => handleImportant(item.id)}>
