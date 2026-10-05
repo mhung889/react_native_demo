@@ -2,6 +2,7 @@ export const colors = {
   primary: {
     light: '#8381D9',
     dark: '#524FE1',
+    orange: '#f4511e',
   },
   secondary: {
     light: '#F4F4F4',
