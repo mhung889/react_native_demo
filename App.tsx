@@ -12,6 +12,8 @@ import Cafe from './src/Cafe';
 import PizzaTranslator from './src/PizzaTranslator';
 import TodoApp from './src/screens/TodoApp/TodoApp';
 
+import TestFlatList2 from './src/TestFlatList2';
+
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -36,6 +38,7 @@ function AppContent() {
 
       {/* Scroll view */}
       <TodoApp />
+      <TestFlatList2 />
     </>
   );
 }
