@@ -3,15 +3,23 @@ import React from 'react';
 import { colors } from '../../theme/colors';
 import { NewType } from '../../types/news';
 import { transformDate } from '../../utils';
+import { useNavigation } from '@react-navigation/native';
+import { SCREENS } from '../../navigation/SCREENS';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/type';
 
 type NewCardProps = {
   item: NewType;
   category: string;
 };
 
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
+
 export default function NewsCard({ item, category }: NewCardProps) {
   // console.log(item);
   // console.log(category);
+
+  const navigation = useNavigation<NavigationProps>();
 
   return (
     <View style={styles.card}>
@@ -26,10 +34,18 @@ export default function NewsCard({ item, category }: NewCardProps) {
 
       {/* Content */}
       <View style={styles.content}>
-        <Text style={styles.title} numberOfLines={3}>
+        <Text
+          style={styles.title}
+          numberOfLines={3}
+          onPress={() =>
+            navigation.navigate(SCREENS.DETAIL, {
+              newDetail: item,
+              category: category,
+            })
+          }
+        >
           {item.title}
         </Text>
-
         <Text style={styles.category}>
           {category.substring(0, 1).toUpperCase().concat(category.substring(1))}
         </Text>
@@ -90,5 +106,13 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 10,
     fontWeight: '600',
+  },
+  action: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  iconHeart: {
+    top: 3,
   },
 });

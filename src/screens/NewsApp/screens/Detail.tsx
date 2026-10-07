@@ -1,41 +1,74 @@
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, Image, ScrollView, Pressable } from 'react-native';
+import React, { useState } from 'react';
 import { colors } from '../theme/colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { NewType } from '../types/news';
+import { transformDate } from '../utils';
+import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid';
+import { useNavigation } from '@react-navigation/native';
+import { useBookMark } from '../context/BookmarkContext';
 
-export default function Detail() {
+export default function Detail({
+  route: {
+    params: { newDetail, category },
+  },
+}: {
+  route: { params: { newDetail: NewType; category: string } };
+}) {
+  // const newDetail: NewType = route.params.new;
+  // console.log(newDetail);
+
+  const navigation = useNavigation();
+
+  const { addBookmark, checkNewsExist, removeBookMark } = useBookMark();
+
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(checkNewsExist(newDetail));
+
+  const handleBookMark = () => {
+    if (checkNewsExist(newDetail)) {
+      removeBookMark(newDetail);
+      setIsBookmarked(false);
+    } else {
+      addBookmark(newDetail);
+      setIsBookmarked(true);
+    }
+  };
+
   return (
     <SafeAreaView>
+      <View style={styles.header}>
+        <Pressable style={styles.goBack} onPress={() => navigation.goBack()}>
+          <FontAwesomeFreeSolid name="circle-left" size={20} color={colors.gray[500]} />
+          <Text> Go back </Text>
+        </Pressable>
+
+        <Pressable onPress={handleBookMark}>
+          <FontAwesomeFreeSolid name="heart" color={isBookmarked ? 'red' : 'gray'} size={30} />
+        </Pressable>
+      </View>
+
       <ScrollView style={styles.card}>
         {/* Image */}
         <Image
           source={{
-            uri: 'https://pic.la.lv/2025/08/kovids.png',
+            uri: `${newDetail.image || newDetail.urlToImage}`,
           }}
           style={styles.image}
           resizeMode="cover"
         />
 
-        {/* Category */}
-        <Text style={styles.category}>Technology</Text>
-
-        {/* Title */}
         <Text style={styles.title} numberOfLines={3}>
-          Mēris atgriežas? Negadījums laboratorijā Sibīrijā izraisa paniku - Pēteris Apinis pasaka,
-          vai mums par to jāsatraucas
+          {newDetail.title}
         </Text>
+        <View style={styles.cateAuth}>
+          <Text style={styles.category}>{category}</Text>
+          <Text style={styles.author}> {newDetail.author} </Text>
+        </View>
 
-        {/* Content */}
+        <Text style={styles.date}>{`Date: ${transformDate(newDetail.publishedAt)}`}</Text>
+
         <View style={styles.content}>
-          <Text style={styles.description}>
-            Las listas de postulantes a suceder a Pablo Milad deben inscribirse hasta este martes de
-            cara a las elecciones del 19 de noviembre. La decisión es fundamental ante la entrada en
-            vigencia de la ley SADP. Mientras algunos buscan documentos para cumplir con los
-            requisitos, otros evalúan incluso la posibilidad de fusionarse.", "content": "Noviembre
-            será decisivo para el fútbol chileno. El jueves 19 de ese mes, el Consejo de Presidentes
-            de la ANFP elegirá al reemplazante de Pablo Milad en la testera de la asociación. La
-            determinación es crucial, por el contexto en que se da: la entrada...
-          </Text>
+          <Text style={styles.description}>{newDetail.description}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -43,6 +76,17 @@ export default function Detail() {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 20,
+  },
+
+  goBack: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
   card: {
     marginHorizontal: 20,
     marginVertical: 10,
@@ -73,6 +117,7 @@ const styles = StyleSheet.create({
   content: {
     borderTopWidth: 1,
     marginVertical: 2,
+    marginHorizontal: 5,
   },
 
   title: {
@@ -80,6 +125,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     lineHeight: 23,
     color: '#222',
+    marginHorizontal: 5,
   },
 
   description: {
@@ -91,8 +137,25 @@ const styles = StyleSheet.create({
 
   category: {
     marginTop: 10,
-    fontSize: 13,
+    fontSize: 16,
     fontWeight: '600',
     color: colors.primary.orange,
+  },
+  cateAuth: {
+    marginHorizontal: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  date: {
+    marginVertical: 5,
+    fontSize: 15,
+    fontWeight: '700',
+    marginHorizontal: 5,
+  },
+  author: {
+    fontSize: 15,
+    top: 5,
+    fontWeight: '500',
   },
 });

@@ -7,7 +7,9 @@ import BookMark from './screens/BookMarks';
 import Detail from './screens/Detail';
 // import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid';
 import { SCREENS } from './navigation/SCREENS';
+import { BookMarkProvider } from './context/BookmarkContext';
 
+const RootStack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
 const BookMarkStack = createNativeStackNavigator();
 const MyTabs = createBottomTabNavigator();
@@ -26,35 +28,50 @@ function BookMarkStackScreen() {
     <BookMarkStack.Navigator>
       <BookMarkStack.Screen
         name={SCREENS.BOOKMARK}
-        component={Detail}
+        component={BookMark}
         options={{ headerShown: false }}
       />
     </BookMarkStack.Navigator>
   );
 }
 
+function MainTabs() {
+  return (
+    <MyTabs.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#007AFF',
+        tabBarInactiveTintColor: 'gray',
+        headerShown: false,
+      }}
+    >
+      <MyTabs.Screen
+        name={SCREENS.HOMESTACK}
+        component={HomeStackScreen}
+        options={{ tabBarLabel: 'Home' }}
+      />
+
+      <MyTabs.Screen
+        name={SCREENS.BOOKMARKSTACK}
+        component={BookMarkStackScreen}
+        options={{ tabBarLabel: 'Saved' }}
+      />
+    </MyTabs.Navigator>
+  );
+}
+
 function NewsApp() {
   return (
     <NavigationContainer>
-      <MyTabs.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: '#007AFF',
-          tabBarInactiveTintColor: 'gray',
-          headerShown: false,
-        }}
-      >
-        <MyTabs.Screen
-          name={SCREENS.HOMESTACK}
-          component={HomeStackScreen}
-          options={{ tabBarLabel: 'Home' }}
-        />
-
-        <MyTabs.Screen
-          name={SCREENS.BOOKMARKSTACK}
-          component={BookMarkStackScreen}
-          options={{ tabBarLabel: 'Saved' }}
-        />
-      </MyTabs.Navigator>
+      <BookMarkProvider>
+        <RootStack.Navigator>
+          <RootStack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} />
+          <RootStack.Screen
+            name={SCREENS.DETAIL}
+            component={Detail}
+            options={{ headerShown: false }}
+          />
+        </RootStack.Navigator>
+      </BookMarkProvider>
     </NavigationContainer>
   );
 }

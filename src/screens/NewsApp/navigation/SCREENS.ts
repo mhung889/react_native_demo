@@ -1,9 +1,11 @@
 export const SCREENS = {
   //Home Stack
   HOME: 'Home',
-  DETAIL: 'Detail',
   // BookMark Stack
   BOOKMARK: 'BookMark',
+
+  //Detail
+  DETAIL: 'Detail',
 
   //Tab
   HOMESTACK: 'HomeStack',
