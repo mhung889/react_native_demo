@@ -5,6 +5,7 @@ export type RootStackParamList = {
   [SCREENS.HOME]: undefined;
 
   [SCREENS.DETAIL]: {
-    new: NewType;
+    newDetail: NewType;
+    category?: string;
   };
 };

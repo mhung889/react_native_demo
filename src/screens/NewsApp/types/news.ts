@@ -1,11 +1,12 @@
 export type NewType = {
-  id: string;
+  id?: string;
   title: string;
   description: string;
   content: string;
   url: string;
   image: string;
   urlToImage?: string;
+  author?: string;
   publishedAt: string;
   lang: string;
   source?: {

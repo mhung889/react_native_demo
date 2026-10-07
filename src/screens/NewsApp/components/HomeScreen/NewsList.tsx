@@ -56,7 +56,7 @@ export default function NewsList({ category, searchTerm }: { category: string; s
   };
 
   const fetchTopHeadlines = async (pageNumber: number) => {
-    console.log(pageNumber);
+    // console.log(pageNumber);
     const response = await fetch(
       // `https://gnews.io/api/v4/top-headlines?category=${category}&apikey=${GNEWS_API_KEY}&lang=vi&max=6&page=${pageNumber}`,
       `https://newsapi.org/v2/top-headlines?apiKey=${NEWS_API_KEY}&page=${pageNumber}&category=${category}&pageSize=${PAGE_SIZE}`,
@@ -135,6 +135,8 @@ export default function NewsList({ category, searchTerm }: { category: string; s
     return <ActivityIndicator color="red" size="large" />;
   };
 
+  // console.log(news);
+
   return (
     <View style={styles.container}>
       <View style={styles.item}>
@@ -144,7 +146,7 @@ export default function NewsList({ category, searchTerm }: { category: string; s
       <FlatList
         style={commonStyle.flex1}
         data={news}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.url}
         renderItem={renderItem}
         //load more
         onEndReached={handleLoadMore}
