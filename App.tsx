@@ -10,6 +10,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import TodoAppV2 from './src/screens/TodoApp/TodoApp';
 import NewsApp from './src/screens/NewsApp/NewsApp';
+import ExpenseTrackerApp from './src/screens/ExpenseTrackerApp/ExpenseTrackerApp';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -30,6 +31,9 @@ function AppContent() {
 
       {/* News App */}
       <NewsApp />
+
+      {/* Expense Tracker App */}
+      {/* <ExpenseTrackerApp /> */}
     </>
   );
 }

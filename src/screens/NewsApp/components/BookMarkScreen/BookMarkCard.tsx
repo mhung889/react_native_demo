@@ -35,8 +35,9 @@ export default function BookMarkCard({ item }: BookMarkCardProps) {
   };
 
   const handleNavigate = () => {
-    navigation.navigate(SCREENS.DETAIL, {
+    navigation.navigate(SCREENS.NEWS_DETAIL, {
       newDetail: item,
+      category: item.category,
     });
   };
 

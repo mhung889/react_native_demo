@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 
 type TodoContextType = {
   // getBookmarks: () => NewType[];
-  addBookmark: (news: NewType) => void;
+  addBookmark: (news: NewType, category: string) => void;
   removeBookMark: (news: NewType) => void;
   checkNewsExist: (news: NewType) => boolean;
   bookMarks: NewType[];
@@ -28,14 +28,16 @@ export function BookMarkProvider({ children }: { children: React.ReactNode }) {
     }
   });
 
-  const addBookmark = (news: NewType) => {
+  const addBookmark = (news: NewType, category: string) => {
     const exists = bookMarks.some((item) => item.url === news.url);
 
     if (exists) {
       return;
     }
 
-    const newBookmarks = [...bookMarks, news];
+    const newSaved = { ...news, category };
+
+    const newBookmarks = [...bookMarks, newSaved];
     setBookMarks(newBookmarks);
 
     storage.set(BOOKMARK_KEY, JSON.stringify(newBookmarks));

@@ -8,9 +8,7 @@ type SearchProp = {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 };
 
-// https://newsapi.org/v2/everything?q=bitcoin&apiKey=e7a6e8095f04422c83990f92894ef6b6&searchIn=title&pageSize=6&page=1
-
-export default function SearchButton({ searchTerm, setSearchTerm }: SearchProp) {
+export default function SearchInput({ searchTerm, setSearchTerm }: SearchProp) {
   console.log(searchTerm);
 
   return (

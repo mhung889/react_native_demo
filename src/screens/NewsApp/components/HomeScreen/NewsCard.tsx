@@ -38,7 +38,7 @@ export default function NewsCard({ item, category }: NewCardProps) {
           style={styles.title}
           numberOfLines={3}
           onPress={() =>
-            navigation.navigate(SCREENS.DETAIL, {
+            navigation.navigate(SCREENS.NEWS_DETAIL, {
               newDetail: item,
               category: category,
             })

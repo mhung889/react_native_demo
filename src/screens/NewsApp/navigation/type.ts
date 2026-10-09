@@ -4,7 +4,7 @@ import { SCREENS } from './SCREENS';
 export type RootStackParamList = {
   [SCREENS.HOME]: undefined;
 
-  [SCREENS.DETAIL]: {
+  [SCREENS.NEWS_DETAIL]: {
     newDetail: NewType;
     category?: string;
   };

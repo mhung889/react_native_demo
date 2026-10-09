@@ -6,19 +6,33 @@ import { colors } from '../../theme/colors';
 type CategoryProps = {
   category: string;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
+  handleCategoryPress: (category: string) => void;
 };
 
-export default function Categories({ category, setCategory }: CategoryProps) {
+export default function Categories({ category, setCategory, handleCategoryPress }: CategoryProps) {
   // console.log(CATEGORIES);
 
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.headerCate}> Categories </Text>
+        <Text style={styles.headerCate}>{'Categories'}</Text>
       </View>
       <View style={styles.item}>
-        {CATEGORIES.map((c) => (
+        {/* {CATEGORIES.map((c) => (
           <Pressable key={c} onPress={() => setCategory(c)}>
+            <Text
+              style={[
+                styles.label,
+                { color: c === category ? colors.primary.orange : colors.black[50] },
+              ]}
+            >
+              {`[${c}]`}
+            </Text>
+          </Pressable>
+        ))} */}
+
+        {CATEGORIES.map((c) => (
+          <Pressable key={c} onPress={() => handleCategoryPress(c)}>
             <Text
               style={[
                 styles.label,
@@ -47,6 +61,7 @@ const styles = StyleSheet.create({
   headerCate: {
     fontSize: 16,
     fontWeight: 'bold',
+    marginHorizontal: 10,
   },
   label: {
     // color: 'black',

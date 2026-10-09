@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from './screens/Home';
 import BookMark from './screens/BookMarks';
-import Detail from './screens/Detail';
+import Detail from './screens/NewsDetail';
 // import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid';
 import { SCREENS } from './navigation/SCREENS';
 import { BookMarkProvider } from './context/BookmarkContext';
@@ -27,7 +27,7 @@ function BookMarkStackScreen() {
   return (
     <BookMarkStack.Navigator>
       <BookMarkStack.Screen
-        name={SCREENS.BOOKMARK}
+        name={SCREENS.BOOK_MARK}
         component={BookMark}
         options={{ headerShown: false }}
       />
@@ -45,13 +45,13 @@ function MainTabs() {
       }}
     >
       <MyTabs.Screen
-        name={SCREENS.HOMESTACK}
+        name={SCREENS.HOME_STACK}
         component={HomeStackScreen}
         options={{ tabBarLabel: 'Home' }}
       />
 
       <MyTabs.Screen
-        name={SCREENS.BOOKMARKSTACK}
+        name={SCREENS.BOOK_MARK_STACK}
         component={BookMarkStackScreen}
         options={{ tabBarLabel: 'Saved' }}
       />
@@ -66,7 +66,7 @@ function NewsApp() {
         <RootStack.Navigator>
           <RootStack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} />
           <RootStack.Screen
-            name={SCREENS.DETAIL}
+            name={SCREENS.NEWS_DETAIL}
             component={Detail}
             options={{ headerShown: false }}
           />

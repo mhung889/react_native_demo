@@ -2,12 +2,11 @@ export const SCREENS = {
   //Home Stack
   HOME: 'Home',
   // BookMark Stack
-  BOOKMARK: 'BookMark',
+  BOOK_MARK: 'BookMark',
 
-  //Detail
-  DETAIL: 'Detail',
+  NEWS_DETAIL: 'NewDetail',
 
   //Tab
-  HOMESTACK: 'HomeStack',
-  BOOKMARKSTACK: 'BookMarkStack',
+  HOME_STACK: 'HomeStack',
+  BOOK_MARK_STACK: 'BookMarkStack',
 } as const;

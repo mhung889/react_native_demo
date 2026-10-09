@@ -29,7 +29,7 @@ export default function Detail({
       removeBookMark(newDetail);
       setIsBookmarked(false);
     } else {
-      addBookmark(newDetail);
+      addBookmark(newDetail, category);
       setIsBookmarked(true);
     }
   };

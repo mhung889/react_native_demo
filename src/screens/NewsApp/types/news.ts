@@ -14,4 +14,5 @@ export type NewType = {
     name: string;
     url: string;
   };
+  category?: string;
 };
