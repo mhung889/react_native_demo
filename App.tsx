@@ -11,6 +11,8 @@ import Hello from './src/Hello';
 import Cafe from './src/Cafe';
 import PizzaTranslator from './src/PizzaTranslator';
 
+import EcommerceApp from './src/screens/EcommerceApp/EcommerceApp';
+
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -25,15 +27,7 @@ function App() {
 function AppContent() {
   return (
     <>
-      {/* <Hello /> */}
-
-      {/* React Fundamentals */}
-      {/* <Cafe /> */}
-
-      {/* handle input  */}
-      <PizzaTranslator />
-
-      {/* Scroll view */}
+      <EcommerceApp />
     </>
   );
 }

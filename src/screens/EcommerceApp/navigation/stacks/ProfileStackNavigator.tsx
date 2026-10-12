@@ -1,0 +1,31 @@
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SCREENS } from '../SCREENS';
+import ProfileScreen from '../../screens/profile/ProfileScreen';
+import SettingProfileScreen from '../../screens/profile/setting/SettingProfileScreen';
+import MyOrdersScreen from '../../screens/profile/orders/MyOrdersScreen';
+import OrderDetailScreen from '../../screens/profile/orders/OrderDetailScreen';
+
+const ProfileStack = createNativeStackNavigator();
+
+const ProfileStackNavigator = () => {
+  return (
+    <ProfileStack.Navigator initialRouteName={SCREENS.PROFILE}>
+      <ProfileStack.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
+      <ProfileStack.Screen
+        name={SCREENS.SETTINGS}
+        component={SettingProfileScreen}
+      />
+      <ProfileStack.Screen
+        name={SCREENS.MY_ORDERS}
+        component={MyOrdersScreen}
+      />
+      <ProfileStack.Screen
+        name={SCREENS.ORDER_DETAIL}
+        component={OrderDetailScreen}
+      />
+    </ProfileStack.Navigator>
+  );
+};
+
+export default ProfileStackNavigator;
