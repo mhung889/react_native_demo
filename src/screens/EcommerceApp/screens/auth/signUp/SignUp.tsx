@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import Ionicons from '@react-native-vector-icons/ionicons';
 import Lucide from '@react-native-vector-icons/lucide';
 import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid';

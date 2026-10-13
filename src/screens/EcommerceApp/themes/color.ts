@@ -7,6 +7,7 @@ export const colors = {
   ordinaryText: '#F5F5F5',
   success: '#55D85A',
   white: '#F6F6F6',
+  yellow: ' rgba(255, 186, 73, 1)',
 
   // logo
   whiteLogo: '#FFFFFF',
