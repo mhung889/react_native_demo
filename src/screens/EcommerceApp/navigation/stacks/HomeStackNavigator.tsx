@@ -4,8 +4,9 @@ import { SCREENS } from '../SCREENS';
 import Home from '../../screens/home/Home';
 import ProductDetailScreen from '../../screens/home/ProductDetailScreen';
 import { screenOption } from '../screenOptions';
+import { HomeStackParamList } from '../types';
 
-const HomeStack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
 const HomeStackNavigator = () => {
   return (

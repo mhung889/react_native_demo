@@ -17,6 +17,7 @@ const RatingStar = ({ ratings }) => {
     <View style={styles.container}>
       {RATING.map(star => (
         <Ionicons
+          key={star}
           name={star <= avegerStar ? 'star' : 'star-outline'}
           color={star <= avegerStar ? colors.yellow : colors.gray}
           size={20}

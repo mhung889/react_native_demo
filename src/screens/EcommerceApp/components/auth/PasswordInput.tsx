@@ -3,19 +3,27 @@ import React, { useState } from 'react';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { colors } from '../../themes/color';
 
-const PasswordInput = () => {
-  const [password, setPassword] = useState('');
+const PasswordInput = ({
+  text,
+  onChange,
+  value,
+  onBlur,
+}: {
+  text: any;
+  onChange: any;
+  value: any;
+}) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
+  // console.log(inputProps);
   return (
-    <View style={styles.container}>
+    <View style={styles.Passwordcontainer}>
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder={text}
         placeholderTextColor={colors.ordinaryText}
-        onChangeText={setPassword}
         secureTextEntry={!isPasswordVisible}
-        value={password}
+        onChangeText={onChange}
+        value={value}
         autoCapitalize="none"
         autoCorrect={false}
       />
@@ -38,7 +46,7 @@ const PasswordInput = () => {
 export default PasswordInput;
 
 const styles = StyleSheet.create({
-  container: {
+  Passwordcontainer: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 15,

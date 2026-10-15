@@ -3,8 +3,9 @@ import React from 'react';
 import { SCREENS } from '../SCREENS';
 import FavoritesScreen from '../../screens/favorites/FavoritesScreen';
 import ProductDetailScreen from '../../screens/home/ProductDetailScreen';
+import { FavoritesStackParamList } from '../types';
 
-const FavoriteStack = createNativeStackNavigator();
+const FavoriteStack = createNativeStackNavigator<FavoritesStackParamList>();
 
 const FavoriteStackNavigator = () => {
   return (

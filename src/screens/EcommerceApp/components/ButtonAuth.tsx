@@ -1,9 +1,19 @@
-import { StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 import React from 'react';
 import { colors } from '../themes/color';
 
-const ButtonAuth = ({ name }: { name: string }) => {
-  return <Text style={styles.buttonText}> {name} </Text>;
+const ButtonAuth = ({
+  name,
+  handleSubmit,
+}: {
+  name: string;
+  handleSubmit: any;
+}) => {
+  return (
+    <Pressable onPress={handleSubmit}>
+      <Text style={styles.buttonText}>{name}</Text>
+    </Pressable>
+  );
 };
 
 export default ButtonAuth;

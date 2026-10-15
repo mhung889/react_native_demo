@@ -1,10 +1,12 @@
 export const SCREENS = {
   // Auth stack
+  AUTH: 'Auth',
   SIGN_UP: 'SignUp',
   SIGN_IN: 'SignIn',
   FORGOT_PASSWORD: 'ForgotPassword',
 
   // Bottom tabs
+  MAIN_TAB: 'MainTab',
   HOME_TAB: 'HomeTab',
   SHOP_TAB: 'ShopTab',
   BAG_TAB: 'BagTab',
@@ -14,7 +16,9 @@ export const SCREENS = {
   // Home stack
   HOME: 'Home',
   PRODUCT_DETAIL: 'ProductDetail',
-  CATEGORY: 'Category',
+
+  //Shop stack
+  SHOP: 'Shop',
 
   //Favaroties stack
   FAVORITES: 'Favorites',
@@ -25,7 +29,8 @@ export const SCREENS = {
 
   // Profile stack
   PROFILE: 'Profile',
-  SETTINGS: 'Settings',
-  MY_ORDERS: 'MyOrders',
-  ORDER_DETAIL: 'OrderDetail',
+  PROFILE_SETTINGS: 'ProfileSettings',
+  PROFILE_MY_ORDERS: 'ProfileMyOrders',
+  PROFILE_ORDER_DETAIL: 'ProfileOrderDetail',
+  PROFILE_ADDRESS: 'ProfileAddress',
 };
