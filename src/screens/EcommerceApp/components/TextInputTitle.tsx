@@ -1,18 +1,23 @@
 import {
+  Pressable,
   StyleSheet,
   Text,
   TextInput,
   TextInputProps,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { ReactNode, useState } from 'react';
 import { colors } from '../themes/color';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 
 type TextInputTitleProps = TextInputProps & {
   errors?: string;
   touched?: boolean;
   field?: string;
   placeholderText: string;
+  isRightElement?: ReactNode;
+  isShowRightElement?: boolean;
+  secureTextEntry?: boolean;
 };
 
 const TextInputTitle = ({
@@ -20,8 +25,16 @@ const TextInputTitle = ({
   value,
   touched,
   placeholderText,
+  isRightElement,
+  secureTextEntry = false,
+  isShowRightElement = false,
   ...inputProps
 }: TextInputTitleProps) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const shouldHidePassword =
+    isShowRightElement && secureTextEntry && !isPasswordVisible;
+
   return (
     <View style={styles.field}>
       <View
@@ -35,11 +48,34 @@ const TextInputTitle = ({
           autoCapitalize="none"
           autoCorrect={false}
           returnKeyType="next"
+          secureTextEntry={shouldHidePassword}
+          //
+
           {...inputProps}
         />
+        {isRightElement
+          ? isRightElement
+          : isShowRightElement && (
+              <Pressable
+                onPress={() => setIsPasswordVisible(previous => !previous)}
+                hitSlop={10}
+                accessibilityRole="button"
+                accessibilityLabel={
+                  isPasswordVisible ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'
+                }
+              >
+                <Ionicons
+                  name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+                  size={21}
+                  color={colors.gray}
+                />
+              </Pressable>
+            )}
       </View>
 
-      {touched && errors && <Text style={styles.errorText}>{errors}</Text>}
+      {/* {touched && errors && <Text> {errors} </Text>} */}
+
+      <Text style={styles.errorText}>{errors ? `${errors}` : ''}</Text>
     </View>
   );
 };
@@ -48,13 +84,7 @@ export default TextInputTitle;
 
 const styles = StyleSheet.create({
   field: {
-    gap: 9,
-  },
-
-  label: {
-    color: colors.white,
-    fontSize: 14,
-    fontWeight: '600',
+    gap: 2,
   },
 
   inputContainer: {
@@ -85,49 +115,5 @@ const styles = StyleSheet.create({
     color: '#f87171',
     fontSize: 12,
     lineHeight: 17,
-  },
-
-  forgotPassword: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    gap: 10,
-    alignItems: 'center',
-  },
-
-  forgotPasswordText: {
-    color: colors.white,
-    fontSize: 13,
-    fontWeight: '600',
-  },
-
-  submitButton: {
-    minHeight: 54,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 14,
-    backgroundColor: colors.primary,
-    marginTop: 26,
-  },
-
-  submitButtonDisabled: {
-    opacity: 0.6,
-  },
-
-  submitButtonPressed: {
-    opacity: 0.85,
-  },
-
-  submitButtonText: {
-    color: colors.white,
-    fontSize: 15,
-    fontWeight: '700',
-    letterSpacing: 0.7,
-  },
-
-  footerText: {
-    color: colors.gray,
-    fontSize: 12,
-    textAlign: 'center',
-    marginTop: 8,
   },
 });

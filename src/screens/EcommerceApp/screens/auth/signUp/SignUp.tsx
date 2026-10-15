@@ -7,7 +7,6 @@ import Header from '../../../components/auth/Header';
 import Footer from '../../../components/auth/Footer';
 import ButtonAuth from '../../../components/ButtonAuth';
 import { commonStyle } from '../../../themes/commonStyle';
-import PasswordInput from '../../../components/auth/PasswordInput';
 import { SCREENS } from '../../../navigation/SCREENS';
 import { Link } from '@react-navigation/native';
 
@@ -36,14 +35,13 @@ const SignUp = () => {
           />
         </View>
 
-        {/* <View style={styles.item}>
+        <View style={styles.item}>
           <TextInput
             placeholder="Password"
             style={styles.textInput}
             placeholderTextColor={colors.gray}
           />
-        </View> */}
-        <PasswordInput />
+        </View>
       </View>
 
       <View style={styles.loginPromptContainer}>

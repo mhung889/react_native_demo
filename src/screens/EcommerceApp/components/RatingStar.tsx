@@ -11,8 +11,6 @@ const RatingStar = ({ ratings }) => {
   const avegerStar =
     ratingExam.reduce((sum, star) => sum + star, 0) / ratingExam.length;
 
-  console.log(avegerStar);
-
   return (
     <View style={styles.container}>
       {RATING.map(star => (

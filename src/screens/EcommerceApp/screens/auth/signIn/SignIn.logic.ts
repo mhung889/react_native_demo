@@ -1,5 +1,4 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
 import { useAuthStore } from '../../../store/auth.store';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AuthStackParamList } from '../../../navigation/types';
@@ -11,7 +10,6 @@ type SignInNavigationProp = NativeStackNavigationProp<AuthStackParamList>;
 export const useSignInLogic = () => {
   const navigation = useNavigation<SignInNavigationProp>();
   const signIn = useAuthStore(state => state.signIn);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const _onSubmit = async (values: any) => {
     try {
@@ -46,7 +44,5 @@ export const useSignInLogic = () => {
     onSubmit: _onSubmit,
     navigation,
     signIn,
-    isPasswordVisible,
-    setIsPasswordVisible,
   };
 };

@@ -3,7 +3,7 @@
 */
 
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useCallback } from 'react';
 import Header from '../../../components/auth/Header';
 import Footer from '../../../components/auth/Footer';
 import { colors } from '../../../themes/color';
@@ -13,7 +13,6 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import TextInputTitle from '../../../components/TextInputTitle';
 import { signInSchema } from '../../../validation/signInSchema';
-import PasswordInputTitle from '../../../components/PasswordInputTitle';
 import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid';
 import { useSignInLogic } from './SignIn.logic';
 import { authService } from '../../../services/authService';
@@ -25,32 +24,40 @@ const SignIn = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm({
     resolver: yupResolver(signInSchema),
+    mode: 'onBlur',
     defaultValues: {
       username: '',
       password: '',
     },
   });
-  const onSubmit = async (data: any) => {
-    console.log(data);
-    try {
-      const listUsers = (await authService.findAllUser()) || [];
 
-      const existUserName = listUsers.some(
-        (user: any) => user.username === data.username.toLowerCase().trim(),
-      );
-      if (!existUserName) {
-        Alert.alert('Error', 'user name khong ton tai');
-        return;
+  const onSubmit = useCallback(
+    async (data: { username: string; password: string }) => {
+      try {
+        const listUsers = (await authService.findAllUser()) || [];
+
+        const existUserName = listUsers.some(
+          (user: any) => user.username === data.username.toLowerCase().trim(),
+        );
+        if (!existUserName) {
+          Alert.alert('Error', 'user name khong ton tai');
+          return;
+        }
+        await signIn(data);
+      } catch {
+        let message = useAuthStore.getState().error;
+        Alert.alert('Error', message ?? 'Loi ...');
       }
-      await signIn(data);
-    } catch {
-      let message = useAuthStore.getState().error;
-      Alert.alert('Error', message ?? 'Loi ...');
-    }
-  };
+    },
+    [signIn],
+  );
+
+  const handleLogin = useCallback(() => {
+    handleSubmit(onSubmit)();
+  }, [handleSubmit, onSubmit]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -60,46 +67,51 @@ const SignIn = () => {
         <Controller
           control={control}
           name="username"
-          render={({ field: { onChange, onBlur, value } }) => (
-            // <TextInput
-            //   placeholder="username"
-            //   onBlur={onBlur}
-            //   onChangeText={onChange}
-            //   value={value}
-            // />
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { error, isTouched },
+          }) => (
             <TextInputTitle
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
               placeholderText="username"
+              //
+              touched={isTouched}
+              errors={error?.message}
             />
           )}
         />
-        {errors.username && (
-          <Text style={styles.inputError}> {errors.username.message} </Text>
-        )}
+        {/* <Text style={styles.inputError}>
+          {errors.username ? errors.username.message : ''}
+        </Text> */}
+
         <Controller
           control={control}
           name="password"
-          render={({ field: { onChange, onBlur, value } }) => (
-            // <TextInput
-            //   placeholder="password"
-            //   onBlur={onBlur}
-            //   onChangeText={onChange}
-            //   value={value}
-            // />
-
-            <PasswordInputTitle
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { isTouched, error },
+          }) => (
+            <TextInputTitle
+              value={value}
               onBlur={onBlur}
               onChangeText={onChange}
-              value={value}
+              isShowRightElement={true}
+              secureTextEntry={true}
+              returnKeyType="done"
+              autoCapitalize="none"
               placeholderText="password"
+              autoComplete="current-password"
+              //
+              touched={isTouched}
+              errors={error?.message}
             />
           )}
         />
-        {errors.password && (
-          <Text style={styles.inputError}> {errors.password.message} </Text>
-        )}
+        {/* <Text style={styles.inputError}>
+          {errors.password ? errors.password.message : ''}
+        </Text> */}
       </View>
 
       {/* Forgot password */}
@@ -113,7 +125,7 @@ const SignIn = () => {
         <FontAwesomeFreeSolid name="arrow-right-long" size={20} color={'red'} />
       </Pressable>
       {/* Submit */}
-      <Pressable onPress={handleSubmit(onSubmit)}>
+      <Pressable onPress={handleLogin}>
         <Text style={styles.buttonText}> {'LOGIN'} </Text>
       </Pressable>
 
@@ -133,11 +145,11 @@ const styles = StyleSheet.create({
 
   formContainer: {
     marginTop: 50,
-    gap: 10,
+    gap: 6,
   },
 
   inputError: {
-    color: colors.white,
+    color: colors.primary,
   },
 
   forgotPassword: {
