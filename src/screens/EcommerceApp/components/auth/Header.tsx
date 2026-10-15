@@ -2,14 +2,14 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { colors } from '../../themes/color';
-import { Link, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 type HeaderType = {
   name: string;
-  screen: string;
+  screen?: string;
 };
 
-const Header = ({ name, screen }: HeaderType) => {
+const Header = ({ name }: HeaderType) => {
   const navigation = useNavigation();
 
   return (

@@ -13,15 +13,15 @@ const ProfileStackNavigator = () => {
     <ProfileStack.Navigator initialRouteName={SCREENS.PROFILE}>
       <ProfileStack.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
       <ProfileStack.Screen
-        name={SCREENS.SETTINGS}
+        name={SCREENS.PROFILE_SETTINGS}
         component={SettingProfileScreen}
       />
       <ProfileStack.Screen
-        name={SCREENS.MY_ORDERS}
+        name={SCREENS.PROFILE_MY_ORDERS}
         component={MyOrdersScreen}
       />
       <ProfileStack.Screen
-        name={SCREENS.ORDER_DETAIL}
+        name={SCREENS.PROFILE_ORDER_DETAIL}
         component={OrderDetailScreen}
       />
     </ProfileStack.Navigator>

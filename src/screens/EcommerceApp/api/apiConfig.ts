@@ -3,12 +3,18 @@ import Config from 'react-native-config';
 
 const TIMEOUT = 5000;
 
-const api = axios.create({
+const URL_BASE = 'https://dummyjson.com';
+
+export const api = axios.create({
+  baseURL: URL_BASE,
   timeout: TIMEOUT,
 });
 
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   //   config.headers.set('Authorization', `Bearer ${getToken()}`);
+  config.headers.set('Content-Type', 'application/json');
+  config.headers.set('Accept', 'application/json');
+
   return config;
 });
 

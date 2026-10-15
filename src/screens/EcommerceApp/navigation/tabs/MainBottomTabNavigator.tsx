@@ -8,8 +8,9 @@ import FavoriteStackNavigator from '../stacks/FavoriteStackNavigator';
 import ProfileStackNavigator from '../stacks/ProfileStackNavigator';
 import TabBarIcon from './TabBarIcon';
 import { colors } from '../../themes/color';
+import { MainTabParamList } from '../types';
 
-const MainTab = createBottomTabNavigator();
+const MainTab = createBottomTabNavigator<MainTabParamList>();
 
 const MainBottomTabNavigator = () => {
   const renderIcon = (
