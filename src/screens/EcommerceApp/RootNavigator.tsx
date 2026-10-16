@@ -6,7 +6,7 @@ import MainBottomTabNavigator from './navigation/tabs/MainBottomTabNavigator';
 const RootNavigator = () => {
   const token = useAuthStore(state => state.accessToken);
 
-  if (token) {
+  if (!token) {
     return <MainBottomTabNavigator />;
   }
 
