@@ -3,7 +3,9 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type HomeStackParamList = {
   [SCREENS.HOME]: undefined;
-  [SCREENS.PRODUCT_DETAIL]: undefined;
+  [SCREENS.PRODUCT_DETAIL]: {
+    productId: number;
+  };
 };
 
 export type ProfileStackParamList = {

@@ -1,28 +1,31 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { colors } from '../../themes/color';
 import { commonStyle } from '../../themes/commonStyle';
 
-const HomeTitle = ({ name, title }: { name: string; title: string }) => {
+type ProductListHeaderProps = {
+  name: string;
+  title?: string;
+  rightElement?: ReactNode;
+};
+
+const ProductListHeader = ({
+  name,
+  title,
+  rightElement,
+}: ProductListHeaderProps) => {
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>{name}</Text>
-        <Text
-          style={{
-            color: colors.white,
-            fontFamily: commonStyle.fontFamily,
-          }}
-        >
-          {title}
-        </Text>
+        {title && <Text style={styles.subtitle}>{title}</Text>}
       </View>
-      <Text style={styles.viewAll}>{'View all'}</Text>
+      {rightElement}
     </View>
   );
 };
 
-export default HomeTitle;
+export default ProductListHeader;
 
 const styles = StyleSheet.create({
   container: {
@@ -31,17 +34,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-
   title: {
     color: colors.white,
     fontFamily: commonStyle.fontFamily,
     fontSize: 30,
     fontWeight: 'bold',
   },
-
-  viewAll: {
+  subtitle: {
     color: colors.white,
     fontFamily: commonStyle.fontFamily,
-    fontSize: 16,
   },
 });

@@ -1,34 +1,69 @@
-import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
 import { colors } from '../../themes/color';
 import HomeBanner from '../../components/home/HomeBanner';
 import { useHomeLogic } from '../../components/home/Home.logic';
-import ProductCardItem from '../../components/home/ProductCard/ProductCardItem';
+import ProductCardItem from '../../components/common/ProductCard/ProductCardItem';
 import { ProductType } from '../../types/product';
-import HomeTitle from '../../components/home/HomeTitle';
+import ProductListHeader from '../../components/home/ProductListHeader';
+import { commonStyle } from '../../themes/commonStyle';
 
 const Home = () => {
-  const { products } = useHomeLogic();
+  const { products, loading, hanleRefresh, refreshing } = useHomeLogic();
 
   const renderItem = ({ item }: { item: ProductType }) => {
     return <ProductCardItem item={item} />;
   };
 
+  const renderRightElement = () => {
+    return (
+      <Pressable>
+        <Text style={styles.viewAll}> View all</Text>
+      </Pressable>
+    );
+  };
+
+  if (loading) {
+    return <ActivityIndicator size={20} color={'red'} />;
+  }
+
   return (
-    <ScrollView style={styles.container}>
-      <HomeBanner />
+    <FlatList
+      style={styles.container}
+      data={products}
+      keyExtractor={item => item.id.toString()}
+      refreshing={refreshing}
+      onRefresh={hanleRefresh}
+      ListHeaderComponent={
+        <>
+          <HomeBanner />
 
-      <View style={styles.listContainer}>
-        <HomeTitle name={'Sale'} title={'Super summer sale'} />
+          <View style={{ marginHorizontal: 16 }}>
+            <ProductListHeader
+              name="Sale"
+              title="Super summer sale"
+              rightElement={renderRightElement()}
+            />
 
-        <FlatList
-          data={products.slice(0, 10)}
-          keyExtractor={item => item.id.toString()}
-          renderItem={renderItem}
-          horizontal={true}
-        />
-      </View>
-    </ScrollView>
+            <FlatList
+              data={products.slice(0, 10)}
+              keyExtractor={item => item.id.toString()}
+              renderItem={renderItem}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+        </>
+      }
+      contentContainerStyle={styles.listContainer}
+    />
   );
 };
 
@@ -41,8 +76,13 @@ const styles = StyleSheet.create({
   },
 
   listContainer: {
-    marginHorizontal: 15,
     marginVertical: 2,
-    flex: 1,
+    paddingBottom: 50,
+  },
+
+  viewAll: {
+    color: colors.white,
+    fontFamily: commonStyle.fontFamily,
+    fontSize: 16,
   },
 });

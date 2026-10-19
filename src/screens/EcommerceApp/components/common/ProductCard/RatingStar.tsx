@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { colors } from '../../../themes/color';
@@ -20,6 +20,7 @@ const RatingStar = ({ reviews }: { reviews: ReviewType[] }) => {
           size={15}
         />
       ))}
+      <Text style={styles.text}> {`(${reviews.length})`}</Text>
     </View>
   );
 };
@@ -30,5 +31,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     gap: 3,
+  },
+  text: {
+    color: colors.white,
   },
 });

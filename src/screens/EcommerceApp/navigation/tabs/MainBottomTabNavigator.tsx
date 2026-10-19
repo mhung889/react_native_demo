@@ -9,6 +9,7 @@ import ProfileStackNavigator from '../stacks/ProfileStackNavigator';
 import TabBarIcon from './TabBarIcon';
 import { colors } from '../../themes/color';
 import { MainTabParamList } from '../types';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const MainTab = createBottomTabNavigator<MainTabParamList>();
 
@@ -22,6 +23,8 @@ const MainBottomTabNavigator = () => {
     <TabBarIcon routeName={name} focused={focused} color={color} size={size} />
   );
 
+  const { bottom } = useSafeAreaInsets();
+
   return (
     <MainTab.Navigator
       initialRouteName={SCREENS.HOME_TAB}
@@ -31,6 +34,7 @@ const MainBottomTabNavigator = () => {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: colors.backgroundBottom,
+          paddingBottom: bottom,
         },
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.gray,

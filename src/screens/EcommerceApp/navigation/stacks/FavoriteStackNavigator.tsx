@@ -4,12 +4,13 @@ import { SCREENS } from '../SCREENS';
 import FavoritesScreen from '../../screens/favorites/FavoritesScreen';
 import ProductDetailScreen from '../../screens/home/ProductDetailScreen';
 import { FavoritesStackParamList } from '../types';
+import { screenOption } from '../screenOptions';
 
 const FavoriteStack = createNativeStackNavigator<FavoritesStackParamList>();
 
 const FavoriteStackNavigator = () => {
   return (
-    <FavoriteStack.Navigator>
+    <FavoriteStack.Navigator screenOptions={screenOption.default}>
       <FavoriteStack.Screen
         name={SCREENS.FAVORITES}
         component={FavoritesScreen}
