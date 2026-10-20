@@ -13,7 +13,7 @@ import TextInputTitle from '../../../components/TextInputTitle';
 
 import { colors } from '../../../themes/color';
 import { SCREENS } from '../../../navigation/SCREENS';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { signInSchema } from '../../../validation/signInSchema';
 import { useSignInLogic } from './SignIn.logic';
 import { authService } from '../../../services/authService';
@@ -26,6 +26,7 @@ const SignIn = () => {
     control,
     handleSubmit,
     // formState: { errors },
+    watch,
   } = useForm({
     resolver: yupResolver(signInSchema),
     mode: 'onBlur',
@@ -63,48 +64,15 @@ const SignIn = () => {
       <Header name="Login" />
 
       <View style={styles.formContainer}>
-        <Controller
-          control={control}
-          name="username"
-          render={({ field: { onChange, onBlur, value }, fieldState: { error, isTouched } }) => (
-            <TextInputTitle
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholderText="username"
-              //
-              touched={isTouched}
-              errors={error?.message}
-            />
-          )}
-        />
-        {/* <Text style={styles.inputError}>
-          {errors.username ? errors.username.message : ''}
-        </Text> */}
+        <TextInputTitle control={control} name="username" placeholderText="username" />
 
-        <Controller
+        <TextInputTitle
           control={control}
           name="password"
-          render={({ field: { onChange, onBlur, value }, fieldState: { isTouched, error } }) => (
-            <TextInputTitle
-              value={value}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              isShowRightElement={true}
-              secureTextEntry={true}
-              returnKeyType="done"
-              autoCapitalize="none"
-              placeholderText="password"
-              autoComplete="current-password"
-              //
-              touched={isTouched}
-              errors={error?.message}
-            />
-          )}
+          placeholderText="password"
+          secureTextEntry={true}
+          isShowRightElement={true}
         />
-        {/* <Text style={styles.inputError}>
-          {errors.password ? errors.password.message : ''}
-        </Text> */}
       </View>
 
       {/* Forgot password */}
