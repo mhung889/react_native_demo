@@ -1,67 +1,69 @@
 import React, { ReactNode, useState } from 'react';
-import { Ionicons } from '@react-native-vector-icons/ionicons';
-import { Pressable, StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native';
-
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors } from '../themes/color';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 
-type TextInputTitleProps = TextInputProps & {
-  errors?: string;
-  touched?: boolean;
-  field?: string;
+type Props<T extends FieldValues> = {
+  control: Control<T>;
+  name: FieldPath<T>;
   placeholderText: string;
-  isRightElement?: ReactNode;
-  isShowRightElement?: boolean;
   secureTextEntry?: boolean;
+  isShowRightElement?: boolean;
+  isRightElement?: ReactNode;
 };
 
-const TextInputTitle = ({
-  errors,
-  value,
-  touched,
+const TextInputTitle = <T extends FieldValues>({
+  control,
+  name,
   placeholderText,
-  isRightElement,
   secureTextEntry = false,
   isShowRightElement = false,
-  ...inputProps
-}: TextInputTitleProps) => {
+  isRightElement,
+}: Props<T>) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const shouldHidePassword = isShowRightElement && secureTextEntry && !isPasswordVisible;
+  const shouldHidePassword = secureTextEntry && isShowRightElement && !isPasswordVisible;
 
   return (
-    <View style={styles.field}>
-      <View style={[styles.inputContainer, touched && errors && styles.inputError]}>
-        <TextInput
-          style={styles.input}
-          value={value}
-          placeholder={placeholderText}
-          placeholderTextColor={colors.gray}
-          autoCapitalize="none"
-          autoCorrect={false}
-          returnKeyType="next"
-          secureTextEntry={shouldHidePassword}
-          //
-
-          {...inputProps}
-        />
-        {isRightElement
-          ? isRightElement
-          : isShowRightElement && (
-              <Pressable
-                onPress={() => setIsPasswordVisible(previous => !previous)}
-                hitSlop={10}
-                accessibilityRole="button"
-                accessibilityLabel={isPasswordVisible ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
-              >
-                <Ionicons name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'} size={21} color={colors.gray} />
-              </Pressable>
-            )}
-      </View>
-
-      {/* {touched && errors && <Text> {errors} </Text>} */}
-
-      <Text style={styles.errorText}>{errors ? `${errors}` : ''}</Text>
-    </View>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { onChange, onBlur, value }, fieldState: { error, isTouched } }) => (
+        <View style={styles.field}>
+          <View style={[styles.inputContainer, isTouched && error && styles.inputError]}>
+            <TextInput
+              style={styles.input}
+              value={value ?? ''}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              placeholder={placeholderText}
+              placeholderTextColor={colors.gray}
+              autoCapitalize="none"
+              autoCorrect={false}
+              secureTextEntry={shouldHidePassword}
+            />
+            {isRightElement
+              ? isRightElement
+              : isShowRightElement && (
+                  <Pressable
+                    onPress={() => setIsPasswordVisible(previous => !previous)}
+                    hitSlop={10}
+                    accessibilityRole="button"
+                  >
+                    <Ionicons
+                      name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+                      size={21}
+                      color={colors.gray}
+                    />
+                  </Pressable>
+                )}
+          </View>
+          {/* {touched && errors && <Text> {errors} </Text>} */}
+          <Text style={styles.errorText}>{error ? `${error.message}` : ''}</Text>
+        </View>
+      )}
+    />
   );
 };
 
