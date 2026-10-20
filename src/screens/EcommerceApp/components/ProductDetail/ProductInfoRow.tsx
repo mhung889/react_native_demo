@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
+
 import { colors } from '../../themes/color';
 import { commonStyle } from '../../themes/commonStyle';
 

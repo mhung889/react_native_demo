@@ -1,9 +1,10 @@
-import { useNavigation } from '@react-navigation/native';
-import { useAuthStore } from '../../../store/auth.store';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AuthStackParamList } from '../../../navigation/types';
-import { authService } from '../../../services/authService';
 import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+import { useAuthStore } from '../../../store/auth.store';
+import { authService } from '../../../services/authService';
+import { AuthStackParamList } from '../../../navigation/types';
 
 type SignInNavigationProp = NativeStackNavigationProp<AuthStackParamList>;
 

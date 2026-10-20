@@ -50,11 +50,7 @@ const ProductImageSlider = ({ images }: ProductImageSliderProps) => {
         })}
         renderItem={({ item }) => (
           <View style={[styles.imageContainer, { width }]}>
-            <Image
-              source={{ uri: item }}
-              style={styles.image}
-              resizeMode="contain"
-            />
+            <Image source={{ uri: item }} style={styles.image} resizeMode="contain" />
           </View>
         )}
       />
@@ -63,10 +59,7 @@ const ProductImageSlider = ({ images }: ProductImageSliderProps) => {
       {imageList.length > 1 && (
         <View style={styles.dotsContainer}>
           {imageList.map((_, index) => (
-            <View
-              key={index}
-              style={[styles.dot, activeIndex === index && styles.activeDot]}
-            />
+            <View key={index} style={[styles.dot, activeIndex === index && styles.activeDot]} />
           ))}
         </View>
       )}

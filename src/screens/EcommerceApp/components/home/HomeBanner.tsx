@@ -1,7 +1,8 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { commonStyle } from '../../themes/commonStyle';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+
 import { colors } from '../../themes/color';
+import { commonStyle } from '../../themes/commonStyle';
 
 const HomeBanner = () => {
   return (

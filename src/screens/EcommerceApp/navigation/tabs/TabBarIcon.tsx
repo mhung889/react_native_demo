@@ -1,6 +1,7 @@
 import React from 'react';
-import { SCREENS } from '../SCREENS';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
+
+import { SCREENS } from '../SCREENS';
 import { screenOption } from '../screenOptions';
 
 type tabBarIconProps = {
@@ -21,13 +22,7 @@ const TabBarIcon = ({ routeName, focused, color, size }: tabBarIconProps) => {
 
   const iconName = icons[routeName as keyof typeof icons] ?? 'ellipse-outline';
 
-  return (
-    <Ionicons
-      name={iconName}
-      size={screenOption.tabBarIconStyle.size}
-      color={color}
-    />
-  );
+  return <Ionicons name={iconName} size={screenOption.tabBarIconStyle.size} color={color} />;
 };
 
 export default TabBarIcon;

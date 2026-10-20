@@ -1,19 +1,20 @@
 /*
   React-hook-form & yup
 */
-
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useCallback } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid';
+
 import Header from '../../../components/auth/Header';
 import Footer from '../../../components/auth/Footer';
+import TextInputTitle from '../../../components/TextInputTitle';
+
 import { colors } from '../../../themes/color';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { SCREENS } from '../../../navigation/SCREENS';
 import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import TextInputTitle from '../../../components/TextInputTitle';
 import { signInSchema } from '../../../validation/signInSchema';
-import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid';
 import { useSignInLogic } from './SignIn.logic';
 import { authService } from '../../../services/authService';
 import { useAuthStore } from '../../../store/auth.store';
@@ -39,9 +40,7 @@ const SignIn = () => {
       try {
         const listUsers = (await authService.findAllUser()) || [];
 
-        const existUserName = listUsers.some(
-          (user: any) => user.username === data.username.toLowerCase().trim(),
-        );
+        const existUserName = listUsers.some((user: any) => user.username === data.username.toLowerCase().trim());
         if (!existUserName) {
           Alert.alert('Error', 'user name khong ton tai');
           return;
@@ -67,10 +66,7 @@ const SignIn = () => {
         <Controller
           control={control}
           name="username"
-          render={({
-            field: { onChange, onBlur, value },
-            fieldState: { error, isTouched },
-          }) => (
+          render={({ field: { onChange, onBlur, value }, fieldState: { error, isTouched } }) => (
             <TextInputTitle
               onBlur={onBlur}
               onChangeText={onChange}
@@ -89,10 +85,7 @@ const SignIn = () => {
         <Controller
           control={control}
           name="password"
-          render={({
-            field: { onChange, onBlur, value },
-            fieldState: { isTouched, error },
-          }) => (
+          render={({ field: { onChange, onBlur, value }, fieldState: { isTouched, error } }) => (
             <TextInputTitle
               value={value}
               onBlur={onBlur}

@@ -1,36 +1,62 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { ProductType } from '../../../types/product';
-import { colors } from '../../../themes/color';
-import { Ionicons } from '@react-native-vector-icons/ionicons';
-import RatingStar from './RatingStar';
-import { formatPrice, getDiscountPrice } from '../../../utils';
-import { useNavigation } from '@react-navigation/native';
-import { SCREENS } from '../../../navigation/SCREENS';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HomeStackParamList } from '../../../navigation/types';
-import { useFavoriteStore } from '../../../store/favorite.store';
 import { useShallow } from 'zustand/react/shallow';
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+import RatingStar from './RatingStar';
+import { colors } from '../../../themes/color';
+import { ProductType } from '../../../types/product';
+import { SCREENS } from '../../../navigation/SCREENS';
+import { HomeStackParamList } from '../../../navigation/types';
+
+import { formatPrice, getDiscountPrice } from '../../../utils';
+import { useFavoriteStore } from '../../../store/favorite.store';
 
 type ProductCardNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
 
-const ProductCardItem = ({ item }: { item: ProductType }) => {
+type ProductCardProps = {
+  item: ProductType;
+  isRemoveFavorite?: boolean;
+};
+
+const ProductCardItem = ({ item, isRemoveFavorite = false }: ProductCardProps) => {
   const navigation = useNavigation<ProductCardNavigationProp>();
 
-  const { isFavorite, addFavoriteProduct, removeFavoriteProduct } =
-    useFavoriteStore(
-      useShallow(state => ({
-        isFavorite: state.isFavoriteProduct(item.id),
-        addFavoriteProduct: state.addFavoriteProduct,
-        removeFavoriteProduct: state.removeFavoriteProduct,
-      })),
-    );
+  const { isFavorite, addFavoriteProduct, removeFavoriteProduct } = useFavoriteStore(
+    useShallow(state => ({
+      isFavorite: state.isFavoriteProduct(item.id),
+      addFavoriteProduct: state.addFavoriteProduct,
+      removeFavoriteProduct: state.removeFavoriteProduct,
+    })),
+  );
 
   const handleToggeHeart = () => {
-    if (isFavorite) {
-      removeFavoriteProduct(item.id);
+    if (isRemoveFavorite === true) {
+      Alert.alert('Delete', `You want to delete ${item.title} to favorites?`, [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          style: 'destructive',
+          onPress: () => {
+            if (isFavorite) {
+              removeFavoriteProduct(item.id);
+            } else {
+              addFavoriteProduct(item);
+            }
+          },
+        },
+      ]);
     } else {
-      addFavoriteProduct(item);
+      if (isFavorite) {
+        removeFavoriteProduct(item.id);
+      } else {
+        addFavoriteProduct(item);
+      }
     }
   };
 
@@ -45,17 +71,11 @@ const ProductCardItem = ({ item }: { item: ProductType }) => {
       <View style={styles.container}>
         {/* Product image */}
         <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: item?.images?.[0] }}
-            style={styles.image}
-            resizeMode="cover"
-          />
+          <Image source={{ uri: item?.images?.[0] }} style={styles.image} resizeMode="cover" />
 
           {/* Discount badge */}
           <View style={styles.discountBadge}>
-            <Text style={styles.discountText}>{`-${Math.round(
-              item.discountPercentage,
-            )} %`}</Text>
+            <Text style={styles.discountText}>{`-${Math.round(item.discountPercentage)} %`}</Text>
           </View>
 
           {/* Favorite button */}
@@ -86,11 +106,7 @@ const ProductCardItem = ({ item }: { item: ProductType }) => {
 
           <View style={styles.priceContainer}>
             <Text style={styles.price}>{formatPrice(item.price)}</Text>
-            <Text style={styles.oldPrice}>
-              {formatPrice(
-                getDiscountPrice(item.price, item.discountPercentage),
-              )}
-            </Text>
+            <Text style={styles.oldPrice}>{formatPrice(getDiscountPrice(item.price, item.discountPercentage))}</Text>
           </View>
         </View>
       </View>
@@ -181,15 +197,16 @@ const styles = StyleSheet.create({
   },
 
   price: {
-    fontSize: 15,
-    fontWeight: '700',
-    color: colors.primary,
+    fontSize: 12,
+    color: colors.gray,
+    textDecorationLine: 'line-through',
   },
 
   oldPrice: {
-    fontSize: 12,
-    color: '#999999',
-    textDecorationLine: 'line-through',
+    fontSize: 16,
+    color: colors.primary,
+    fontWeight: '700',
+    // bottom: 1,
   },
 
   ratingContainer: { flexDirection: 'row', alignItems: 'center' },

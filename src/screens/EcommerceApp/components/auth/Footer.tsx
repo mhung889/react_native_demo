@@ -1,28 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
+
 import { colors } from '../../themes/color';
 
 const Footer = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.textSocialAccount}>
-        {'Or sign up with social account'}
-      </Text>
+      <Text style={styles.textSocialAccount}>{'Or sign up with social account'}</Text>
       <View style={styles.itemContainer}>
-        <Ionicons
-          name="logo-google"
-          size={20}
-          color={'red'}
-          style={styles.logo}
-        />
+        <Ionicons name="logo-google" size={20} color={'red'} style={styles.logo} />
 
-        <Ionicons
-          name="logo-facebook"
-          size={20}
-          color={'red'}
-          style={styles.logo}
-        />
+        <Ionicons name="logo-facebook" size={20} color={'red'} style={styles.logo} />
       </View>
     </View>
   );

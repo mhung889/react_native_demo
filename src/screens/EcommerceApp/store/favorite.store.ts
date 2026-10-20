@@ -1,7 +1,8 @@
 import { create } from 'zustand';
-import { ProductType } from '../types/product';
+
 import { MMKVStorage } from './MMKV.store';
 import { useAuthStore } from './auth.store';
+import { ProductType } from '../types/product';
 
 type FavoriteState = {
   favoriteProductList: ProductType[];

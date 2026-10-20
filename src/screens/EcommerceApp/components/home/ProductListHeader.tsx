@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React, { ReactNode } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
 import { colors } from '../../themes/color';
 import { commonStyle } from '../../themes/commonStyle';
 
@@ -9,11 +10,7 @@ type ProductListHeaderProps = {
   rightElement?: ReactNode;
 };
 
-const ProductListHeader = ({
-  name,
-  title,
-  rightElement,
-}: ProductListHeaderProps) => {
+const ProductListHeader = ({ name, title, rightElement }: ProductListHeaderProps) => {
   return (
     <View style={styles.container}>
       <View>

@@ -1,18 +1,13 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
 import React from 'react';
-import { colors } from '../../themes/color';
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+
 import HomeBanner from '../../components/home/HomeBanner';
 import { useHomeLogic } from '../../components/home/Home.logic';
-import ProductCardItem from '../../components/common/ProductCard/ProductCardItem';
-import { ProductType } from '../../types/product';
 import ProductListHeader from '../../components/home/ProductListHeader';
+import ProductCardItem from '../../components/common/ProductCard/ProductCardItem';
+
+import { colors } from '../../themes/color';
+import { ProductType } from '../../types/product';
 import { commonStyle } from '../../themes/commonStyle';
 
 const Home = () => {
@@ -45,12 +40,8 @@ const Home = () => {
         <>
           <HomeBanner />
 
-          <View style={{ marginHorizontal: 16 }}>
-            <ProductListHeader
-              name="Sale"
-              title="Super summer sale"
-              rightElement={renderRightElement()}
-            />
+          <View style={styles.sectionContainer}>
+            <ProductListHeader name="Sale" title="Super summer sale" rightElement={renderRightElement()} />
 
             <FlatList
               data={products.slice(0, 10)}
@@ -73,6 +64,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+
+  sectionContainer: {
+    marginHorizontal: 16,
   },
 
   listContainer: {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
+
 import { colors } from '../../themes/color';
 import { commonStyle } from '../../themes/commonStyle';
 
@@ -9,19 +10,12 @@ type AddToCartButtonProps = {
   title?: string;
 };
 
-const AddToCartButton = ({
-  onPress,
-  disabled = false,
-  title = 'ADD TO CART',
-}: AddToCartButtonProps) => {
+const AddToCartButton = ({ onPress, disabled = false, title = 'ADD TO CART' }: AddToCartButtonProps) => {
   return (
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={({ pressed }) => [
-        styles.button,
-        pressed && !disabled && styles.pressed,
-      ]}
+      style={({ pressed }) => [styles.button, pressed && !disabled && styles.pressed]}
     >
       <Text style={styles.text}>{title}</Text>
     </Pressable>

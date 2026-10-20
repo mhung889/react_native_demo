@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
+
 import { colors } from '../../../themes/color';
 import { ReviewType } from '../../../types/product';
 
 const RATING = [1, 2, 3, 4, 5];
 
 const RatingStar = ({ reviews }: { reviews: ReviewType[] }) => {
-  const avegerStar =
-    reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
+  const avegerStar = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
 
   return (
     <View style={styles.container}>

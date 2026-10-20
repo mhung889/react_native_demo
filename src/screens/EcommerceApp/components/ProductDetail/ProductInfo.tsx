@@ -1,8 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { ProductType } from '../../types/product';
+
 import { colors } from '../../themes/color';
+import { formatPrice, getDiscountPrice } from '../../utils';
+import { ProductType } from '../../types/product';
 import { commonStyle } from '../../themes/commonStyle';
+
 import RatingStar from '../common/ProductCard/RatingStar';
 
 type Props = {
@@ -15,7 +18,7 @@ const ProductInfo = ({ product }: Props) => {
       <View style={styles.titleRow}>
         <Text style={styles.brand}>{product.brand || product.category}</Text>
 
-        <Text style={styles.price}>${product.price.toFixed(2)}</Text>
+        <Text style={styles.price}>{formatPrice(getDiscountPrice(product.price, product.discountPercentage))}</Text>
       </View>
 
       <Text style={styles.name}>{product.title}</Text>

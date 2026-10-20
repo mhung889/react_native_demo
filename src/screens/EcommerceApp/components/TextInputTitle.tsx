@@ -1,14 +1,8 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  TextInputProps,
-  View,
-} from 'react-native';
 import React, { ReactNode, useState } from 'react';
-import { colors } from '../themes/color';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { Pressable, StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native';
+
+import { colors } from '../themes/color';
 
 type TextInputTitleProps = TextInputProps & {
   errors?: string;
@@ -32,14 +26,11 @@ const TextInputTitle = ({
 }: TextInputTitleProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const shouldHidePassword =
-    isShowRightElement && secureTextEntry && !isPasswordVisible;
+  const shouldHidePassword = isShowRightElement && secureTextEntry && !isPasswordVisible;
 
   return (
     <View style={styles.field}>
-      <View
-        style={[styles.inputContainer, touched && errors && styles.inputError]}
-      >
+      <View style={[styles.inputContainer, touched && errors && styles.inputError]}>
         <TextInput
           style={styles.input}
           value={value}
@@ -60,15 +51,9 @@ const TextInputTitle = ({
                 onPress={() => setIsPasswordVisible(previous => !previous)}
                 hitSlop={10}
                 accessibilityRole="button"
-                accessibilityLabel={
-                  isPasswordVisible ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'
-                }
+                accessibilityLabel={isPasswordVisible ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
               >
-                <Ionicons
-                  name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
-                  size={21}
-                  color={colors.gray}
-                />
+                <Ionicons name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'} size={21} color={colors.gray} />
               </Pressable>
             )}
       </View>

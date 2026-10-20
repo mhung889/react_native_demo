@@ -39,12 +39,8 @@ export type MainTabParamList = {
   [SCREENS.HOME_TAB]: NavigatorScreenParams<HomeStackParamList> | undefined;
   [SCREENS.SHOP_TAB]: NavigatorScreenParams<ShopStackParamList> | undefined;
   [SCREENS.BAG_TAB]: NavigatorScreenParams<BagStackParamList> | undefined;
-  [SCREENS.FAVORITES_TAB]:
-    | NavigatorScreenParams<FavoritesStackParamList>
-    | undefined;
-  [SCREENS.PROFILE_TAB]:
-    | NavigatorScreenParams<ProfileStackParamList>
-    | undefined;
+  [SCREENS.FAVORITES_TAB]: NavigatorScreenParams<FavoritesStackParamList> | undefined;
+  [SCREENS.PROFILE_TAB]: NavigatorScreenParams<ProfileStackParamList> | undefined;
 };
 
 export type RootStackParamList = {

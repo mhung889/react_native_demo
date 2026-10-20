@@ -1,11 +1,13 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@react-native-vector-icons/ionicons';
-import { colors } from '../../themes/color';
-import { commonStyle } from '../../themes/commonStyle';
-import { ProductType } from '../../types/product';
-import { useFavoriteStore } from '../../store/favorite.store';
 import { useShallow } from 'zustand/react/shallow';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+
+import { colors } from '../../themes/color';
+import { ProductType } from '../../types/product';
+import { commonStyle } from '../../themes/commonStyle';
+
+import { useFavoriteStore } from '../../store/favorite.store';
 
 type Props = {
   selectedSize?: string | null;
@@ -15,14 +17,13 @@ type Props = {
 
 const ProductOptions = ({ selectedSize, onSelectSize, product }: Props) => {
   // use zustand
-  const { addFavoriteProduct, removeFavoriteProduct, isFavorite } =
-    useFavoriteStore(
-      useShallow(state => ({
-        addFavoriteProduct: state.addFavoriteProduct,
-        removeFavoriteProduct: state.removeFavoriteProduct,
-        isFavorite: state.isFavoriteProduct(product.id),
-      })),
-    );
+  const { addFavoriteProduct, removeFavoriteProduct, isFavorite } = useFavoriteStore(
+    useShallow(state => ({
+      addFavoriteProduct: state.addFavoriteProduct,
+      removeFavoriteProduct: state.removeFavoriteProduct,
+      isFavorite: state.isFavoriteProduct(product.id),
+    })),
+  );
 
   const handleToggleFavorite = () => {
     if (isFavorite) {
@@ -35,18 +36,12 @@ const ProductOptions = ({ selectedSize, onSelectSize, product }: Props) => {
   return (
     <View style={styles.container}>
       <Pressable onPress={onSelectSize} style={styles.sizeButton}>
-        <Text style={styles.sizeText}>
-          {selectedSize ? `Size: ${selectedSize}` : 'Select size'}
-        </Text>
+        <Text style={styles.sizeText}>{selectedSize ? `Size: ${selectedSize}` : 'Select size'}</Text>
 
         <Ionicons name="chevron-down" size={20} color={colors.gray} />
       </Pressable>
 
-      <Pressable
-        style={styles.favoriteButton}
-        hitSlop={8}
-        onPress={handleToggleFavorite}
-      >
+      <Pressable style={styles.favoriteButton} hitSlop={8} onPress={handleToggleFavorite}>
         <Ionicons
           name={isFavorite ? 'heart' : 'heart-outline'}
           size={21}

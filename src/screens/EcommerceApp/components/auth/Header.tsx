@@ -1,8 +1,9 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { Ionicons } from '@react-native-vector-icons/ionicons';
-import { colors } from '../../themes/color';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+
+import { colors } from '../../themes/color';
 
 type HeaderType = {
   name: string;

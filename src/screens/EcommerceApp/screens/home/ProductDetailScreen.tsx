@@ -1,34 +1,24 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import {
-  ActivityIndicator,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import BottomSheet from '@gorhom/bottom-sheet';
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
-import { ProductType } from '../../types/product';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+
 import { productServices } from '../../services/productService';
-import { colors } from '../../themes/color';
-import { commonStyle } from '../../themes/commonStyle';
-import ProductImageSlider from '../../components/ProductDetail/ProductImageSlider';
-import ProductBottomSheet from '../../components/ProductDetail/ProductBottomSheet';
-import ProductDetailHeader from '../../components/ProductDetail/ProductDetailHeader';
 import ProductInfo from '../../components/ProductDetail/ProductInfo';
-import ProductInfoRow from '../../components/ProductDetail/ProductInfoRow';
-import AddToCartButton from '../../components/ProductDetail/AddToCartButton';
-import ProductListHeader from '../../components/home/ProductListHeader';
 import { Size } from '../../components/ProductDetail/SelecteSizeModal';
+import ProductListHeader from '../../components/home/ProductListHeader';
+import ProductInfoRow from '../../components/ProductDetail/ProductInfoRow';
 import ProductOptions from '../../components/ProductDetail/ProductOptions';
-import BottomSheet from '@gorhom/bottom-sheet';
+import AddToCartButton from '../../components/ProductDetail/AddToCartButton';
+import ProductBottomSheet from '../../components/ProductDetail/ProductBottomSheet';
+import ProductImageSlider from '../../components/ProductDetail/ProductImageSlider';
+import ProductDetailHeader from '../../components/ProductDetail/ProductDetailHeader';
+
+import { colors } from '../../themes/color';
+import { ProductType } from '../../types/product';
+import { commonStyle } from '../../themes/commonStyle';
 
 type Props = {
   route: {
@@ -51,7 +41,7 @@ const ProductDetailScreen = ({ route }: Props) => {
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['40%'], []);
+  const snapPoints = useMemo(() => ['50%'], []);
 
   const fetchSingleProduct = useCallback(async () => {
     try {
@@ -127,19 +117,12 @@ const ProductDetailScreen = ({ route }: Props) => {
         <ProductImageSlider images={product.images} />
 
         <View style={styles.productContent}>
-          <ProductOptions
-            selectedSize={selectedSize}
-            onSelectSize={handleOpenSizeSheet}
-            product={product}
-          />
+          <ProductOptions selectedSize={selectedSize} onSelectSize={handleOpenSizeSheet} product={product} />
 
           <ProductInfo product={product} />
 
           <View style={styles.mainButton}>
-            <AddToCartButton
-              title={'ADD TO CART'}
-              onPress={selectedSize ? handleAddToCart : handleOpenSizeSheet}
-            />
+            <AddToCartButton title={'ADD TO CART'} onPress={selectedSize ? handleAddToCart : handleOpenSizeSheet} />
           </View>
 
           <View style={styles.sectionIndicator} />

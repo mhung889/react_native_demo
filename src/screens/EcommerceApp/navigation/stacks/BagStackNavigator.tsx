@@ -1,8 +1,9 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import MyBagScreen from '../../screens/bag/MyBagScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import { SCREENS } from '../SCREENS';
 import { BagStackParamList } from '../types';
+import MyBagScreen from '../../screens/bag/MyBagScreen';
 
 const BagStack = createNativeStackNavigator<BagStackParamList>();
 

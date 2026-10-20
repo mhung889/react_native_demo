@@ -1,6 +1,7 @@
 import React from 'react';
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { StyleSheet } from 'react-native';
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+
 import { colors } from '../../themes/color';
 import SelecteSizeModal, { Size } from './SelecteSizeModal';
 
@@ -12,13 +13,7 @@ type Props = {
   onAddToCart: () => void;
 };
 
-const ProductBottomSheet = ({
-  bottomSheetRef,
-  snapPoints,
-  selectedSize,
-  onSelectSize,
-  onAddToCart,
-}: Props) => {
+const ProductBottomSheet = ({ bottomSheetRef, snapPoints, selectedSize, onSelectSize, onAddToCart }: Props) => {
   // const handleSheetChanges = useCallback((index: number) => {
   //   console.log('Bottom sheet index:', index);
   // }, []);
@@ -34,11 +29,7 @@ const ProductBottomSheet = ({
       handleIndicatorStyle={styles.handleIndicator}
     >
       <BottomSheetView style={styles.content}>
-        <SelecteSizeModal
-          selectedSize={selectedSize}
-          onSelectSize={onSelectSize}
-          onAddToCart={onAddToCart}
-        />
+        <SelecteSizeModal selectedSize={selectedSize} onSelectSize={onSelectSize} onAddToCart={onAddToCart} />
       </BottomSheetView>
     </BottomSheet>
   );
