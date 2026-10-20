@@ -21,7 +21,7 @@ const SelecteSizeModal = ({ selectedSize, onSelectSize, onAddToCart }: Props) =>
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Select Size</Text>
+      <Text style={styles.title}>{'Select Size'}</Text>
 
       <View style={styles.sizeContainer}>
         {DATA_SIZES.map(size => {

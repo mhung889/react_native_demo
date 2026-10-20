@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { colors } from '../../themes/color';
 import { ProductType } from '../../types/product';
-import { useFavoriteStore } from '../../store/favorite.store';
+import { useFavoriteStore } from '../../store/favorite/favorite.store';
 
 import ProductCardItem from '../../components/common/ProductCard/ProductCardItem';
 

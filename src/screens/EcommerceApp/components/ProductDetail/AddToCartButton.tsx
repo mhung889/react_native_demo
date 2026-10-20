@@ -12,11 +12,7 @@ type AddToCartButtonProps = {
 
 const AddToCartButton = ({ onPress, disabled = false, title = 'ADD TO CART' }: AddToCartButtonProps) => {
   return (
-    <Pressable
-      onPress={onPress}
-      disabled={disabled}
-      style={({ pressed }) => [styles.button, pressed && !disabled && styles.pressed]}
-    >
+    <Pressable onPress={onPress} disabled={disabled} style={[styles.button, !disabled && styles.pressed]}>
       <Text style={styles.text}>{title}</Text>
     </Pressable>
   );

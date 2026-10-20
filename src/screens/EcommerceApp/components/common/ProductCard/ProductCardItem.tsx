@@ -12,7 +12,8 @@ import { SCREENS } from '../../../navigation/SCREENS';
 import { HomeStackParamList } from '../../../navigation/types';
 
 import { formatPrice, getDiscountPrice } from '../../../utils';
-import { useFavoriteStore } from '../../../store/favorite.store';
+import { useFavoriteStore } from '../../../store/favorite/favorite.store';
+import { selectFavorite } from '../../../store/favorite/selector.favorite';
 
 type ProductCardNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
 
@@ -25,15 +26,11 @@ const ProductCardItem = ({ item, isRemoveFavorite = false }: ProductCardProps) =
   const navigation = useNavigation<ProductCardNavigationProp>();
 
   const { isFavorite, addFavoriteProduct, removeFavoriteProduct } = useFavoriteStore(
-    useShallow(state => ({
-      isFavorite: state.isFavoriteProduct(item.id),
-      addFavoriteProduct: state.addFavoriteProduct,
-      removeFavoriteProduct: state.removeFavoriteProduct,
-    })),
+    useShallow(selectFavorite(item.id)),
   );
 
   const handleToggeHeart = () => {
-    if (isRemoveFavorite === true) {
+    if (isRemoveFavorite) {
       Alert.alert('Delete', `You want to delete ${item.title} to favorites?`, [
         {
           text: 'Cancel',

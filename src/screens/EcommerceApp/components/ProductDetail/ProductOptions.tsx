@@ -7,7 +7,7 @@ import { colors } from '../../themes/color';
 import { ProductType } from '../../types/product';
 import { commonStyle } from '../../themes/commonStyle';
 
-import { useFavoriteStore } from '../../store/favorite.store';
+import { useFavoriteStore } from '../../store/favorite/favorite.store';
 
 type Props = {
   selectedSize?: string | null;

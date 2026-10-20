@@ -17,7 +17,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { signInSchema } from '../../../validation/signInSchema';
 import { useSignInLogic } from './SignIn.logic';
 import { authService } from '../../../services/authService';
-import { useAuthStore } from '../../../store/auth.store';
+import { useAuthStore } from '../../../store/auth/auth.store';
 
 const SignIn = () => {
   const { navigation, signIn } = useSignInLogic();

@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 
-import { MMKVStorage } from './MMKV.store';
-import { useAuthStore } from './auth.store';
-import { ProductType } from '../types/product';
+import { MMKVStorage } from '../MMKV.store';
+import { useAuthStore } from '../auth/auth.store';
+import { ProductType } from '../../types/product';
 
-type FavoriteState = {
+export type FavoriteState = {
   favoriteProductList: ProductType[];
   loadFavorites: () => void;
   getFavoriteProductList: () => ProductType[];
@@ -63,9 +63,7 @@ export const useFavoriteStore = create<FavoriteState>((set, get) => ({
     if (!currentUserId) return;
     const favoriteList = get().favoriteProductList;
 
-    const existProduct = favoriteList.some(
-      (favorite: ProductType) => favorite.id === product.id,
-    );
+    const existProduct = favoriteList.some((favorite: ProductType) => favorite.id === product.id);
     if (existProduct) return;
 
     const newFavorites = [...favoriteList, product];
@@ -75,24 +73,16 @@ export const useFavoriteStore = create<FavoriteState>((set, get) => ({
     });
     console.log(MMKVStorage.getString(getFavoriteKey(currentUserId)));
     // update MMKVStorage
-    MMKVStorage.set(
-      getFavoriteKey(currentUserId),
-      JSON.stringify(newFavorites),
-    );
+    MMKVStorage.set(getFavoriteKey(currentUserId), JSON.stringify(newFavorites));
   },
   removeFavoriteProduct: (productId: ProductType['id']) => {
     if (!currentUserId) return;
-    const newFavorites = get().favoriteProductList.filter(
-      item => item.id !== productId,
-    );
+    const newFavorites = get().favoriteProductList.filter(item => item.id !== productId);
     set({
       favoriteProductList: newFavorites,
     });
     // update MMKVStorage
-    MMKVStorage.set(
-      getFavoriteKey(currentUserId),
-      JSON.stringify(newFavorites),
-    );
+    MMKVStorage.set(getFavoriteKey(currentUserId), JSON.stringify(newFavorites));
   },
 
   isFavoriteProduct: (productId: ProductType['id']) => {

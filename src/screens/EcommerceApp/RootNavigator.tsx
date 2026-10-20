@@ -2,8 +2,8 @@ import React from 'react';
 import AuthStackNavigator from './navigation/stacks/auth/AuthStackNavigator';
 import MainBottomTabNavigator from './navigation/tabs/MainBottomTabNavigator';
 
-import { useAuthStore } from './store/auth.store';
-import { useFavoriteStore } from './store/favorite.store';
+import { useAuthStore } from './store/auth/auth.store';
+import { useFavoriteStore } from './store/favorite/favorite.store';
 
 const RootNavigator = () => {
   const token = useAuthStore(state => state.accessToken);
