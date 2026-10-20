@@ -1,15 +1,14 @@
-import { StyleSheet, View } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
-import { colors } from '../themes/color';
+
+import { colors } from '../../../themes/color';
+import { ReviewType } from '../../../types/product';
 
 const RATING = [1, 2, 3, 4, 5];
 
-const RatingStar = ({ ratings }) => {
-  const ratingExam: any[] = [3, 4, 5];
-
-  const avegerStar =
-    ratingExam.reduce((sum, star) => sum + star, 0) / ratingExam.length;
+const RatingStar = ({ reviews }: { reviews: ReviewType[] }) => {
+  const avegerStar = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
 
   return (
     <View style={styles.container}>
@@ -18,9 +17,10 @@ const RatingStar = ({ ratings }) => {
           key={star}
           name={star <= avegerStar ? 'star' : 'star-outline'}
           color={star <= avegerStar ? colors.yellow : colors.gray}
-          size={20}
+          size={15}
         />
       ))}
+      <Text style={styles.text}> {`(${reviews.length})`}</Text>
     </View>
   );
 };
@@ -30,6 +30,9 @@ export default RatingStar;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 3,
+  },
+  text: {
+    color: colors.white,
   },
 });

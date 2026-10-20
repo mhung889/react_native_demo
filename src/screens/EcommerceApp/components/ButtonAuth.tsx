@@ -1,14 +1,9 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
 import React from 'react';
+import { Pressable, StyleSheet, Text } from 'react-native';
+
 import { colors } from '../themes/color';
 
-const ButtonAuth = ({
-  name,
-  handleSubmit,
-}: {
-  name: string;
-  handleSubmit: any;
-}) => {
+const ButtonAuth = ({ name, handleSubmit }: { name: string; handleSubmit: any }) => {
   return (
     <Pressable onPress={handleSubmit}>
       <Text style={styles.buttonText}>{name}</Text>

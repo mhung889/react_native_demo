@@ -3,7 +3,9 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type HomeStackParamList = {
   [SCREENS.HOME]: undefined;
-  [SCREENS.PRODUCT_DETAIL]: undefined;
+  [SCREENS.PRODUCT_DETAIL]: {
+    productId: number;
+  };
 };
 
 export type ProfileStackParamList = {
@@ -37,12 +39,8 @@ export type MainTabParamList = {
   [SCREENS.HOME_TAB]: NavigatorScreenParams<HomeStackParamList> | undefined;
   [SCREENS.SHOP_TAB]: NavigatorScreenParams<ShopStackParamList> | undefined;
   [SCREENS.BAG_TAB]: NavigatorScreenParams<BagStackParamList> | undefined;
-  [SCREENS.FAVORITES_TAB]:
-    | NavigatorScreenParams<FavoritesStackParamList>
-    | undefined;
-  [SCREENS.PROFILE_TAB]:
-    | NavigatorScreenParams<ProfileStackParamList>
-    | undefined;
+  [SCREENS.FAVORITES_TAB]: NavigatorScreenParams<FavoritesStackParamList> | undefined;
+  [SCREENS.PROFILE_TAB]: NavigatorScreenParams<ProfileStackParamList> | undefined;
 };
 
 export type RootStackParamList = {

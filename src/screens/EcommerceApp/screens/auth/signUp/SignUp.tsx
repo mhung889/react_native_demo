@@ -1,14 +1,16 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
 import React from 'react';
+import { Link } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid';
+
 import { colors } from '../../../themes/color';
+import { SCREENS } from '../../../navigation/SCREENS';
+import { commonStyle } from '../../../themes/commonStyle';
+
 import Header from '../../../components/auth/Header';
 import Footer from '../../../components/auth/Footer';
 import ButtonAuth from '../../../components/ButtonAuth';
-import { commonStyle } from '../../../themes/commonStyle';
-import { SCREENS } from '../../../navigation/SCREENS';
-import { Link } from '@react-navigation/native';
 
 const SignUp = () => {
   return (
@@ -28,30 +30,18 @@ const SignUp = () => {
 
         <View style={styles.item}>
           <Text style={styles.labelInput}>{'Email'} </Text>
-          <TextInput
-            placeholder="enter Email"
-            style={styles.textInput}
-            placeholderTextColor={colors.ordinaryText}
-          />
+          <TextInput placeholder="enter Email" style={styles.textInput} placeholderTextColor={colors.ordinaryText} />
         </View>
 
         <View style={styles.item}>
-          <TextInput
-            placeholder="Password"
-            style={styles.textInput}
-            placeholderTextColor={colors.gray}
-          />
+          <TextInput placeholder="Password" style={styles.textInput} placeholderTextColor={colors.gray} />
         </View>
       </View>
 
       <View style={styles.loginPromptContainer}>
         <Text style={styles.loginPromptText}>{'Already have an account?'}</Text>
         <Link screen={SCREENS.SIGN_IN} params={{}}>
-          <FontAwesomeFreeSolid
-            name="arrow-right-long"
-            color={colors.primary}
-            size={20}
-          />
+          <FontAwesomeFreeSolid name="arrow-right-long" color={colors.primary} size={20} />
         </Link>
       </View>
 

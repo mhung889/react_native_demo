@@ -1,9 +1,10 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
 import React from 'react';
-import Header from '../../../components/auth/Header';
-import { colors } from '../../../themes/color';
-import ButtonAuth from '../../../components/ButtonAuth';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+
+import { colors } from '../../../themes/color';
+import Header from '../../../components/auth/Header';
+import ButtonAuth from '../../../components/ButtonAuth';
 import { SCREENS } from '../../../navigation/SCREENS';
 
 const ForgotPassword = () => {
