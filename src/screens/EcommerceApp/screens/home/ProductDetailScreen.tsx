@@ -14,11 +14,12 @@ import ProductOptions from '../../components/ProductDetail/ProductOptions';
 import AddToCartButton from '../../components/ProductDetail/AddToCartButton';
 import ProductBottomSheet from '../../components/ProductDetail/ProductBottomSheet';
 import ProductImageSlider from '../../components/ProductDetail/ProductImageSlider';
-import ProductDetailHeader from '../../components/ProductDetail/ProductDetailHeader';
+import Header from '../../components/common/Header';
 
 import { colors } from '../../themes/color';
 import { ProductType } from '../../types/product';
 import { commonStyle } from '../../themes/commonStyle';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 
 type Props = {
   route: {
@@ -31,8 +32,6 @@ type Props = {
 const ProductDetailScreen = ({ route }: Props) => {
   const { productId } = route.params;
   const navigation = useNavigation();
-
-  // favorite Storage
 
   const [product, setProduct] = useState<ProductType | null>(null);
   const [loading, setLoading] = useState(true);
@@ -107,11 +106,10 @@ const ProductDetailScreen = ({ route }: Props) => {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <ProductDetailHeader
+        <Header
           onBack={() => navigation.goBack()}
-          onShare={() => {
-            // Tích hợp chức năng chia sẻ.
-          }}
+          title="Product Details"
+          rightElement={<Ionicons name="share-social-outline" size={22} color={colors.white} />}
         />
 
         <ProductImageSlider images={product.images} />

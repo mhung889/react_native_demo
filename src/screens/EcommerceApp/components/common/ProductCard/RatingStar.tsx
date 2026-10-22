@@ -8,15 +8,20 @@ import { ReviewType } from '../../../types/product';
 const RATING = [1, 2, 3, 4, 5];
 
 const RatingStar = ({ reviews }: { reviews: ReviewType[] }) => {
-  const avegerStar = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
+  const safeReviews = Array.isArray(reviews) ? reviews : [];
+
+  const averageStar =
+    safeReviews.length > 0
+      ? safeReviews.reduce((sum, review) => sum + (review.rating ?? 0), 0) / safeReviews.length
+      : 0;
 
   return (
     <View style={styles.container}>
       {RATING.map(star => (
         <Ionicons
           key={star}
-          name={star <= avegerStar ? 'star' : 'star-outline'}
-          color={star <= avegerStar ? colors.yellow : colors.gray}
+          name={star <= averageStar ? 'star' : 'star-outline'}
+          color={star <= averageStar ? colors.yellow : colors.gray}
           size={15}
         />
       ))}

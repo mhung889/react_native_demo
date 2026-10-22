@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { MMKVStorage } from '../MMKV.store';
+import { MMKVStorage } from '../MMKVstore/MMKV.store';
 import { useAuthStore } from '../auth/auth.store';
 import { ProductType } from '../../types/product';
 
@@ -77,7 +77,7 @@ export const useFavoriteStore = create<FavoriteState>((set, get) => ({
   },
   removeFavoriteProduct: (productId: ProductType['id']) => {
     if (!currentUserId) return;
-    const newFavorites = get().favoriteProductList.filter(item => item.id !== productId);
+    const newFavorites = get().favoriteProductList.filter((item) => item.id !== productId);
     set({
       favoriteProductList: newFavorites,
     });
@@ -86,7 +86,7 @@ export const useFavoriteStore = create<FavoriteState>((set, get) => ({
   },
 
   isFavoriteProduct: (productId: ProductType['id']) => {
-    return get().favoriteProductList.some(item => item.id === productId);
+    return get().favoriteProductList.some((item) => item.id === productId);
   },
 
   clearFavorites: () => {

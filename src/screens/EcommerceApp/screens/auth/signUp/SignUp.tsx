@@ -8,14 +8,14 @@ import { colors } from '../../../themes/color';
 import { SCREENS } from '../../../navigation/SCREENS';
 import { commonStyle } from '../../../themes/commonStyle';
 
-import Header from '../../../components/auth/Header';
+import AuthHeader from '../../../components/auth/AuthHeader';
 import Footer from '../../../components/auth/Footer';
 import ButtonAuth from '../../../components/ButtonAuth';
 
 const SignUp = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header name={'Sign Up'} screen={SCREENS.SIGN_IN} />
+      <AuthHeader name={'Sign Up'} screen={SCREENS.SIGN_IN} />
 
       {/* Form Signup */}
       <View style={styles.formContainer}>

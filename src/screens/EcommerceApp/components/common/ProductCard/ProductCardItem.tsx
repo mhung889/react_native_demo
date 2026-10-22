@@ -20,9 +20,10 @@ type ProductCardNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
 type ProductCardProps = {
   item: ProductType;
   isRemoveFavorite?: boolean;
+  widthStyle?: number;
 };
 
-const ProductCardItem = ({ item, isRemoveFavorite = false }: ProductCardProps) => {
+const ProductCardItem = ({ item, isRemoveFavorite = false, widthStyle = 150 }: ProductCardProps) => {
   const navigation = useNavigation<ProductCardNavigationProp>();
 
   const { isFavorite, addFavoriteProduct, removeFavoriteProduct } = useFavoriteStore(
@@ -65,7 +66,7 @@ const ProductCardItem = ({ item, isRemoveFavorite = false }: ProductCardProps) =
         })
       }
     >
-      <View style={styles.container}>
+      <View style={[styles.container, { width: widthStyle }]}>
         {/* Product image */}
         <View style={styles.imageContainer}>
           <Image source={{ uri: item?.images?.[0] }} style={styles.image} resizeMode="cover" />
@@ -94,7 +95,7 @@ const ProductCardItem = ({ item, isRemoveFavorite = false }: ProductCardProps) =
           </View>
 
           <Text numberOfLines={1} style={styles.brand}>
-            {item.brand}
+            {item.brand || item.category}
           </Text>
 
           <Text numberOfLines={1} style={styles.productName}>
@@ -115,9 +116,10 @@ export default ProductCardItem;
 
 const styles = StyleSheet.create({
   container: {
-    width: 150,
+    // width: 150,
     marginRight: 10,
     marginBottom: 8,
+    // alignItems: 'center',
   },
 
   imageContainer: {

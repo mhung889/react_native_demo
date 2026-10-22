@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid';
 
-import Header from '../../../components/auth/Header';
+import AuthHeader from '../../../components/auth/AuthHeader';
 import Footer from '../../../components/auth/Footer';
 import TextInputTitle from '../../../components/TextInputTitle';
 
@@ -61,7 +61,7 @@ const SignIn = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header name="Login" />
+      <AuthHeader name="Login" />
 
       <View style={styles.formContainer}>
         <TextInputTitle control={control} name="username" placeholderText="username" />

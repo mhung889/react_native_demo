@@ -10,7 +10,7 @@ type HeaderType = {
   screen?: string;
 };
 
-const Header = ({ name }: HeaderType) => {
+const AuthHeader = ({ name }: HeaderType) => {
   const navigation = useNavigation();
 
   return (
@@ -28,7 +28,7 @@ const Header = ({ name }: HeaderType) => {
   );
 };
 
-export default Header;
+export default AuthHeader;
 
 const styles = StyleSheet.create({
   textHeader: {
