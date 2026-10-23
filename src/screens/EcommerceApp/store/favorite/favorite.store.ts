@@ -50,7 +50,6 @@ export const useFavoriteStore = create<FavoriteState>((set, get) => ({
     set({ favoriteProductList: favorites });
 
     const key = getFavoriteKey(currentUserId);
-
     if (MMKVStorage.getString(key) === undefined) {
       MMKVStorage.set(getFavoriteKey(currentUserId), JSON.stringify(favorites));
     }
@@ -91,6 +90,6 @@ export const useFavoriteStore = create<FavoriteState>((set, get) => ({
 
   clearFavorites: () => {
     currentUserId = null;
-    // set({ favoriteProductList: [] });
+    set({ favoriteProductList: [] });
   },
 }));

@@ -5,6 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 
+import Header from '../../components/common/Header';
 import { productServices } from '../../services/productService';
 import ProductInfo from '../../components/ProductDetail/ProductInfo';
 import { Size } from '../../components/ProductDetail/SelecteSizeModal';
@@ -14,7 +15,6 @@ import ProductOptions from '../../components/ProductDetail/ProductOptions';
 import AddToCartButton from '../../components/ProductDetail/AddToCartButton';
 import ProductBottomSheet from '../../components/ProductDetail/ProductBottomSheet';
 import ProductImageSlider from '../../components/ProductDetail/ProductImageSlider';
-import Header from '../../components/common/Header';
 
 import { colors } from '../../themes/color';
 import { ProductType } from '../../types/product';
@@ -101,17 +101,19 @@ const ProductDetailScreen = ({ route }: Props) => {
   return (
     <GestureHandlerRootView style={styles.container}>
       {/* <View style={styles.container}> */}
+
+      <Header
+        onBack={() => navigation.goBack()}
+        title="Product Details"
+        rightElement={<Ionicons name="share-social-outline" size={22} color={colors.white} />}
+        isShowleftElement={true}
+      />
+
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <Header
-          onBack={() => navigation.goBack()}
-          title="Product Details"
-          rightElement={<Ionicons name="share-social-outline" size={22} color={colors.white} />}
-        />
-
         <ProductImageSlider images={product.images} />
 
         <View style={styles.productContent}>

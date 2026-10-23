@@ -33,10 +33,10 @@ export default CategoryItem;
 
 const styles = StyleSheet.create({
   text: {
-    paddingHorizontal: 23,
+    paddingHorizontal: 10,
     paddingVertical: 10,
     borderRadius: 20,
-    marginRight: 12,
+    marginRight: 8,
     fontSize: 15,
     fontFamily: commonStyle.fontFamily,
     fontWeight: '500',

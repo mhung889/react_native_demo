@@ -10,15 +10,18 @@ type Props = {
   onBack?: () => void;
   title?: string;
   rightElement?: ReactNode;
+  isShowleftElement?: boolean;
   isCategory?: boolean;
 };
 
-const Header = ({ onBack, title, rightElement, isCategory = false }: Props) => {
+const Header = ({ onBack, title, rightElement, isShowleftElement = false, isCategory = false }: Props) => {
   return (
     <View style={styles.container}>
-      <Pressable onPress={onBack} hitSlop={12}>
-        <Ionicons name="chevron-back" size={24} color={colors.white} />
-      </Pressable>
+      {isShowleftElement && (
+        <Pressable onPress={onBack} hitSlop={12}>
+          <Ionicons name="chevron-back" size={24} color={colors.white} />
+        </Pressable>
+      )}
 
       {isCategory ? (
         <Text style={styles.title}> {capitalizeFirstLetter(title || '')} </Text>
@@ -42,12 +45,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'space-between',
     backgroundColor: colors.background,
-  },
-  action: {
-    width: 36,
-    height: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     flex: 1,

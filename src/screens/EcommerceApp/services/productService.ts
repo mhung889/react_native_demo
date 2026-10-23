@@ -1,9 +1,13 @@
 import { api } from '../api/apiConfig';
 
 export const productServices = {
-  getProductLists: async () => {
-    const response = await api.get('/products');
-    // console.log(response.data);
+  getProductLists: async (limit: number, skip: number) => {
+    const response = await api.get('/products', {
+      params: {
+        limit,
+        skip,
+      },
+    });
     return response.data.products || [];
   },
 

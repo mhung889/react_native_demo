@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 
 import { colors } from '../../../themes/color';
@@ -7,7 +7,12 @@ import { ReviewType } from '../../../types/product';
 
 const RATING = [1, 2, 3, 4, 5];
 
-const RatingStar = ({ reviews }: { reviews: ReviewType[] }) => {
+type RatingStarType = {
+  styleContainer?: StyleProp<ViewStyle>;
+  reviews: ReviewType[];
+};
+
+const RatingStar = ({ reviews, styleContainer }: RatingStarType) => {
   const safeReviews = Array.isArray(reviews) ? reviews : [];
 
   const averageStar =
@@ -16,8 +21,8 @@ const RatingStar = ({ reviews }: { reviews: ReviewType[] }) => {
       : 0;
 
   return (
-    <View style={styles.container}>
-      {RATING.map(star => (
+    <View style={[styles.container, styleContainer]}>
+      {RATING.map((star) => (
         <Ionicons
           key={star}
           name={star <= averageStar ? 'star' : 'star-outline'}
@@ -38,6 +43,6 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   text: {
-    color: colors.white,
+    color: colors.gray,
   },
 });

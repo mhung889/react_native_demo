@@ -20,10 +20,16 @@ type ProductCardNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
 type ProductCardProps = {
   item: ProductType;
   isRemoveFavorite?: boolean;
-  widthStyle?: number;
+  widthContainer?: number;
+  heightImage?: number;
 };
 
-const ProductCardItem = ({ item, isRemoveFavorite = false, widthStyle = 150 }: ProductCardProps) => {
+const ProductCardItem = ({
+  item,
+  isRemoveFavorite = false,
+  widthContainer = 150,
+  heightImage = 184,
+}: ProductCardProps) => {
   const navigation = useNavigation<ProductCardNavigationProp>();
 
   const { isFavorite, addFavoriteProduct, removeFavoriteProduct } = useFavoriteStore(
@@ -66,9 +72,9 @@ const ProductCardItem = ({ item, isRemoveFavorite = false, widthStyle = 150 }: P
         })
       }
     >
-      <View style={[styles.container, { width: widthStyle }]}>
+      <View style={[styles.container, { width: widthContainer }]}>
         {/* Product image */}
-        <View style={styles.imageContainer}>
+        <View style={[styles.imageContainer, { height: heightImage }]}>
           <Image source={{ uri: item?.images?.[0] }} style={styles.image} resizeMode="cover" />
 
           {/* Discount badge */}
@@ -77,22 +83,18 @@ const ProductCardItem = ({ item, isRemoveFavorite = false, widthStyle = 150 }: P
           </View>
 
           {/* Favorite button */}
-          <Pressable onPress={handleToggeHeart}>
-            <View style={styles.favoriteButton}>
-              <Ionicons
-                name={isFavorite ? 'heart' : 'heart-outline'}
-                size={20}
-                color={isFavorite ? colors.primary : colors.gray}
-              />
-            </View>
+          <Pressable onPress={handleToggeHeart} style={styles.favoriteButton}>
+            <Ionicons
+              name={isFavorite ? 'heart' : 'heart-outline'}
+              size={20}
+              color={isFavorite ? colors.primary : colors.gray}
+            />
           </Pressable>
         </View>
 
         {/* Product information */}
         <View style={styles.infoContainer}>
-          <View style={styles.ratingContainer}>
-            <RatingStar reviews={item.reviews} />
-          </View>
+          <RatingStar reviews={item.reviews} />
 
           <Text numberOfLines={1} style={styles.brand}>
             {item.brand || item.category}
@@ -117,14 +119,14 @@ export default ProductCardItem;
 const styles = StyleSheet.create({
   container: {
     // width: 150,
-    marginRight: 10,
-    marginBottom: 8,
+    // marginRight: 10,
+    // marginBottom: 8,
     // alignItems: 'center',
   },
 
   imageContainer: {
     width: '100%',
-    height: 184,
+    // height: 184,
     position: 'relative',
     borderRadius: 12,
     backgroundColor: '#F3F3F3',
@@ -174,16 +176,15 @@ const styles = StyleSheet.create({
   },
 
   brand: {
-    marginTop: 5,
+    // marginTop: 5,
     fontSize: 11,
-    color: '#888888',
+    color: colors.gray,
     fontWeight: '500',
   },
 
   productName: {
     marginTop: 3,
-    fontSize: 13,
-    lineHeight: 18,
+    fontSize: 16,
     color: colors.white,
     fontWeight: '500',
   },
@@ -191,7 +192,6 @@ const styles = StyleSheet.create({
   priceContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 6,
     gap: 7,
   },
 
@@ -199,12 +199,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.gray,
     textDecorationLine: 'line-through',
+    fontWeight: '500',
   },
 
   oldPrice: {
     fontSize: 16,
     color: colors.primary,
-    fontWeight: '700',
+    fontWeight: '400',
     // bottom: 1,
   },
 

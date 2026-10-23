@@ -33,7 +33,7 @@ const Home = () => {
     <FlatList
       style={styles.container}
       data={products}
-      keyExtractor={item => item.id.toString()}
+      keyExtractor={(item) => item.id.toString()}
       refreshing={refreshing}
       onRefresh={hanleRefresh}
       ListHeaderComponent={
@@ -45,10 +45,11 @@ const Home = () => {
 
             <FlatList
               data={products.slice(0, 10)}
-              keyExtractor={item => item.id.toString()}
+              keyExtractor={(item) => item.id.toString()}
               renderItem={renderItem}
               horizontal
               showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.itemProduct}
             />
           </View>
         </>
@@ -73,6 +74,10 @@ const styles = StyleSheet.create({
   listContainer: {
     marginVertical: 2,
     paddingBottom: 50,
+  },
+
+  itemProduct: {
+    gap: 12,
   },
 
   viewAll: {
