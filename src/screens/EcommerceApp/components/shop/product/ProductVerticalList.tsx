@@ -24,7 +24,7 @@ const ProductVerticalList = ({ filterData, loadingProduct, loadingHasMore, error
         <ActivityIndicator size="large" color={colors.primary} />
       ) : (
         <>
-          <Text style={styles.emptyTitle}>{error ? 'Không thể tải sản phẩm' : 'Chưa có sản phẩm'}</Text>
+          {/* <Text style={styles.emptyTitle}>{error ? 'Không thể tải sản phẩm' : 'Chưa có sản phẩm'}</Text> */}
           <Text style={styles.emptyDescription}>{error ?? 'Hãy thử chọn danh mục khác nhé.'}</Text>
         </>
       )}

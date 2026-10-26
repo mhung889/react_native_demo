@@ -46,7 +46,7 @@ const ProductGridList = ({ filterData, loadingProduct, loadingHasMore, error, lo
           </SafeAreaView>
         ) : (
           <SafeAreaView style={styles.center}>
-            <Text>Không có sản phẩm.</Text>
+            <Text>{'Không có sản phẩm.'}</Text>
           </SafeAreaView>
         )
       }

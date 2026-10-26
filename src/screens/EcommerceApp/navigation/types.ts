@@ -33,6 +33,7 @@ export type AuthStackParamList = {
 
 export type ShopStackParamList = {
   [SCREENS.SHOP]: undefined;
+  [SCREENS.SEARCH_PRODUCT]: undefined;
 };
 
 export type MainTabParamList = {

@@ -1,10 +1,13 @@
 import React, { ReactNode } from 'react';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { colors } from '../../themes/color';
-import { commonStyle } from '../../themes/commonStyle';
+import { SCREENS } from '../../navigation/SCREENS';
 import { capitalizeFirstLetter } from '../../utils';
+import { commonStyle } from '../../themes/commonStyle';
+import { ShopStackParamList } from '../../navigation/types';
 
 type Props = {
   onBack?: () => void;
@@ -12,9 +15,23 @@ type Props = {
   rightElement?: ReactNode;
   isShowleftElement?: boolean;
   isCategory?: boolean;
+  isSearch?: boolean;
+  navigation?: NativeStackNavigationProp<ShopStackParamList>;
 };
 
-const Header = ({ onBack, title, rightElement, isShowleftElement = false, isCategory = false }: Props) => {
+const Header = ({
+  onBack,
+  title,
+  rightElement,
+  isShowleftElement = false,
+  isCategory = false,
+  isSearch = false,
+  navigation,
+}: Props) => {
+  const handleNavigationToSearch = () => {
+    navigation?.navigate(SCREENS.SEARCH_PRODUCT);
+  };
+
   return (
     <View style={styles.container}>
       {isShowleftElement && (
@@ -24,12 +41,13 @@ const Header = ({ onBack, title, rightElement, isShowleftElement = false, isCate
       )}
 
       {isCategory ? (
-        <Text style={styles.title}> {capitalizeFirstLetter(title || '')} </Text>
+        <Text style={styles.title}>{capitalizeFirstLetter(title || '')}</Text>
       ) : (
-        <Text style={styles.title}> {title}</Text>
+        <Text style={styles.title}>{title}</Text>
       )}
 
-      {rightElement && <Pressable onPress={() => console.log('first')}>{rightElement}</Pressable>}
+      {rightElement &&
+        (isSearch ? <Pressable onPress={handleNavigationToSearch}>{rightElement}</Pressable> : rightElement)}
     </View>
   );
 };

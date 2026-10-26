@@ -12,10 +12,17 @@ import { productServices } from '../../services/productService';
 import { useCategoryProducts } from '../../hook/useCategoryProduct';
 import ProductGridList from '../../components/shop/product/ProductGridList';
 import ProductVerticalList from '../../components/shop/product/ProductVerticalList';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ShopStackParamList } from '../../navigation/types';
 
 export type SortType = 'asc' | 'desc';
 
+type ShopScreenNavigationProp = NativeStackNavigationProp<ShopStackParamList>;
+
 const ShopScreen = () => {
+  const navigation = useNavigation<ShopScreenNavigationProp>();
+
   const [selectedCategory, setSelectedCategory] = useState('all');
   const { products, loadingProduct, loadingHasMore, error, loadMore } = useCategoryProducts(selectedCategory);
 
@@ -49,6 +56,8 @@ const ShopScreen = () => {
         rightElement={<Ionicons name="search-outline" size={22} color={colors.white} />}
         title={selectedCategory}
         isCategory
+        isSearch
+        navigation={navigation}
       />
       <View style={styles.contentCategory}>
         <CategoryList

@@ -37,4 +37,16 @@ export const productServices = {
 
     return response.data.products;
   },
+
+  getProductListBySearchInput: async (searchInput: string, skip: number, limit: number) => {
+    const reponse = await api.get(`/products/search`, {
+      params: {
+        skip,
+        limit,
+        q: searchInput,
+      },
+    });
+
+    return reponse.data.products;
+  },
 };

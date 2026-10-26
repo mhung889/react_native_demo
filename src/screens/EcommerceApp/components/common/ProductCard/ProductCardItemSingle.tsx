@@ -58,15 +58,14 @@ const ProductCardItemSingle = ({ item, isRemoveFavorite = false }: ProductCardPr
     }
   };
 
+  const handleNavigationProductDetail = () => {
+    navigation.navigate(SCREENS.PRODUCT_DETAIL, {
+      productId: item.id,
+    });
+  };
+
   return (
-    <Pressable
-      onPress={() =>
-        navigation.navigate(SCREENS.PRODUCT_DETAIL, {
-          productId: item.id,
-        })
-      }
-      style={[styles.container]}
-    >
+    <Pressable onPress={handleNavigationProductDetail} style={[styles.container]}>
       <Image source={{ uri: item.thumbnail }} style={styles.image} />
 
       <View style={styles.infoContainer}>

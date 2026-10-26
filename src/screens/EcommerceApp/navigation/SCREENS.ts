@@ -19,6 +19,7 @@ export const SCREENS = {
 
   //Shop stack
   SHOP: 'Shop',
+  SEARCH_PRODUCT: 'SearchProduct',
 
   //Favaroties stack
   FAVORITES: 'Favorites',
