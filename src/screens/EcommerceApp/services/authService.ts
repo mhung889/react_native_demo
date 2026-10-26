@@ -12,7 +12,6 @@ export const authService = {
 
   findAllUser: async () => {
     const response = await api.get('/users');
-    // console.log(response);
     return response.data.users || [];
   },
 

@@ -16,9 +16,8 @@ type Props = {
 };
 
 const ProductOptions = ({ selectedSize, onSelectSize, product }: Props) => {
-  // use zustand
   const { addFavoriteProduct, removeFavoriteProduct, isFavorite } = useFavoriteStore(
-    useShallow(state => ({
+    useShallow((state) => ({
       addFavoriteProduct: state.addFavoriteProduct,
       removeFavoriteProduct: state.removeFavoriteProduct,
       isFavorite: state.isFavoriteProduct(product.id),

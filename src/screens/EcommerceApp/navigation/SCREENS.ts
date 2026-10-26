@@ -19,6 +19,8 @@ export const SCREENS = {
 
   //Shop stack
   SHOP: 'Shop',
+  SEARCH_PRODUCT: 'SearchProduct',
+  SEARCH_PRODUCT_LIST: 'SearchProductList',
 
   //Favaroties stack
   FAVORITES: 'Favorites',
@@ -33,4 +35,4 @@ export const SCREENS = {
   PROFILE_MY_ORDERS: 'ProfileMyOrders',
   PROFILE_ORDER_DETAIL: 'ProfileOrderDetail',
   PROFILE_ADDRESS: 'ProfileAddress',
-};
+} as const;

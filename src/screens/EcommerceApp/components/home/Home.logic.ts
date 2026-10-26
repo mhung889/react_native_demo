@@ -3,17 +3,18 @@ import { useCallback, useEffect, useState } from 'react';
 import { ProductType } from '../../types/product';
 import { productServices } from '../../services/productService';
 
+const PAGE_SIZE = 10;
+
 export const useHomeLogic = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
-  const fetchDataProducts = async () => {
+  const fetchDataProducts = async (page: number) => {
     try {
-      const products = await productServices.getProductLists();
-
-      // console.log(products);
-      setProducts(products);
+      const skip = (page - 1) * PAGE_SIZE;
+      const response = await productServices.getProductLists(PAGE_SIZE, skip);
+      setProducts(response);
     } catch (error) {
       console.error(error);
     }
@@ -24,7 +25,7 @@ export const useHomeLogic = () => {
     setRefreshing(true);
 
     try {
-      await fetchDataProducts();
+      await fetchDataProducts(1);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -32,7 +33,7 @@ export const useHomeLogic = () => {
   }, []);
 
   useEffect(() => {
-    fetchDataProducts();
+    fetchDataProducts(1);
   }, []);
 
   return {

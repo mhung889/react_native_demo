@@ -19,3 +19,10 @@ export type ProductType = {
   thumbnail: string;
   images: string[];
 };
+type CacheData = {
+  product: ProductType[];
+  page: number;
+  hasMore: boolean;
+};
+
+export type CategoryCache = Record<string, CacheData>;

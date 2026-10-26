@@ -1,5 +1,5 @@
 module.exports = {
-  arrowParens: 'avoid', // nếu arrow function có 1 tham số thì bỏ ()
+  arrowParens: 'always', // nếu arrow function có 1 tham số thì khong bỏ (), muon bo thay 'always' thanh 'void
   singleQuote: true, // dùng '' thay vì ""
   trailingComma: 'all', // thêm dấu ',' ở phần tử cuối cùng trong object, array,import,...
 

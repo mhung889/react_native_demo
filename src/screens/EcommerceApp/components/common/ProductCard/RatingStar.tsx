@@ -1,22 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 
 import { colors } from '../../../themes/color';
 import { ReviewType } from '../../../types/product';
 
 const RATING = [1, 2, 3, 4, 5];
 
-const RatingStar = ({ reviews }: { reviews: ReviewType[] }) => {
-  const avegerStar = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
+type RatingStarType = {
+  styleContainer?: StyleProp<ViewStyle>;
+  reviews: ReviewType[];
+};
+
+const RatingStar = ({ reviews, styleContainer }: RatingStarType) => {
+  const safeReviews = Array.isArray(reviews) ? reviews : [];
+
+  const averageStar =
+    safeReviews.length > 0
+      ? safeReviews.reduce((sum, review) => sum + (review.rating ?? 0), 0) / safeReviews.length
+      : 0;
 
   return (
-    <View style={styles.container}>
-      {RATING.map(star => (
+    <View style={[styles.container, styleContainer]}>
+      {RATING.map((star) => (
         <Ionicons
           key={star}
-          name={star <= avegerStar ? 'star' : 'star-outline'}
-          color={star <= avegerStar ? colors.yellow : colors.gray}
+          name={star <= averageStar ? 'star' : 'star-outline'}
+          color={star <= averageStar ? colors.yellow : colors.gray}
           size={15}
         />
       ))}
@@ -33,6 +43,6 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   text: {
-    color: colors.white,
+    color: colors.gray,
   },
 });

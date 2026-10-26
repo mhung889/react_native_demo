@@ -1,25 +1,32 @@
 import React from 'react';
-import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text } from 'react-native';
 
 import HomeBanner from '../../components/home/HomeBanner';
 import { useHomeLogic } from '../../components/home/Home.logic';
 import ProductListHeader from '../../components/home/ProductListHeader';
-import ProductCardItem from '../../components/common/ProductCard/ProductCardItem';
 
 import { colors } from '../../themes/color';
-import { ProductType } from '../../types/product';
 import { commonStyle } from '../../themes/commonStyle';
+import { MainTabParamList } from '../../navigation/types';
+import { SCREENS } from '../../navigation/SCREENS';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+
+type HomeNavigationProp = BottomTabNavigationProp<MainTabParamList>;
 
 const Home = () => {
+  const navigation = useNavigation<HomeNavigationProp>();
   const { products, loading, hanleRefresh, refreshing } = useHomeLogic();
 
-  const renderItem = ({ item }: { item: ProductType }) => {
-    return <ProductCardItem item={item} />;
+  const handleNagivateAllProduct = () => {
+    navigation.navigate(SCREENS.SHOP_TAB, {
+      screen: SCREENS.SHOP,
+    });
   };
 
   const renderRightElement = () => {
     return (
-      <Pressable>
+      <Pressable onPress={handleNagivateAllProduct}>
         <Text style={styles.viewAll}> View all</Text>
       </Pressable>
     );
@@ -33,24 +40,19 @@ const Home = () => {
     <FlatList
       style={styles.container}
       data={products}
-      keyExtractor={item => item.id.toString()}
+      keyExtractor={(item) => item.id.toString()}
       refreshing={refreshing}
       onRefresh={hanleRefresh}
       ListHeaderComponent={
         <>
-          <HomeBanner />
+          {products.length > 3 && <HomeBanner product={products[3]} />}
 
-          <View style={styles.sectionContainer}>
-            <ProductListHeader name="Sale" title="Super summer sale" rightElement={renderRightElement()} />
-
-            <FlatList
-              data={products.slice(0, 10)}
-              keyExtractor={item => item.id.toString()}
-              renderItem={renderItem}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-            />
-          </View>
+          <ProductListHeader
+            name="Sale"
+            title="Super summer sale"
+            rightElement={renderRightElement()}
+            products={products.slice(0, 10)}
+          />
         </>
       }
       contentContainerStyle={styles.listContainer}
@@ -73,6 +75,10 @@ const styles = StyleSheet.create({
   listContainer: {
     marginVertical: 2,
     paddingBottom: 50,
+  },
+
+  itemProduct: {
+    gap: 12,
   },
 
   viewAll: {

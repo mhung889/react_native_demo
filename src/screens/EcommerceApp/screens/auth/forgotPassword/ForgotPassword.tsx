@@ -3,30 +3,24 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { colors } from '../../../themes/color';
-import Header from '../../../components/auth/Header';
+import AuthHeader from '../../../components/auth/AuthHeader';
 import ButtonAuth from '../../../components/ButtonAuth';
 import { SCREENS } from '../../../navigation/SCREENS';
 
 const ForgotPassword = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header name={'Forgot password'} screen={SCREENS.SIGN_IN} />
+      <AuthHeader name={'Forgot password'} screen={SCREENS.SIGN_IN} />
 
       <Text style={styles.descriptionText}>
-        {
-          'Please, enter your email address. You will receive a link to create a new password via email.'
-        }
+        {'Please, enter your email address. You will receive a link to create a new password via email.'}
       </Text>
 
       {/* Form Signup */}
       <View style={styles.formContainer}>
         <View style={styles.item}>
           <Text style={styles.labelInput}>{'Email'} </Text>
-          <TextInput
-            placeholder="enter Email"
-            style={styles.textInput}
-            placeholderTextColor={colors.ordinaryText}
-          />
+          <TextInput placeholder="enter Email" style={styles.textInput} placeholderTextColor={colors.ordinaryText} />
         </View>
       </View>
 

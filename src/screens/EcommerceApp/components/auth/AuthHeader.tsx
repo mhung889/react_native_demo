@@ -10,15 +10,11 @@ type HeaderType = {
   screen?: string;
 };
 
-const Header = ({ name }: HeaderType) => {
+const AuthHeader = ({ name }: HeaderType) => {
   const navigation = useNavigation();
 
   return (
     <View>
-      {/* <Link screen={screen} params={{}}>
-        <Ionicons name="chevron-back-outline" color={colors.white} size={30} />
-      </Link> */}
-
       <Pressable onPress={() => navigation.goBack()}>
         <Ionicons name="chevron-back-outline" color={colors.white} size={30} />
       </Pressable>
@@ -28,7 +24,7 @@ const Header = ({ name }: HeaderType) => {
   );
 };
 
-export default Header;
+export default AuthHeader;
 
 const styles = StyleSheet.create({
   textHeader: {
