@@ -10,27 +10,25 @@ type AuthState = {
   isLoading: boolean;
   error: string | null;
 
-  //
   signIn: (payload: SignInPayload) => Promise<void>;
   logOut: () => void;
   clearError: () => void;
 };
 
-export const useAuthStore = create<AuthState>(set => ({
+export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   accessToken: null,
   refreshToken: null,
   isLoading: false,
   error: null,
 
-  signIn: async payload => {
+  signIn: async (payload) => {
     set({
       isLoading: true,
       error: null,
     });
     try {
       const response = await authService.signIn(payload);
-
       const { accessToken, refreshToken, ...user } = response;
       set({
         user,
@@ -41,12 +39,10 @@ export const useAuthStore = create<AuthState>(set => ({
       });
     } catch (error: unknown) {
       const message = 'please retry user name and password';
-
       set({
         isLoading: false,
         error: message,
       });
-
       throw error;
     }
   },

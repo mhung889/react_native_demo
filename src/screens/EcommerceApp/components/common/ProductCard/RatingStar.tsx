@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 
 import { colors } from '../../../themes/color';
 import { ReviewType } from '../../../types/product';

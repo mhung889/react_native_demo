@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 
 import { colors } from '../../themes/color';
@@ -31,23 +31,23 @@ const ShopScreen = () => {
 
   const [activeRenderGrid, setActiveRenderGrid] = useState(false);
 
-  const filterData = useCallback(
+  const filterData = useMemo(
     () => [...products].sort((a, b) => (sortPrice === 'asc' ? a.price - b.price : b.price - a.price)),
     [sortPrice, products],
   );
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await productServices.getCategoryList();
-        setCategories(response);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchCategories();
+  const fetchCategories = useCallback(async () => {
+    try {
+      const response = await productServices.getCategoryList();
+      setCategories(response);
+    } catch (err) {
+      console.error(err);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   const renderHeader = () => (
     <View style={{ backgroundColor: colors.background }}>
@@ -107,45 +107,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
-
-  columnWrapStyle: {
-    justifyContent: 'space-between',
-  },
-
-  contentContainer: {
-    marginHorizontal: 16,
-    gap: 16,
-    paddingBottom: 30,
-  },
-
   contentCategory: {
     marginLeft: 16,
   },
-
   center: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.background,
     padding: 200,
-  },
-  message: {
-    marginTop: 12,
-    padding: 16,
-    fontSize: 14,
-    color: colors.gray,
-    textAlign: 'center',
-  },
-  error: {
-    margin: 16,
-    fontSize: 14,
-    color: 'red',
-    textAlign: 'center',
-  },
-  categoriesContainer: {
-    // paddingVertical: 30,
-  },
-  footer: {
-    padding: 16,
   },
 });

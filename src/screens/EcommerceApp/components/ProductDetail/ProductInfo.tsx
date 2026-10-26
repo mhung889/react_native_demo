@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../../themes/color';
-import { formatPrice, getDiscountPrice } from '../../utils';
 import { ProductType } from '../../types/product';
 import { commonStyle } from '../../themes/commonStyle';
+import { formatPrice, getDiscountPrice } from '../../utils';
 
 import RatingStar from '../common/ProductCard/RatingStar';
 
@@ -20,16 +20,9 @@ const ProductInfo = ({ product }: Props) => {
 
         <Text style={styles.price}>{formatPrice(getDiscountPrice(product.price, product.discountPercentage))}</Text>
       </View>
-
       <Text style={styles.name}>{product.title}</Text>
-
-      {/* <View style={styles.ratingRow}>
-        <Text style={styles.rating}>★ {product.rating}</Text>
-      </View> */}
-
       <RatingStar reviews={product.reviews} />
-
-      <Text style={styles.descriptionTitle}>Description</Text>
+      <Text style={styles.descriptionTitle}>{'Description'}</Text>
       <Text style={styles.description}>{product.description}</Text>
     </View>
   );
@@ -65,21 +58,6 @@ const styles = StyleSheet.create({
     fontFamily: commonStyle.fontFamily,
     fontSize: 16,
     marginTop: 6,
-  },
-  ratingRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 14,
-    marginTop: 12,
-  },
-  rating: {
-    color: colors.white,
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  stock: {
-    color: colors.gray,
-    fontSize: 13,
   },
   descriptionTitle: {
     color: colors.ordinaryText,

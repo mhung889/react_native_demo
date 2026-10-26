@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 import { colors } from '../../../themes/color';
 import { commonStyle } from '../../../themes/commonStyle';
 import { capitalizeFirstLetter } from '../../../utils';
@@ -29,7 +29,7 @@ const CategoryItem = ({ title, selectedCategory, setSelectedCategory }: Category
   );
 };
 
-export default CategoryItem;
+export default memo(CategoryItem);
 
 const styles = StyleSheet.create({
   text: {

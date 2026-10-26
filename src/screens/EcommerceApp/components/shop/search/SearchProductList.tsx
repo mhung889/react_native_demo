@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
@@ -12,7 +12,6 @@ import { useSearchProduct } from '../../../hook/useSearchProduct';
 import ProductCardItemSingle from '../../common/ProductCard/ProductCardItemSingle';
 
 type SearchProductListProps = NativeStackScreenProps<ShopStackParamList, typeof SCREENS.SEARCH_PRODUCT_LIST>;
-// tuong duong voi
 // type SearchProductListProps = NativeStackScreenProps<ShopStackParamList, 'SearchProductList'>;
 
 const SearchProductList = ({ route, navigation }: SearchProductListProps) => {
@@ -20,9 +19,9 @@ const SearchProductList = ({ route, navigation }: SearchProductListProps) => {
 
   const { products, loading, error, handleHasMore, loadingHasMore } = useSearchProduct(keyword);
 
-  const renderProductItem = ({ item }: { item: ProductType }) => {
+  const renderProductItem = useCallback(({ item }: { item: ProductType }) => {
     return <ProductCardItemSingle item={item} />;
-  };
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -63,26 +62,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
-
   productList: {
     marginHorizontal: 16,
     gap: 10,
   },
-
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   footerLoader: {
     marginVertical: 16,
   },
-
   emptyList: {
     flexGrow: 1,
   },
-
   errorText: {
     color: colors.white,
   },

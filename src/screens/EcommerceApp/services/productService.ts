@@ -34,7 +34,6 @@ export const productServices = {
 
   getAllProductsByCategory: async (categoryName: string) => {
     const response = await api.get(`/products/category/${categoryName}`, { params: { limit: 0 } });
-
     return response.data.products;
   },
 

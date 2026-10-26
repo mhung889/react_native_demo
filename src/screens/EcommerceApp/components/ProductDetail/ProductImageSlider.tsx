@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import {
   FlatList,
   Image,
@@ -20,11 +20,14 @@ const ProductImageSlider = ({ images }: ProductImageSliderProps) => {
 
   const imageList = images.filter(Boolean);
 
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const offsetX = event.nativeEvent.contentOffset.x;
-    const index = Math.round(offsetX / width);
-    setActiveIndex(index);
-  };
+  const handleScroll = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const offsetX = event.nativeEvent.contentOffset.x;
+      const index = Math.round(offsetX / width);
+      setActiveIndex(index);
+    },
+    [width],
+  );
 
   if (imageList.length === 0) {
     return (
@@ -67,7 +70,7 @@ const ProductImageSlider = ({ images }: ProductImageSliderProps) => {
   );
 };
 
-export default ProductImageSlider;
+export default memo(ProductImageSlider);
 
 const styles = StyleSheet.create({
   imageContainer: {

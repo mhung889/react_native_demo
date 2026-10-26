@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FlatList, Pressable, StyleSheet, Text } from 'react-native';
+
 import CategoryItem from './CategoryItem';
+import { colors } from '../../../themes/color';
 import { capitalizeFirstLetter } from '../../../utils';
 import { commonStyle } from '../../../themes/commonStyle';
-import { colors } from '../../../themes/color';
 
 interface CategoryListProps {
   categories: string[];
@@ -14,30 +15,38 @@ interface CategoryListProps {
 const CategoryList = ({ categories, selectedCategory, setSelectedCategory }: CategoryListProps) => {
   const categoryData = ['all', ...categories];
 
-  const renderCateAll = (title: string) => (
-    <Pressable onPress={() => setSelectedCategory(title)}>
-      <Text
-        style={[
-          styles.text,
-          {
-            backgroundColor: selectedCategory.toLowerCase() === title.toLowerCase() ? colors.primary : colors.white,
-            borderColor: selectedCategory.toLowerCase() === title.toLowerCase() ? colors.primary : colors.white,
-            color: selectedCategory.toLowerCase() === title.toLowerCase() ? colors.white : colors.backgroundBottom,
-          },
-        ]}
-      >
-        {capitalizeFirstLetter(title)}
-      </Text>
-    </Pressable>
+  const renderCateAll = useCallback(
+    (title: string) => (
+      <Pressable onPress={() => setSelectedCategory(title)}>
+        <Text
+          style={[
+            styles.text,
+            {
+              backgroundColor: selectedCategory.toLowerCase() === title.toLowerCase() ? colors.primary : colors.white,
+              borderColor: selectedCategory.toLowerCase() === title.toLowerCase() ? colors.primary : colors.white,
+              color: selectedCategory.toLowerCase() === title.toLowerCase() ? colors.white : colors.backgroundBottom,
+            },
+          ]}
+        >
+          {capitalizeFirstLetter(title)}
+        </Text>
+      </Pressable>
+    ),
+    [selectedCategory, setSelectedCategory],
   );
 
-  const renderCate = ({ item }: { item: string }) => {
-    if (item.toLowerCase() === 'all') {
-      return renderCateAll(item);
-    }
+  const renderCate = useCallback(
+    ({ item }: { item: string }) => {
+      if (item.toLowerCase() === 'all') {
+        return renderCateAll(item);
+      }
 
-    return <CategoryItem title={item} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />;
-  };
+      return (
+        <CategoryItem title={item} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+      );
+    },
+    [renderCateAll, selectedCategory, setSelectedCategory],
+  );
 
   return (
     <FlatList
@@ -46,7 +55,6 @@ const CategoryList = ({ categories, selectedCategory, setSelectedCategory }: Cat
       renderItem={renderCate}
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.contentCategory}
     />
   );
 };
@@ -54,10 +62,6 @@ const CategoryList = ({ categories, selectedCategory, setSelectedCategory }: Cat
 export default CategoryList;
 
 const styles = StyleSheet.create({
-  contentCategory: {
-    // Giữ style hiện tại
-  },
-
   text: {
     paddingHorizontal: 20,
     paddingVertical: 10,

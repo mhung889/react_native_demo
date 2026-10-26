@@ -15,10 +15,6 @@ const AuthHeader = ({ name }: HeaderType) => {
 
   return (
     <View>
-      {/* <Link screen={screen} params={{}}>
-        <Ionicons name="chevron-back-outline" color={colors.white} size={30} />
-      </Link> */}
-
       <Pressable onPress={() => navigation.goBack()}>
         <Ionicons name="chevron-back-outline" color={colors.white} size={30} />
       </Pressable>

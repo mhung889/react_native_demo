@@ -71,7 +71,6 @@ export const useFavoriteStore = create<FavoriteState>((set, get) => ({
       favoriteProductList: newFavorites,
     });
     console.log(MMKVStorage.getString(getFavoriteKey(currentUserId)));
-    // update MMKVStorage
     MMKVStorage.set(getFavoriteKey(currentUserId), JSON.stringify(newFavorites));
   },
   removeFavoriteProduct: (productId: ProductType['id']) => {
@@ -80,7 +79,6 @@ export const useFavoriteStore = create<FavoriteState>((set, get) => ({
     set({
       favoriteProductList: newFavorites,
     });
-    // update MMKVStorage
     MMKVStorage.set(getFavoriteKey(currentUserId), JSON.stringify(newFavorites));
   },
 

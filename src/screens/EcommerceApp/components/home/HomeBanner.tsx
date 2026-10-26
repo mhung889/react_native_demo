@@ -1,13 +1,13 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { colors } from '../../themes/color';
 import { ProductType } from '../../types/product';
-import { commonStyle } from '../../themes/commonStyle';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HomeStackParamList } from '../../navigation/types';
 import { SCREENS } from '../../navigation/SCREENS';
+import { commonStyle } from '../../themes/commonStyle';
+import { HomeStackParamList } from '../../navigation/types';
 
 type HomeBannerNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
 

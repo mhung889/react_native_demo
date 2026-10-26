@@ -1,12 +1,12 @@
 import { ActivityIndicator, FlatList, StyleSheet, Text } from 'react-native';
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { ProductType } from '../../../types/product';
 import ProductCardItem from '../../common/ProductCard/ProductCardItem';
 import { colors } from '../../../themes/color';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 type ProductGridListType = {
-  filterData: () => ProductType[];
+  filterData: ProductType[];
   loadingProduct: boolean;
   loadingHasMore: boolean;
   error: string | null;
@@ -14,16 +14,15 @@ type ProductGridListType = {
 };
 
 const ProductGridList = ({ filterData, loadingProduct, loadingHasMore, error, loadMore }: ProductGridListType) => {
-  const products = filterData();
-
-  const renderProductByCategory = ({ item }: { item: ProductType }) => (
-    <ProductCardItem item={item} widthContainer={176} heightImage={200} />
+  const renderProductByCategory = useCallback(
+    ({ item }: { item: ProductType }) => <ProductCardItem item={item} widthContainer={176} heightImage={200} />,
+    [],
   );
 
   return (
     <FlatList
       key="grid"
-      data={products}
+      data={filterData}
       keyExtractor={(item) => String(item.id)}
       renderItem={renderProductByCategory}
       numColumns={2}
@@ -54,7 +53,7 @@ const ProductGridList = ({ filterData, loadingProduct, loadingHasMore, error, lo
   );
 };
 
-export default ProductGridList;
+export default memo(ProductGridList);
 
 const styles = StyleSheet.create({
   container: {

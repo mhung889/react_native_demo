@@ -1,18 +1,21 @@
-import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { useShallow } from 'zustand/react/shallow';
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HomeStackParamList } from '../../../navigation/types';
+import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+
+import { SCREENS } from '../../../navigation/SCREENS';
 import { ProductType } from '../../../types/product';
+import { HomeStackParamList } from '../../../navigation/types';
+
 import RatingStar from './RatingStar';
 import { colors } from '../../../themes/color';
-import { Ionicons } from '@react-native-vector-icons/ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { commonStyle } from '../../../themes/commonStyle';
+import { formatPrice, getDiscountPrice } from '../../../utils';
+
 import { useFavoriteStore } from '../../../store/favorite/favorite.store';
 import { selectFavorite } from '../../../store/favorite/selector.favorite';
-import { useShallow } from 'zustand/react/shallow';
-import { SCREENS } from '../../../navigation/SCREENS';
-import { formatPrice, getDiscountPrice } from '../../../utils';
-import { commonStyle } from '../../../themes/commonStyle';
 
 type ProductCardNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
 

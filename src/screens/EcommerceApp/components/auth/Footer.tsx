@@ -10,7 +10,6 @@ const Footer = () => {
       <Text style={styles.textSocialAccount}>{'Or sign up with social account'}</Text>
       <View style={styles.itemContainer}>
         <Ionicons name="logo-google" size={20} color={'red'} style={styles.logo} />
-
         <Ionicons name="logo-facebook" size={20} color={'red'} style={styles.logo} />
       </View>
     </View>

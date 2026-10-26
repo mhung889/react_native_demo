@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { memo, ReactNode, useCallback } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../../themes/color';
@@ -14,9 +14,9 @@ type ProductListHeaderProps = {
 };
 
 const ProductListHeader = ({ name, title, rightElement, products = [] }: ProductListHeaderProps) => {
-  const renderItem = ({ item }: { item: ProductType }) => {
+  const renderItem = useCallback(({ item }: { item: ProductType }) => {
     return <ProductCardItem item={item} />;
-  };
+  }, []);
 
   return (
     <>
@@ -44,7 +44,7 @@ const ProductListHeader = ({ name, title, rightElement, products = [] }: Product
   );
 };
 
-export default ProductListHeader;
+export default memo(ProductListHeader);
 
 const styles = StyleSheet.create({
   container: {

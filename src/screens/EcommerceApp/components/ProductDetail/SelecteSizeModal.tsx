@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
@@ -24,7 +24,7 @@ const SelecteSizeModal = ({ selectedSize, onSelectSize, onAddToCart }: Props) =>
       <Text style={styles.title}>{'Select Size'}</Text>
 
       <View style={styles.sizeContainer}>
-        {DATA_SIZES.map(size => {
+        {DATA_SIZES.map((size) => {
           const selected = selectedSize === size;
 
           return (
@@ -65,7 +65,7 @@ const SelecteSizeModal = ({ selectedSize, onSelectSize, onAddToCart }: Props) =>
   );
 };
 
-export default SelecteSizeModal;
+export default memo(SelecteSizeModal);
 
 const styles = StyleSheet.create({
   container: {
