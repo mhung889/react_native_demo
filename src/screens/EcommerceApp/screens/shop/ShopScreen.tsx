@@ -40,7 +40,6 @@ const ShopScreen = () => {
     const fetchCategories = async () => {
       try {
         const response = await productServices.getCategoryList();
-
         setCategories(response);
       } catch (err) {
         console.error(err);

@@ -19,7 +19,6 @@ export type ProductType = {
   thumbnail: string;
   images: string[];
 };
-
 type CacheData = {
   product: ProductType[];
   page: number;

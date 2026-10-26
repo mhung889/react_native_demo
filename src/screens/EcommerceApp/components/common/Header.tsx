@@ -16,6 +16,7 @@ type Props = {
   isShowleftElement?: boolean;
   isCategory?: boolean;
   isSearch?: boolean;
+  heightContainer?: number;
   navigation?: NativeStackNavigationProp<ShopStackParamList>;
 };
 
@@ -26,6 +27,7 @@ const Header = ({
   isShowleftElement = false,
   isCategory = false,
   isSearch = false,
+  heightContainer = 90,
   navigation,
 }: Props) => {
   const handleNavigationToSearch = () => {
@@ -33,7 +35,7 @@ const Header = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { height: heightContainer }]}>
       {isShowleftElement && (
         <Pressable onPress={onBack} hitSlop={12}>
           <Ionicons name="chevron-back" size={24} color={colors.white} />

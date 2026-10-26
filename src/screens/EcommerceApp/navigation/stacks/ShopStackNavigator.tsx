@@ -7,6 +7,7 @@ import { screenOption } from '../screenOptions';
 import ShopScreen from '../../screens/shop/ShopScreen';
 import ProductDetailScreen from '../../screens/home/ProductDetailScreen';
 import SearchProductScreen from '../../screens/shop/SearchProductScreen';
+import SearchProductList from '../../components/shop/search/SearchProductList';
 
 const ShopStack = createNativeStackNavigator<ShopStackParamList>();
 
@@ -16,6 +17,7 @@ const ShopStackNavigator = () => {
       <ShopStack.Screen name={SCREENS.SHOP} component={ShopScreen} />
       <ShopStack.Screen name={SCREENS.PRODUCT_DETAIL} component={ProductDetailScreen} />
       <ShopStack.Screen name={SCREENS.SEARCH_PRODUCT} component={SearchProductScreen} />
+      <ShopStack.Screen name={SCREENS.SEARCH_PRODUCT_LIST} component={SearchProductList} />
     </ShopStack.Navigator>
   );
 };

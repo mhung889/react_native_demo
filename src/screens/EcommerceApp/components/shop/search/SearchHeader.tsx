@@ -30,8 +30,6 @@ const SearchHeader = ({
           <Ionicons name="arrow-back" size={24} color={colors.whiteLogo} />
         </Pressable>
         <View style={styles.searchBox}>
-          <Ionicons name="search-outline" size={20} color={colors.whiteLogo} />
-
           <TextInput
             placeholder="Tìm kiếm sản phẩm..."
             placeholderTextColor={colors.gray}
@@ -49,13 +47,16 @@ const SearchHeader = ({
             </Pressable>
           )}
         </View>
+        <Pressable onPress={handleSaveNote}>
+          <Ionicons name="search" size={24} color={colors.whiteLogo} />
+        </Pressable>
       </View>
 
       {/* Search History */}
       {history.length > 0 && (
         <View style={styles.historyContainer}>
           <View style={styles.historyHeader}>
-            <Text style={styles.historyTitle}>Tìm kiếm gần đây</Text>
+            <Text style={styles.historyTitle}>{'Tìm kiếm gần đây'}</Text>
 
             <Pressable onPress={clearHistory} hitSlop={8}>
               <Ionicons name="trash-outline" size={20} color={colors.primary} />
@@ -70,7 +71,6 @@ const SearchHeader = ({
             ))}
           </Text>
         </View>
-        // </View>
       )}
     </>
   );

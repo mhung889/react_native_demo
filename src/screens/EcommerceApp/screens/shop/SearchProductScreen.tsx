@@ -1,37 +1,25 @@
 import React, { useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import { useDebounce } from 'use-debounce';
+import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { useShallow } from 'zustand/react/shallow';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { colors } from '../../themes/color';
-import { ProductType } from '../../types/product';
-import { useSearchProduct } from '../../hook/useSearchProduct';
+import { SCREENS } from '../../navigation/SCREENS';
+import { ShopStackParamList } from '../../navigation/types';
 import { useSearchStore } from '../../store/search/search.store';
 import { selectSearch } from '../../store/search/selector.search';
 import SearchHeader from '../../components/shop/search/SearchHeader';
-import ProductCardItemSingle from '../../components/common/ProductCard/ProductCardItemSingle';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type SearchProductNavigationProp = NativeStackNavigationProp<ShopStackParamList>;
 
 const SearchProductScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<SearchProductNavigationProp>();
 
   const { addSearch, history, removeSearch, clearHistory } = useSearchStore(useShallow(selectSearch));
 
-  const [searchInput, setSearchInput] = useState('');
-  const [searchInputDebounce] = useDebounce(searchInput, 1000);
-
-  const { products, loading, error, handleHasMore, loadingHasMore } = useSearchProduct(searchInputDebounce);
+  const [searchInput, setSearchInput] = useState<string>('');
 
   const handleGoBack = () => {
     Keyboard.dismiss();
@@ -41,16 +29,10 @@ const SearchProductScreen = () => {
   const handleSaveNote = () => {
     if (!searchInput) return;
     addSearch(searchInput);
-    setSearchInput('');
+    navigation.push(SCREENS.SEARCH_PRODUCT_LIST, {
+      keyword: searchInput,
+    });
     Keyboard.dismiss();
-  };
-
-  const renderProductItem = ({ item }: { item: ProductType }) => {
-    return (
-      <Pressable>
-        <ProductCardItemSingle item={item} />
-      </Pressable>
-    );
   };
 
   // console.log(products);
@@ -72,20 +54,6 @@ const SearchProductScreen = () => {
               handleSaveNote={handleSaveNote}
               removeSearch={removeSearch}
               clearHistory={clearHistory}
-            />
-
-            {/* Products */}
-            <FlatList
-              data={products}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={renderProductItem}
-              onEndReachedThreshold={0.3}
-              onEndReached={handleHasMore}
-              ListEmptyComponent={loading ? <ActivityIndicator size="large" color={colors.primary} /> : undefined}
-              ListFooterComponent={
-                loadingHasMore ? <ActivityIndicator size="small" color={colors.primary} /> : undefined
-              }
-              contentContainerStyle={styles.productList}
             />
           </View>
         </TouchableWithoutFeedback>

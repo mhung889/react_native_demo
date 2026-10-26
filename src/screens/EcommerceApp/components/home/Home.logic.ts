@@ -13,10 +13,8 @@ export const useHomeLogic = () => {
   const fetchDataProducts = async (page: number) => {
     try {
       const skip = (page - 1) * PAGE_SIZE;
-      const products = await productServices.getProductLists(PAGE_SIZE, skip);
-
-      // console.log(products);
-      setProducts(products);
+      const response = await productServices.getProductLists(PAGE_SIZE, skip);
+      setProducts(response);
     } catch (error) {
       console.error(error);
     }

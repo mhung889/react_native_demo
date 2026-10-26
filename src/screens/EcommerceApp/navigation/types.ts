@@ -18,7 +18,9 @@ export type ProfileStackParamList = {
 
 export type FavoritesStackParamList = {
   [SCREENS.FAVORITES]: undefined;
-  // thieu [SCREENS.PRODUCT_DETAIL]
+  [SCREENS.PRODUCT_DETAIL]: {
+    productId: number;
+  };
 };
 
 export type BagStackParamList = {
@@ -34,11 +36,17 @@ export type AuthStackParamList = {
 export type ShopStackParamList = {
   [SCREENS.SHOP]: undefined;
   [SCREENS.SEARCH_PRODUCT]: undefined;
+  [SCREENS.PRODUCT_DETAIL]: {
+    productId: number;
+  };
+  [SCREENS.SEARCH_PRODUCT_LIST]: {
+    keyword: string;
+  };
 };
 
 export type MainTabParamList = {
   [SCREENS.HOME_TAB]: NavigatorScreenParams<HomeStackParamList> | undefined;
-  [SCREENS.SHOP_TAB]: NavigatorScreenParams<ShopStackParamList> | undefined;
+  [SCREENS.SHOP_TAB]: NavigatorScreenParams<ShopStackParamList>;
   [SCREENS.BAG_TAB]: NavigatorScreenParams<BagStackParamList> | undefined;
   [SCREENS.FAVORITES_TAB]: NavigatorScreenParams<FavoritesStackParamList> | undefined;
   [SCREENS.PROFILE_TAB]: NavigatorScreenParams<ProfileStackParamList> | undefined;
