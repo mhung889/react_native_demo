@@ -1,6 +1,7 @@
 import React from 'react';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+
 import { colors } from '../../../themes/color';
 import { SearchHistoryItem } from '../../../store/search/search.store';
 
@@ -65,7 +66,7 @@ const SearchHeader = ({
 
           <Text numberOfLines={2}>
             {history.map((item) => (
-              <Pressable onPress={() => setSearchInput(item.keyword)}>
+              <Pressable key={item.id} onPress={() => setSearchInput(item.keyword)}>
                 <Text style={styles.historyKeyword}>{item.keyword}</Text>
               </Pressable>
             ))}

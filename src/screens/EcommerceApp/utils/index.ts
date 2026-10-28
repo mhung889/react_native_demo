@@ -14,3 +14,14 @@ export const getDiscountPrice = (price: number, discountPercentage: number) => {
 export const capitalizeFirstLetter = (text: string): string => {
   return text.charAt(0).toUpperCase().concat(text.slice(1));
 };
+
+export const getPriceBySize = (basePrice: number, size: string) => {
+  switch (size) {
+    case 'M':
+      return basePrice + 30;
+    case 'L':
+      return basePrice + 50;
+    default:
+      return basePrice;
+  }
+};

@@ -8,7 +8,7 @@ import { commonStyle } from '../../themes/commonStyle';
 
 export type Size = 'S' | 'M' | 'L';
 
-const DATA_SIZES: Size[] = ['S', 'M', 'L'];
+export const DATA_SIZES: Size[] = ['S', 'M', 'L'];
 
 type Props = {
   selectedSize: Size | null;
