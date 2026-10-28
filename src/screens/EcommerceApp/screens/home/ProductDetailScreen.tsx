@@ -37,7 +37,6 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['50%'], []);
 
   const [productsLikeCategory, setProductsLikeCategory] = useState<ProductType[]>([]);
 
@@ -79,7 +78,7 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
   }, [product]);
 
   const handleOpenSizeSheet = useCallback(() => {
-    bottomSheetRef.current?.snapToIndex(0);
+    bottomSheetRef.current?.expand();
   }, []);
 
   const handleAddToCart = useCallback(() => {
@@ -186,7 +185,6 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
 
       <ProductBottomSheet
         bottomSheetRef={bottomSheetRef}
-        snapPoints={snapPoints}
         selectedSize={selectedSize}
         onSelectSize={setSelectedSize}
         onAddToCart={handleAddToCart}

@@ -1,11 +1,8 @@
 import React, { useCallback } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Dimensions, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
 
-import Header from '../../components/common/Header';
 import CardItem from '../../components/bag/CardItem';
 import { DATA_SIZES } from '../../components/ProductDetail/SelecteSizeModal';
 
@@ -19,7 +16,6 @@ const MyBagScreen = () => {
   const {
     handleBottomSheet,
     handleUpdateCartItem,
-    snapPoints,
     bottomSheetRef,
     totalAmountPrice,
     cartItemList,
@@ -41,11 +37,12 @@ const MyBagScreen = () => {
 
   if (cartItemList.length === 0) {
     return (
-      <SafeAreaView style={[styles.container]}>
-        <Header rightElement={<Ionicons name="search" color={colors.whiteLogo} size={24} />} isSearch />
-        <Text style={styles.headerBag}>{'My Bag'}</Text>
+      <View style={[styles.container]}>
+        <View style={styles.header}>
+          <Text style={styles.headerBag}>{'My Bag'}</Text>
+        </View>
         <Text style={styles.textEmpty}>{'Không có sản phẩm nào'}</Text>
-      </SafeAreaView>
+      </View>
     );
   }
 
@@ -72,7 +69,6 @@ const MyBagScreen = () => {
 
       <BottomSheet
         ref={bottomSheetRef}
-        snapPoints={snapPoints}
         index={-1}
         enablePanDownToClose
         backdropComponent={renderBackdrop}

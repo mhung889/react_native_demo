@@ -40,10 +40,12 @@ const CardItem = ({ item, handleBottomSheet }: CartItemProp) => {
             {item.title}
           </Text>
 
-          <Pressable onPress={() => handleBottomSheet(item)}>
-            <Text style={styles.category} numberOfLines={1}>
-              {item.size}
-            </Text>
+          <Pressable
+            onPress={() => handleBottomSheet(item)}
+            hitSlop={{ top: 8, bottom: 8, left: 10, right: 10 }}
+            style={styles.categoryButton}
+          >
+            <Text style={styles.category}>{item.size}</Text>
           </Pressable>
 
           <View style={styles.quantityContainer}>
@@ -113,7 +115,6 @@ const styles = StyleSheet.create({
 
   productInfo: {
     flex: 1,
-    minWidth: 0,
     marginLeft: 10,
     marginTop: 12,
     marginBottom: 12,
@@ -123,6 +124,12 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: '700',
     fontSize: 20,
+  },
+
+  categoryButton: {
+    alignSelf: 'flex-start',
+    flexGrow: 0,
+    flexShrink: 0,
   },
 
   category: {
