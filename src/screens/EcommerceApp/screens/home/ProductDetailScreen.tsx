@@ -4,7 +4,7 @@ import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Header from '../../components/common/Header';
 import { productServices } from '../../services/productService';
@@ -22,6 +22,8 @@ import { ProductType } from '../../types/product';
 import { SCREENS } from '../../navigation/SCREENS';
 import { commonStyle } from '../../themes/commonStyle';
 import { HomeStackParamList } from '../../navigation/types';
+import { useCartStore } from '../../store/cart/cart.store';
+import { getDiscountPrice } from '../../utils';
 
 type ProductDetailProps = NativeStackScreenProps<HomeStackParamList, typeof SCREENS.PRODUCT_DETAIL>;
 
@@ -35,9 +37,11 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['50%'], []);
 
   const [productsLikeCategory, setProductsLikeCategory] = useState<ProductType[]>([]);
+
+  // const user = useAuthStore.getState().user;
+  const addItem = useCartStore((state) => state.addItem);
 
   const fetchSingleProduct = useCallback(async () => {
     try {
@@ -74,24 +78,43 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
   }, [product]);
 
   const handleOpenSizeSheet = useCallback(() => {
-    bottomSheetRef.current?.snapToIndex(0);
+    bottomSheetRef.current?.expand();
   }, []);
 
   const handleAddToCart = useCallback(() => {
     if (!product || !selectedSize) {
       return;
     }
+    let priceBySize = Number(getDiscountPrice(product.price, product.discountPercentage).toFixed(2));
+    if (selectedSize === 'M') {
+      priceBySize += 30;
+    } else if (selectedSize === 'L') {
+      priceBySize += 50;
+    }
 
-    // Gọi cart service/store của ứng dụng tại đây.
-    console.log('Add to cart:', {
-      productId: product.id,
+    addItem({
+      id: product.id,
+      thumbnail: product.thumbnail,
       title: product.title,
       size: selectedSize,
-      quantity: 1,
+      price: priceBySize,
     });
 
+    Alert.alert('', 'Add product to cart success', [
+      {
+        text: 'OK',
+        style: 'default',
+      },
+    ]);
+
     bottomSheetRef.current?.close();
-  }, [product, selectedSize]);
+  }, [product, selectedSize, addItem]);
+
+  // loai bo san pham trong product detail khoi danh sach cac san pham cung loai category
+  const filterProductLikeCategory = useMemo(() => {
+    if (!product) return [];
+    return productsLikeCategory.filter((p) => p.id !== product.id);
+  }, [product, productsLikeCategory]);
 
   if (loading) {
     return (
@@ -156,13 +179,12 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
         <ProductListHeader
           name="You can also like this"
           rightElement={<Text style={styles.rightElement}>{productsLikeCategory.length || 0}</Text>}
-          products={productsLikeCategory}
+          products={filterProductLikeCategory}
         />
       </ScrollView>
 
       <ProductBottomSheet
         bottomSheetRef={bottomSheetRef}
-        snapPoints={snapPoints}
         selectedSize={selectedSize}
         onSelectSize={setSelectedSize}
         onAddToCart={handleAddToCart}

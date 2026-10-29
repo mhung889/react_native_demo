@@ -7,13 +7,12 @@ import SelecteSizeModal, { Size } from './SelecteSizeModal';
 
 type Props = {
   bottomSheetRef: React.RefObject<BottomSheet | null>;
-  snapPoints: (string | number)[];
   selectedSize: Size | null;
   onSelectSize: (size: Size) => void;
   onAddToCart: () => void;
 };
 
-const ProductBottomSheet = ({ bottomSheetRef, snapPoints, selectedSize, onSelectSize, onAddToCart }: Props) => {
+const ProductBottomSheet = ({ bottomSheetRef, selectedSize, onSelectSize, onAddToCart }: Props) => {
   // const handleSheetChanges = useCallback((index: number) => {
   //   console.log('Bottom sheet index:', index);
   // }, []);
@@ -22,7 +21,6 @@ const ProductBottomSheet = ({ bottomSheetRef, snapPoints, selectedSize, onSelect
     <BottomSheet
       ref={bottomSheetRef}
       // onChange={handleSheetChanges}
-      snapPoints={snapPoints}
       index={-1}
       enablePanDownToClose
       backgroundStyle={styles.background}

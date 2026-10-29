@@ -8,7 +8,7 @@ import { useFavoriteStore } from './store/favorite/favorite.store';
 const RootNavigator = () => {
   const token = useAuthStore((state) => state.accessToken);
 
-  if (!token) {
+  if (token) {
     // tao key store mmkv cho tung user moi khi dang nhap
     useFavoriteStore.getState().loadFavorites();
     return <MainBottomTabNavigator />;

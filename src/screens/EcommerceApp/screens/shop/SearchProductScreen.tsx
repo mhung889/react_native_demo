@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { useShallow } from 'zustand/react/shallow';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
 import { colors } from '../../themes/color';
 import { SCREENS } from '../../navigation/SCREENS';
@@ -34,8 +34,6 @@ const SearchProductScreen = () => {
     });
     Keyboard.dismiss();
   };
-
-  // console.log(products);
 
   return (
     <SafeAreaView style={styles.container}>

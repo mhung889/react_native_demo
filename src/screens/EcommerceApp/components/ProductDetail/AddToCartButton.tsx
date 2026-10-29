@@ -12,7 +12,7 @@ type AddToCartButtonProps = {
 
 const AddToCartButton = ({ onPress, disabled = false, title = 'ADD TO CART' }: AddToCartButtonProps) => {
   return (
-    <Pressable onPress={onPress} disabled={disabled} style={[styles.button, !disabled && styles.pressed]}>
+    <Pressable onPress={onPress} disabled={disabled} style={[styles.button]}>
       <Text style={styles.text}>{title}</Text>
     </Pressable>
   );
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   pressed: {
-    opacity: 0.8,
+    opacity: 0.9,
   },
 });

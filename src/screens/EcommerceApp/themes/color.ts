@@ -12,6 +12,8 @@ export const colors = {
   // logo
   whiteLogo: '#FFFFFF',
 
+  darkColor: 'rgba(42,44,54,1)',
+
   // background bottom tabs
   backgroundBottom: '#1A1B20',
 };
