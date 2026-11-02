@@ -1,3 +1,5 @@
+import { AddressItem } from '../store/profile/address.store';
+import { User } from '../types/auth';
 import { SCREENS } from './SCREENS';
 import { NavigatorScreenParams } from '@react-navigation/native';
 
@@ -10,10 +12,16 @@ export type HomeStackParamList = {
 
 export type ProfileStackParamList = {
   [SCREENS.PROFILE]: undefined;
-  [SCREENS.PROFILE_SETTINGS]: undefined;
+  [SCREENS.PROFILE_SETTINGS]: {
+    user: User;
+  };
   [SCREENS.PROFILE_MY_ORDERS]: undefined;
   [SCREENS.PROFILE_ORDER_DETAIL]: undefined;
   [SCREENS.PROFILE_ADDRESS]: undefined;
+  [SCREENS.PROFILE_ADDRESS_ADD]: undefined;
+  [SCREENS.PROFILE_ADDRESS_UPDATE]: {
+    item: AddressItem;
+  };
 };
 
 export type FavoritesStackParamList = {

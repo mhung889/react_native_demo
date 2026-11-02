@@ -6,6 +6,7 @@ export type User = {
   lastName?: string;
   age?: number;
   gender?: string;
+  email?: string;
 };
 
 export type SignInPayload = {
