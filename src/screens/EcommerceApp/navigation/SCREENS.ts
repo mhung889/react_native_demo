@@ -35,4 +35,8 @@ export const SCREENS = {
   PROFILE_MY_ORDERS: 'ProfileMyOrders',
   PROFILE_ORDER_DETAIL: 'ProfileOrderDetail',
   PROFILE_ADDRESS: 'ProfileAddress',
+
+  // Profile Address management
+  PROFILE_ADDRESS_ADD: 'ProfileAddressAdd',
+  PROFILE_ADDRESS_UPDATE: 'ProfileAddressUpdate',
 } as const;
