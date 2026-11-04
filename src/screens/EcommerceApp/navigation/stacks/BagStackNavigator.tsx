@@ -12,6 +12,7 @@ const BagStackNavigator = () => {
   return (
     <BagStack.Navigator initialRouteName={SCREENS.BAG} screenOptions={screenOption.default}>
       <BagStack.Screen name={SCREENS.BAG} component={MyBagScreen} />
+      {/* <BagStack.Screen name={SCREENS.CHECKOUT} component={CheckoutScreen} /> */}
     </BagStack.Navigator>
   );
 };

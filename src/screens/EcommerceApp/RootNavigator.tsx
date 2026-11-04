@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AuthStackNavigator from './navigation/stacks/auth/AuthStackNavigator';
 import MainBottomTabNavigator from './navigation/tabs/MainBottomTabNavigator';
+
+import { SCREENS } from './navigation/SCREENS';
+import { RootStackParamList } from './navigation/types';
+import { screenOption } from './navigation/screenOptions';
+import CheckoutScreen from './screens/bag/CheckoutScreen';
 
 import { useAuthStore } from './store/auth/auth.store';
 import { useFavoriteStore } from './store/favorite/favorite.store';
 
+const RootStack = createNativeStackNavigator<RootStackParamList>();
+
 const RootNavigator = () => {
   const token = useAuthStore((state) => state.accessToken);
 
-  if (token) {
-    // tao key store mmkv cho tung user moi khi dang nhap
-    useFavoriteStore.getState().loadFavorites();
-    return <MainBottomTabNavigator />;
-  }
+  useEffect(() => {
+    if (token) {
+      useFavoriteStore.getState().loadFavorites();
+    }
+  }, [token]);
 
-  return <AuthStackNavigator />;
+  return (
+    <RootStack.Navigator>
+      {token ? (
+        <RootStack.Group screenOptions={screenOption.default}>
+          <RootStack.Screen name={SCREENS.MAIN_TAB} component={MainBottomTabNavigator} />
+          <RootStack.Screen name={SCREENS.CHECKOUT} component={CheckoutScreen} />
+        </RootStack.Group>
+      ) : (
+        <RootStack.Group screenOptions={screenOption.default}>
+          <RootStack.Screen name={SCREENS.AUTH} component={AuthStackNavigator} />
+        </RootStack.Group>
+      )}
+    </RootStack.Navigator>
+  );
 };
 
 export default RootNavigator;

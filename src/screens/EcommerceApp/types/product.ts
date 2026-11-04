@@ -18,6 +18,7 @@ export type ProductType = {
   reviews: ReviewType[];
   thumbnail: string;
   images: string[];
+  shippingInformation?: string;
 };
 type CacheData = {
   product: ProductType[];

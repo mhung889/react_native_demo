@@ -98,6 +98,8 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
       title: product.title,
       size: selectedSize,
       price: priceBySize,
+      category: product.category ?? product.brand,
+      shippingInformation: product.shippingInformation || '',
     });
 
     Alert.alert('', 'Add product to cart success', [

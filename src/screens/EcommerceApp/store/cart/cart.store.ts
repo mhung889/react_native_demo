@@ -8,6 +8,8 @@ export interface CartItem {
   price: number;
   size: string;
   quantity: number;
+  category: string;
+  shippingInformation: string;
 }
 
 interface CartStore {
@@ -53,7 +55,7 @@ export const useCartStore = create<CartStore>((set) => ({
     set((state) => {
       const currentItem = state.items.find((item) => item.id === id && item.size === oldSize);
 
-      if (!currentItem || oldSize === newSize) return state;
+      if (!currentItem) return state;
 
       const existingSameSize = state.items.find((item) => item.id === id && item.size === newSize);
 
@@ -68,14 +70,12 @@ export const useCartStore = create<CartStore>((set) => ({
         };
       }
 
+      // Đổi sang size mới, tính lại giá
       // Khôi phục giá cơ sở từ giá đã tính theo size cũ
       const oldExtra = oldSize === 'M' ? 30 : oldSize === 'L' ? 50 : 0;
-
       const basePrice = currentItem.price - oldExtra;
-
       // Tính giá theo size mới
       const newPrice = getPriceBySize(basePrice, newSize);
-
       return {
         items: state.items.map((item) =>
           item.id === id && item.size === oldSize

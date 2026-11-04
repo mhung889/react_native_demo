@@ -11,6 +11,7 @@ import { colors } from '../../themes/color';
 import MyBagScreenLogic from './MyBagScreen.logic';
 import { commonStyle } from '../../themes/commonStyle';
 import { CartItem } from '../../store/cart/cart.store';
+import { SCREENS } from '../../navigation/SCREENS';
 
 const MyBagScreen = () => {
   const {
@@ -22,7 +23,14 @@ const MyBagScreen = () => {
     selectedItem,
     selectedSize,
     setSelectedSize,
+    navigation,
   } = MyBagScreenLogic();
+
+  const handleNavigateCheckout = useCallback(() => {
+    navigation.navigate(SCREENS.CHECKOUT, {
+      itemList: cartItemList,
+    });
+  }, [navigation, cartItemList]);
 
   const renderBackdrop = useCallback(
     (props: BottomSheetBackdropProps) => (
@@ -63,7 +71,7 @@ const MyBagScreen = () => {
         <Text style={styles.totalAmountPrice}>{formatPrice(totalAmountPrice)}</Text>
       </View>
 
-      <Pressable style={styles.buttonCheckout}>
+      <Pressable style={styles.buttonCheckout} onPress={handleNavigateCheckout}>
         <Text style={styles.buttonCheckoutText}>{'CHECK OUT'}</Text>
       </Pressable>
 
