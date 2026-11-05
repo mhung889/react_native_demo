@@ -1,3 +1,4 @@
+import { CartItem } from '../store/cart/cart.store';
 import { AddressItem } from '../store/profile/address.store';
 import { User } from '../types/auth';
 import { SCREENS } from './SCREENS';
@@ -17,7 +18,13 @@ export type ProfileStackParamList = {
   };
   [SCREENS.PROFILE_MY_ORDERS]: undefined;
   [SCREENS.PROFILE_ORDER_DETAIL]: undefined;
-  [SCREENS.PROFILE_ADDRESS]: undefined;
+  [SCREENS.PROFILE_PAYMENT_METHOD]: undefined;
+  [SCREENS.PROFILE_ADDRESS]:
+    | {
+        fromCheckout?: boolean;
+      }
+    | undefined;
+
   [SCREENS.PROFILE_ADDRESS_ADD]: undefined;
   [SCREENS.PROFILE_ADDRESS_UPDATE]: {
     item: AddressItem;
@@ -33,6 +40,9 @@ export type FavoritesStackParamList = {
 
 export type BagStackParamList = {
   [SCREENS.BAG]: undefined;
+  // [SCREENS.CHECKOUT]: {
+  //   itemList: CartItem[];
+  // };
 };
 
 export type AuthStackParamList = {
@@ -54,7 +64,7 @@ export type ShopStackParamList = {
 
 export type MainTabParamList = {
   [SCREENS.HOME_TAB]: NavigatorScreenParams<HomeStackParamList> | undefined;
-  [SCREENS.SHOP_TAB]: NavigatorScreenParams<ShopStackParamList>;
+  [SCREENS.SHOP_TAB]: NavigatorScreenParams<ShopStackParamList> | undefined;
   [SCREENS.BAG_TAB]: NavigatorScreenParams<BagStackParamList> | undefined;
   [SCREENS.FAVORITES_TAB]: NavigatorScreenParams<FavoritesStackParamList> | undefined;
   [SCREENS.PROFILE_TAB]: NavigatorScreenParams<ProfileStackParamList> | undefined;
@@ -63,4 +73,7 @@ export type MainTabParamList = {
 export type RootStackParamList = {
   [SCREENS.AUTH]: undefined;
   [SCREENS.MAIN_TAB]: NavigatorScreenParams<MainTabParamList>;
+  [SCREENS.CHECKOUT]: {
+    itemList: CartItem[];
+  };
 };

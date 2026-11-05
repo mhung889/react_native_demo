@@ -93,9 +93,7 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
     }
 
     addItem({
-      id: product.id,
-      thumbnail: product.thumbnail,
-      title: product.title,
+      ...product,
       size: selectedSize,
       price: priceBySize,
     });

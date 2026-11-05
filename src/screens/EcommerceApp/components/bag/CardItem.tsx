@@ -93,7 +93,7 @@ export default CardItem;
 const styles = StyleSheet.create({
   card: {
     marginHorizontal: 16,
-    height: 150,
+    height: 130,
     flexDirection: 'row',
     alignItems: 'stretch',
     backgroundColor: colors.dark,

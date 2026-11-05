@@ -73,8 +73,21 @@ export const useAddressStore = create<AddressStoreType>((set) => ({
   },
   removeAddress: (id) => {
     set((state) => {
+      const remaning = state.addressList.filter((item) => item.id !== id);
+      if (remaning.length === 0) {
+        return {
+          addressList: [],
+        };
+      }
+      const hasDefault = remaning.some((item) => item.isDefault);
+      if (!hasDefault) {
+        remaning[0] = {
+          ...remaning[0],
+          isDefault: true,
+        };
+      }
       return {
-        addressList: state.addressList.filter((item) => item.id !== id),
+        addressList: remaning,
       };
     });
   },

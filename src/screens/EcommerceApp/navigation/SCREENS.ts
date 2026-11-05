@@ -13,6 +13,8 @@ export const SCREENS = {
   FAVORITES_TAB: 'FavoritesTab',
   PROFILE_TAB: 'ProfileTab',
 
+  CHECKOUT: 'Checkout',
+
   // Home stack
   HOME: 'Home',
   PRODUCT_DETAIL: 'ProductDetail',
@@ -27,7 +29,6 @@ export const SCREENS = {
 
   // Bag stack
   BAG: 'Bag',
-  CHECKOUT: 'Checkout',
 
   // Profile stack
   PROFILE: 'Profile',
@@ -35,6 +36,7 @@ export const SCREENS = {
   PROFILE_MY_ORDERS: 'ProfileMyOrders',
   PROFILE_ORDER_DETAIL: 'ProfileOrderDetail',
   PROFILE_ADDRESS: 'ProfileAddress',
+  PROFILE_PAYMENT_METHOD: 'ProfilePaymentMethod',
 
   // Profile Address management
   PROFILE_ADDRESS_ADD: 'ProfileAddressAdd',

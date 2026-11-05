@@ -11,6 +11,7 @@ import SettingProfileScreen from '../../screens/profile/setting/SettingProfileSc
 import AddressProfileScreen from '../../screens/profile/address/AddressProfileScreen';
 import AddAddressProfile from '../../components/address/AddAddressProfile';
 import UpdateAddressProfile from '../../components/address/UpdateAddressProfile';
+import PaymentMethodScreen from '../../screens/profile/payment-method/PaymentMethodScreen';
 
 const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
 
@@ -19,6 +20,7 @@ const ProfileStackNavigator = () => {
     <ProfileStack.Navigator initialRouteName={SCREENS.PROFILE} screenOptions={screenOption.default}>
       <ProfileStack.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
       <ProfileStack.Screen name={SCREENS.PROFILE_MY_ORDERS} component={MyOrdersScreen} />
+      <ProfileStack.Screen name={SCREENS.PROFILE_PAYMENT_METHOD} component={PaymentMethodScreen} />
 
       <ProfileStack.Screen name={SCREENS.PROFILE_ADDRESS} component={AddressProfileScreen} />
       <ProfileStack.Screen name={SCREENS.PROFILE_ADDRESS_ADD} component={AddAddressProfile} />

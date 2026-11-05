@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import Config from 'react-native-config';
 
-const TIMEOUT = 5000;
+const TIMEOUT = 15000;
 
 const URL_BASE = 'https://dummyjson.com';
 
@@ -20,5 +20,5 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
 api.interceptors.response.use(
   (response: AxiosResponse) => response,
-  error => Promise.reject(error),
+  (error) => Promise.reject(error),
 );

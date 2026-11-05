@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
@@ -21,20 +21,24 @@ const ProfileScreen = () => {
   const user = useAuthStore((state) => state.user);
   const addressList = useAddressStore((state) => state.addressList);
 
-  const handleNavigateMyOrder = () => {
+  const handleNavigateMyOrder = useCallback(() => {
     navigation.navigate(SCREENS.PROFILE_MY_ORDERS);
-  };
+  }, [navigation]);
 
-  const handleNavigateAddress = () => {
+  const handleNavigatePaymentMethod = useCallback(() => {
+    navigation.navigate(SCREENS.PROFILE_PAYMENT_METHOD);
+  }, [navigation]);
+
+  const handleNavigateAddress = useCallback(() => {
     navigation.navigate(SCREENS.PROFILE_ADDRESS);
-  };
+  }, [navigation]);
 
-  const handleNavigateSetting = () => {
+  const handleNavigateSetting = useCallback(() => {
     if (!user) return;
     navigation.navigate(SCREENS.PROFILE_SETTINGS, {
       user,
     });
-  };
+  }, [navigation, user]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -65,7 +69,13 @@ const ProfileScreen = () => {
         isShowIconRight
       />
 
-      <ProfileMenuItem title="Payment methods" subtitle={`Visa ...`} isItemDivider isShowIconRight />
+      <ProfileMenuItem
+        title="Payment methods"
+        subtitle={`Visa ...`}
+        isItemDivider
+        isShowIconRight
+        onPress={handleNavigatePaymentMethod}
+      />
 
       <ProfileMenuItem title="My reviews" subtitle={`Reviews for `} isItemDivider isShowIconRight />
 

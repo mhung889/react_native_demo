@@ -3,10 +3,17 @@ import { SCREENS } from '../../../navigation/SCREENS';
 import { AddressProfileScreensProps } from './AddressProfileScreen';
 import { AddressItem, useAddressStore } from '../../../store/profile/address.store';
 
-export default function AddressProfileLogic({ navigation }: AddressProfileScreensProps) {
+export default function AddressProfileLogic({ route, navigation }: AddressProfileScreensProps) {
   const addressList = useAddressStore((state) => state.addressList);
 
   const handleBack = () => {
+    if (route.params?.fromCheckout) {
+      console.log(navigation.getState());
+      console.log(navigation.getParent()?.getState());
+      console.log(navigation.getParent()?.getParent()?.getState());
+      navigation.getParent()?.getParent()?.goBack();
+      return;
+    }
     navigation.goBack();
   };
 
