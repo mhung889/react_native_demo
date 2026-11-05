@@ -8,6 +8,7 @@ export type HomeStackParamList = {
   [SCREENS.HOME]: undefined;
   [SCREENS.PRODUCT_DETAIL]: {
     productId: number;
+    fromProductLikeThisToProductDetail?: boolean;
   };
 };
 
@@ -43,6 +44,9 @@ export type BagStackParamList = {
   // [SCREENS.CHECKOUT]: {
   //   itemList: CartItem[];
   // };
+  [SCREENS.PRODUCT_DETAIL]: {
+    productId: number;
+  };
 };
 
 export type AuthStackParamList = {

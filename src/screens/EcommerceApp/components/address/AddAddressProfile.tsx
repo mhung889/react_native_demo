@@ -3,7 +3,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useCallback, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Alert, Pressable, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
@@ -112,7 +111,11 @@ const AddAddressProfile = ({ navigation }: AddAddressProfileProps) => {
         return (
           <View style={styles.inputContainer}>
             <View style={[styles.inputWrapper, options?.multiline && styles.multilineWrapper]}>
-              {isActive && <Text style={styles.floatingLabel}>{label}</Text>}
+              {isActive && (
+                <Text style={styles.floatingLabel}>
+                  {label} <Text style={styles.required}>{'*'}</Text>
+                </Text>
+              )}
 
               <TextInput
                 style={[styles.input, options?.multiline && styles.multilineInput]}
@@ -149,8 +152,8 @@ const AddAddressProfile = ({ navigation }: AddAddressProfileProps) => {
   );
 
   return (
-    <GestureHandlerRootView>
-      <SafeAreaView style={styles.container}>
+    <>
+      <SafeAreaView style={styles.container} edges={['top']}>
         <Header onBack={handleBack} isShowleftElement heightContainer={33} />
 
         <Text style={styles.header}>{'Add Address'}</Text>
@@ -222,7 +225,7 @@ const AddAddressProfile = ({ navigation }: AddAddressProfileProps) => {
           <BottomSheetAddress selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
         </BottomSheetView>
       </BottomSheet>
-    </GestureHandlerRootView>
+    </>
   );
 };
 
@@ -270,6 +273,12 @@ const styles = StyleSheet.create({
     fontSize: 11,
     marginTop: 6,
     fontFamily: commonStyle.fontFamily,
+  },
+
+  required: {
+    color: colors.primary,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 
   input: {
@@ -345,6 +354,7 @@ const styles = StyleSheet.create({
   footer: {
     marginTop: 'auto',
     paddingHorizontal: 16,
+    marginBottom: 6,
   },
 
   submitButton: {

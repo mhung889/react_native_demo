@@ -3,7 +3,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useCallback, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Alert, Pressable, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
@@ -151,8 +150,8 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
   }, [navigation]);
 
   return (
-    <GestureHandlerRootView>
-      <SafeAreaView style={styles.container}>
+    <>
+      <SafeAreaView style={styles.container} edges={['top']}>
         <Header onBack={handleBack} isShowleftElement heightContainer={33} />
 
         <Text style={styles.header}>{'Update Address'}</Text>
@@ -232,7 +231,7 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
           />
         </BottomSheetView>
       </BottomSheet>
-    </GestureHandlerRootView>
+    </>
   );
 };
 
@@ -358,6 +357,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+    marginBottom: 6,
   },
 
   submitButton: {

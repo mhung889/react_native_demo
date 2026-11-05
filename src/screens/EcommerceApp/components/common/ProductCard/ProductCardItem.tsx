@@ -9,13 +9,13 @@ import RatingStar from './RatingStar';
 import { colors } from '../../../themes/color';
 import { ProductType } from '../../../types/product';
 import { SCREENS } from '../../../navigation/SCREENS';
-import { HomeStackParamList } from '../../../navigation/types';
+import { FavoritesStackParamList } from '../../../navigation/types';
 
 import { formatPrice, getDiscountPrice } from '../../../utils';
 import { useFavoriteStore } from '../../../store/favorite/favorite.store';
 import { selectFavorite } from '../../../store/favorite/selector.favorite';
 
-type ProductCardNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
+type ProductCardNavigationProp = NativeStackNavigationProp<FavoritesStackParamList>;
 
 type ProductCardProps = {
   item: ProductType;
@@ -67,7 +67,7 @@ const ProductCardItem = ({
   return (
     <Pressable
       onPress={() =>
-        navigation.navigate(SCREENS.PRODUCT_DETAIL, {
+        navigation.push(SCREENS.PRODUCT_DETAIL, {
           productId: item.id,
         })
       }

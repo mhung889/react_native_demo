@@ -39,7 +39,7 @@ const AddressProfileScreen = ({ route, navigation }: AddressProfileScreensProps)
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.content}>
         <Header onBack={handleBack} isShowleftElement heightContainer={33} />
 
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
 
   addButton: {
     backgroundColor: colors.primary,
-    marginBottom: -26,
+    marginBottom: 6,
     borderRadius: 26,
     marginHorizontal: 16,
   },

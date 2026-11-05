@@ -1,7 +1,6 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -18,14 +17,14 @@ import ProductBottomSheet from '../../components/ProductDetail/ProductBottomShee
 import ProductImageSlider from '../../components/ProductDetail/ProductImageSlider';
 
 import { colors } from '../../themes/color';
+import { getDiscountPrice } from '../../utils';
 import { ProductType } from '../../types/product';
 import { SCREENS } from '../../navigation/SCREENS';
 import { commonStyle } from '../../themes/commonStyle';
-import { HomeStackParamList } from '../../navigation/types';
 import { useCartStore } from '../../store/cart/cart.store';
-import { getDiscountPrice } from '../../utils';
+import { HomeStackParamList } from '../../navigation/types';
 
-type ProductDetailProps = NativeStackScreenProps<HomeStackParamList, typeof SCREENS.PRODUCT_DETAIL>;
+export type ProductDetailProps = NativeStackScreenProps<HomeStackParamList, typeof SCREENS.PRODUCT_DETAIL>;
 
 const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
   const { productId } = route.params;
@@ -35,12 +34,12 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
   const [error, setError] = useState<string | null>(null);
 
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
+  const [quantityProduct, setQuantityProduct] = useState<number>(1);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   const [productsLikeCategory, setProductsLikeCategory] = useState<ProductType[]>([]);
 
-  // const user = useAuthStore.getState().user;
   const addItem = useCartStore((state) => state.addItem);
 
   const fetchSingleProduct = useCallback(async () => {
@@ -96,6 +95,7 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
       ...product,
       size: selectedSize,
       price: priceBySize,
+      quantity: quantityProduct,
     });
 
     Alert.alert('', 'Add product to cart success', [
@@ -104,11 +104,10 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
         style: 'default',
       },
     ]);
-
+    setQuantityProduct(1);
     bottomSheetRef.current?.close();
-  }, [product, selectedSize, addItem]);
+  }, [product, selectedSize, addItem, quantityProduct]);
 
-  // loai bo san pham trong product detail khoi danh sach cac san pham cung loai category
   const filterProductLikeCategory = useMemo(() => {
     if (!product) return [];
     return productsLikeCategory.filter((p) => p.id !== product.id);
@@ -118,7 +117,7 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
     return (
       <SafeAreaView style={styles.center}>
         <ActivityIndicator size="large" color={colors.primary} />
-        <Text style={styles.message}>Đang tải sản phẩm...</Text>
+        <Text style={styles.message}>{'Đang tải sản phẩm...'}</Text>
       </SafeAreaView>
     );
   }
@@ -132,9 +131,7 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
   }
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      {/* <View style={styles.container}> */}
-
+    <View style={styles.container}>
       <Header
         onBack={() => navigation.goBack()}
         title="Product Details"
@@ -159,19 +156,9 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
         </View>
 
         <View style={styles.divider} />
-        <ProductInfoRow
-          title="Shipping Info"
-          onPress={() => {
-            //  Mở thông tin vận chuyển.
-          }}
-        />
+        <ProductInfoRow title="Shipping Info" />
         <View style={styles.divider} />
-        <ProductInfoRow
-          title="Support"
-          onPress={() => {
-            // Mở trang hỗ trợ.
-          }}
-        />
+        <ProductInfoRow title="Support" />
         <View style={styles.divider} />
 
         <ProductListHeader
@@ -186,9 +173,10 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
         selectedSize={selectedSize}
         onSelectSize={setSelectedSize}
         onAddToCart={handleAddToCart}
+        quantityProduct={quantityProduct}
+        setQuantityProduct={setQuantityProduct}
       />
-      {/* </View> */}
-    </GestureHandlerRootView>
+    </View>
   );
 };
 

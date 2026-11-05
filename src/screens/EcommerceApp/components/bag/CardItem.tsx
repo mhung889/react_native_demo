@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Lucide } from '@react-native-vector-icons/lucide';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
@@ -6,13 +6,17 @@ import { formatPrice } from '../../utils';
 import { colors } from '../../themes/color';
 import CardItemLogic from './CardItem.logic';
 import { CartItem } from '../../store/cart/cart.store';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
+import { SCREENS } from '../../navigation/SCREENS';
 
 interface CartItemProp {
   item: CartItem;
   handleBottomSheet: (item: CartItem) => void;
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 }
 
-const CardItem = ({ item, handleBottomSheet }: CartItemProp) => {
+const CardItem = ({ item, handleBottomSheet, navigation }: CartItemProp) => {
   const {
     active,
     setActive,
@@ -23,16 +27,30 @@ const CardItem = ({ item, handleBottomSheet }: CartItemProp) => {
     handleAddFavorite,
   } = CardItemLogic(item);
 
+  const handleNavigateProductDetail = useCallback(() => {
+    navigation.navigate(SCREENS.MAIN_TAB, {
+      screen: SCREENS.BAG_TAB,
+      params: {
+        screen: SCREENS.PRODUCT_DETAIL,
+        params: {
+          productId: item.id,
+        },
+      },
+    });
+  }, [navigation, item.id]);
+
   return (
     <>
       <View style={styles.card}>
-        <Image
-          source={{
-            uri: `${item.thumbnail}`,
-          }}
-          style={styles.image}
-          resizeMode="cover"
-        />
+        <Pressable onPress={handleNavigateProductDetail}>
+          <Image
+            source={{
+              uri: `${item.thumbnail}`,
+            }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        </Pressable>
 
         {/* Product information */}
         <View style={styles.productInfo}>
@@ -40,12 +58,9 @@ const CardItem = ({ item, handleBottomSheet }: CartItemProp) => {
             {item.title}
           </Text>
 
-          <Pressable
-            onPress={() => handleBottomSheet(item)}
-            hitSlop={{ top: 8, bottom: 8, left: 10, right: 10 }}
-            style={styles.categoryButton}
-          >
+          <Pressable onPress={() => handleBottomSheet(item)} style={styles.categoryButton}>
             <Text style={styles.category}>{item.size}</Text>
+            <Lucide name="chevron-down" size={16} color={colors.white} />
           </Pressable>
 
           <View style={styles.quantityContainer}>
@@ -130,11 +145,21 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     flexGrow: 0,
     flexShrink: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 3,
+    paddingHorizontal: 3,
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: 'rgba(255,255,255,0.18)',
+    backgroundColor: 'rgba(255,255,255,0.06)',
+    marginTop: 3,
   },
 
   category: {
     color: colors.white,
     fontSize: 15,
+    fontWeight: '600',
   },
 
   quantityContainer: {

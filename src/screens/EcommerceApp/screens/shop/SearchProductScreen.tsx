@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -21,17 +21,17 @@ const SearchProductScreen = () => {
 
   const [searchInput, setSearchInput] = useState<string>('');
 
-  const handleGoBack = () => {
+  const handleGoBack = useCallback(() => {
     Keyboard.dismiss();
     navigation.goBack();
-  };
+  }, [navigation]);
 
   const handleSaveNote = () => {
     if (!searchInput) return;
-    addSearch(searchInput);
     navigation.push(SCREENS.SEARCH_PRODUCT_LIST, {
       keyword: searchInput,
     });
+    addSearch(searchInput);
     Keyboard.dismiss();
   };
 
