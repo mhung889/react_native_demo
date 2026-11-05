@@ -1,15 +1,12 @@
+import { useState } from 'react';
 import { Alert } from 'react-native';
 import { useShallow } from 'zustand/react/shallow';
-import { useCallback, useEffect, useState } from 'react';
 
-import { ProductType } from '../../types/product';
 import { CartItem, useCartStore } from '../../store/cart/cart.store';
-import { productServices } from '../../services/productService';
 import { useFavoriteStore } from '../../store/favorite/favorite.store';
 
 const CardItemLogic = (item: CartItem) => {
   const [active, setActive] = useState(false);
-  const [productActive, setProductActive] = useState<ProductType | undefined>(undefined);
 
   const { increment, decrement, removeItem } = useCartStore(
     useShallow((state) => ({
@@ -36,8 +33,8 @@ const CardItemLogic = (item: CartItem) => {
   };
 
   const handleAddFavorite = () => {
-    if (!productActive) return;
-    const result = addFavoriteProduct(productActive);
+    if (!item) return;
+    const result = addFavoriteProduct(item);
 
     switch (result) {
       case 'exists':
@@ -53,24 +50,9 @@ const CardItemLogic = (item: CartItem) => {
     setActive(!active);
   };
 
-  const getProductById = useCallback(async () => {
-    try {
-      const response = await productServices.getSingleProduct(item.id);
-      setProductActive(response);
-    } catch (err) {
-      console.error(err);
-    }
-  }, [item.id]);
-
-  useEffect(() => {
-    getProductById();
-  }, [getProductById]);
-
   return {
     active,
     setActive,
-    productActive,
-    setProductActive,
     totalPrice,
     handleIncrementQuantity,
     handleDecrementQuantity,

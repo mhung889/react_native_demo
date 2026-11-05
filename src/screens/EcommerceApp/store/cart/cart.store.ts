@@ -1,15 +1,10 @@
 import { create } from 'zustand';
 import { getPriceBySize } from '../../utils';
+import { ProductType } from '../../types/product';
 
-export interface CartItem {
-  id: number;
-  thumbnail: string;
-  title: string;
-  price: number;
+export interface CartItem extends ProductType {
   size: string;
   quantity: number;
-  category: string;
-  shippingInformation: string;
 }
 
 interface CartStore {

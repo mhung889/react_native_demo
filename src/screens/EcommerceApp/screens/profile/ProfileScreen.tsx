@@ -25,6 +25,10 @@ const ProfileScreen = () => {
     navigation.navigate(SCREENS.PROFILE_MY_ORDERS);
   }, [navigation]);
 
+  const handleNavigatePaymentMethod = useCallback(() => {
+    navigation.navigate(SCREENS.PROFILE_PAYMENT_METHOD);
+  }, [navigation]);
+
   const handleNavigateAddress = useCallback(() => {
     navigation.navigate(SCREENS.PROFILE_ADDRESS);
   }, [navigation]);
@@ -65,7 +69,13 @@ const ProfileScreen = () => {
         isShowIconRight
       />
 
-      <ProfileMenuItem title="Payment methods" subtitle={`Visa ...`} isItemDivider isShowIconRight />
+      <ProfileMenuItem
+        title="Payment methods"
+        subtitle={`Visa ...`}
+        isItemDivider
+        isShowIconRight
+        onPress={handleNavigatePaymentMethod}
+      />
 
       <ProfileMenuItem title="My reviews" subtitle={`Reviews for `} isItemDivider isShowIconRight />
 

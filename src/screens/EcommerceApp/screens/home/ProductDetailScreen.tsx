@@ -93,13 +93,9 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
     }
 
     addItem({
-      id: product.id,
-      thumbnail: product.thumbnail,
-      title: product.title,
+      ...product,
       size: selectedSize,
       price: priceBySize,
-      category: product.category ?? product.brand,
-      shippingInformation: product.shippingInformation || '',
     });
 
     Alert.alert('', 'Add product to cart success', [
