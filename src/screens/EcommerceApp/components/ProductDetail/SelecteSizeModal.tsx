@@ -95,7 +95,7 @@ const SelecteSizeModal = ({ selectedSize, onSelectSize, onAddToCart, quantityPro
       </View>
 
       <View style={styles.buttonContainer}>
-        <AddToCartButton disabled={!selectedSize} onPress={onAddToCart} />
+        <AddToCartButton onPress={onAddToCart} />
       </View>
     </View>
   );

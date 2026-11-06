@@ -2,9 +2,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
-import { colors } from '../../../themes/color';
+import { colors } from '../../../../themes/color';
 import { SelectedAddress } from '../AddAddressProfile';
-import { addressService } from '../../../services/addressService';
+import { addressService } from '../../../../services/addressService';
 
 export type Province = {
   code: number;

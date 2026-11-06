@@ -82,6 +82,7 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
 
   const handleAddToCart = useCallback(() => {
     if (!product || !selectedSize) {
+      Alert.alert('Select a size', 'Please select a size before adding this product to your bag.', [{ text: 'OK' }]);
       return;
     }
     let priceBySize = Number(getDiscountPrice(product.price, product.discountPercentage).toFixed(2));
@@ -90,20 +91,13 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
     } else if (selectedSize === 'L') {
       priceBySize += 50;
     }
-
     addItem({
       ...product,
       size: selectedSize,
       price: priceBySize,
       quantity: quantityProduct,
     });
-
-    Alert.alert('', 'Add product to cart success', [
-      {
-        text: 'OK',
-        style: 'default',
-      },
-    ]);
+    Alert.alert('', 'Add product to cart success', [{ text: 'OK' }]);
     setQuantityProduct(1);
     bottomSheetRef.current?.close();
   }, [product, selectedSize, addItem, quantityProduct]);

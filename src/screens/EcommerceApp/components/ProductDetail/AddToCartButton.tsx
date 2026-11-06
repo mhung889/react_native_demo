@@ -6,13 +6,12 @@ import { commonStyle } from '../../themes/commonStyle';
 
 type AddToCartButtonProps = {
   onPress?: () => void;
-  disabled?: boolean;
   title?: string;
 };
 
-const AddToCartButton = ({ onPress, disabled = false, title = 'ADD TO CART' }: AddToCartButtonProps) => {
+const AddToCartButton = ({ onPress, title = 'ADD TO CART' }: AddToCartButtonProps) => {
   return (
-    <Pressable onPress={onPress} disabled={disabled} style={[styles.button]}>
+    <Pressable onPress={onPress} style={[styles.button]}>
       <Text style={styles.text}>{title}</Text>
     </Pressable>
   );

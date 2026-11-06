@@ -7,46 +7,92 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Alert, Pressable, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
 
-import Header from '../common/Header';
-import { colors } from '../../themes/color';
-import { SCREENS } from '../../navigation/SCREENS';
-import { commonStyle } from '../../themes/commonStyle';
-import { ProfileStackParamList } from '../../navigation/types';
-import BottomSheetAddress from './bottomsheet/BottomSheetAddress';
-import { FormValues, SelectedAddress } from './AddAddressProfile';
-import { addAddressProfileSchema } from '../../validation/addAddressProfileSchema';
-import { useAddressStore } from '../../store/profile/address.store';
+import Header from '../../common/Header';
+import { colors } from '../../../themes/color';
+import { SCREENS } from '../../../navigation/SCREENS';
+import { commonStyle } from '../../../themes/commonStyle';
+import { ProfileStackParamList } from '../../../navigation/types';
+import { useAddressStore } from '../../../store/profile/address.store';
+import { addAddressProfileSchema } from '../../../validation/addAddressProfileSchema';
+import BottomSheetAddress, { Province, Ward } from './bottomsheet/BottomSheetAddress';
+import ButtonAddress from '../../common/ProfileAddress/ButtonAddress';
 
-type UpdateAddressProfileProps = NativeStackScreenProps<ProfileStackParamList, typeof SCREENS.PROFILE_ADDRESS_UPDATE>;
+type AddAddressProfileProps = NativeStackScreenProps<ProfileStackParamList, typeof SCREENS.PROFILE_ADDRESS_ADD>;
 
-const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) => {
-  const { item } = route.params;
+export type FormValues = {
+  fullName: string;
+  phoneNumber: string;
+  street: string;
+  isDefault: boolean;
+};
+
+export type SelectedAddress = {
+  province: Province | null;
+  ward: Ward | null;
+};
+
+const AddAddressProfile = ({ navigation }: AddAddressProfileProps) => {
+  const [focusedField, setFocusedField] = useState<string | null>(null);
+
+  const addAddress = useAddressStore((state) => state.addAddress);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-  const [focusedField, setFocusedField] = useState<string | null>(null);
   const [selectedAddress, setSelectedAddress] = useState<SelectedAddress>({
     province: null,
     ward: null,
   });
 
-  const updateAddress = useAddressStore((state) => state.updateAddress);
-  const removeAddress = useAddressStore((state) => state.removeAddress);
-
-  // Parse old address
-  const wardActive = item.address.ward ?? ''; // ward name
-  const provinceActive = item.address.province ?? ''; // province name
-
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, watch } = useForm<FormValues>({
     resolver: yupResolver(addAddressProfileSchema),
     mode: 'onBlur',
     defaultValues: {
-      fullName: item.fullName,
-      phoneNumber: item.phoneNumber,
-      isDefault: item.isDefault,
-      street: item.address.street,
+      fullName: '',
+      phoneNumber: '',
+      street: '',
+      isDefault: false,
     },
   });
+
+  const handleBack = () => {
+    if (watch('fullName') || watch('phoneNumber') || watch('street')) {
+      return Alert.alert('', 'Updates have not been saved, Are you sure you want to discard the changes?', [
+        {
+          text: 'Cancel',
+          style: 'default',
+        },
+        {
+          text: 'Discard',
+          style: 'destructive',
+          onPress: () => navigation.goBack(),
+        },
+      ]);
+    }
+    navigation.goBack();
+  };
+
+  const handleAddAddress = () => {
+    handleSubmit(onSubmit)();
+  };
+
+  const onSubmit = (data: FormValues) => {
+    if (!selectedAddress.province || !selectedAddress.ward) {
+      Alert.alert('Validation', 'Please select Province and Ward');
+      return;
+    }
+    addAddress({
+      id: Math.random().toString(),
+      fullName: data.fullName,
+      phoneNumber: data.phoneNumber,
+      address: {
+        street: data.street,
+        ward: selectedAddress.ward.name,
+        province: selectedAddress.province.name,
+      },
+      isDefault: data.isDefault,
+    });
+    navigation.goBack();
+  };
 
   const renderInput = (
     name: 'fullName' | 'phoneNumber' | 'street',
@@ -66,7 +112,11 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
         return (
           <View style={styles.inputContainer}>
             <View style={[styles.inputWrapper, options?.multiline && styles.multilineWrapper]}>
-              {isActive && <Text style={styles.floatingLabel}>{label}</Text>}
+              {isActive && (
+                <Text style={styles.floatingLabel}>
+                  {label} <Text style={styles.required}>{'*'}</Text>
+                </Text>
+              )}
 
               <TextInput
                 style={[styles.input, options?.multiline && styles.multilineInput]}
@@ -90,48 +140,9 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
       }}
     />
   );
-  // complete
-  const handleUpdateComplete = () => {
-    handleSubmit(onSubmit)();
-  };
 
-  const onSubmit = (data: FormValues) => {
-    const wardName = selectedAddress.ward?.name ?? wardActive;
-    const provinceName = selectedAddress.province?.name ?? provinceActive;
-
-    if (!wardName || !provinceName) {
-      Alert.alert('Validation', 'Please select Province and Ward');
-      return;
-    }
-    // update Address Store
-    console.log({ data });
-    updateAddress({
-      id: item.id,
-      fullName: data.fullName,
-      phoneNumber: data.phoneNumber,
-      isDefault: data.isDefault,
-      address: {
-        street: data.street,
-        ward: wardName,
-        province: provinceName,
-      },
-    });
-    navigation.goBack();
-  };
-
-  //delete
-  const handleDelete = () => {
-    Alert.alert('Delete', 'Are you sure you want to delete this address ?', [
-      { style: 'cancel', text: 'Cancel' },
-      {
-        style: 'destructive',
-        text: 'Delete',
-        onPress: () => {
-          removeAddress(item.id);
-          navigation.goBack();
-        },
-      },
-    ]);
+  const handleOpenBottomSheet = () => {
+    bottomSheetRef.current?.expand();
   };
 
   const renderBackDropBottomSheet = useCallback(
@@ -141,20 +152,12 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
     [],
   );
 
-  const handleOpenBottomSheet = useCallback(() => {
-    bottomSheetRef.current?.expand();
-  }, []);
-
-  const handleBack = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
-
   return (
     <>
       <SafeAreaView style={styles.container} edges={['top']}>
         <Header onBack={handleBack} isShowleftElement heightContainer={33} />
 
-        <Text style={styles.header}>{'Update Address'}</Text>
+        <Text style={styles.header}>{'Add Address'}</Text>
 
         <View style={styles.formContainer}>
           {renderInput('fullName', 'Full Name')}
@@ -205,14 +208,7 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
           />
         </View>
 
-        <View style={styles.footer}>
-          <Text onPress={handleDelete} style={styles.submitButton}>
-            {'Delete '}
-          </Text>
-          <Text style={styles.submitButton} onPress={handleUpdateComplete}>
-            {'Complete'}
-          </Text>
-        </View>
+        <ButtonAddress title="Save Address" onPress={handleAddAddress} />
       </SafeAreaView>
 
       <BottomSheet
@@ -223,53 +219,19 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
         backgroundStyle={{ backgroundColor: colors.background }}
       >
         <BottomSheetView>
-          <BottomSheetAddress
-            selectedAddress={selectedAddress}
-            setSelectedAddress={setSelectedAddress}
-            wardActive={wardActive}
-            provinceActive={provinceActive}
-          />
+          <BottomSheetAddress selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
         </BottomSheetView>
       </BottomSheet>
     </>
   );
 };
 
-export default UpdateAddressProfile;
+export default AddAddressProfile;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-  },
-
-  // province & ward
-  selectedAddressContainer: {
-    height: 58,
-    borderWidth: 1,
-    borderColor: '#454545',
-    borderRadius: 10,
-    backgroundColor: '#292929',
-    justifyContent: 'center',
-  },
-
-  selectedAddressInput: {
-    color: colors.white,
-    fontSize: 15,
-    marginLeft: 14,
-  },
-
-  selectInput: {
-    paddingHorizontal: 14,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-
-  selectLabel: {
-    color: colors.gray,
-    fontSize: 15,
-    fontFamily: commonStyle.fontFamily,
   },
 
   header: {
@@ -310,6 +272,12 @@ const styles = StyleSheet.create({
     fontFamily: commonStyle.fontFamily,
   },
 
+  required: {
+    color: colors.primary,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
   input: {
     color: colors.white,
     fontSize: 15,
@@ -335,6 +303,35 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
 
+  // province & ward
+  selectedAddressContainer: {
+    height: 58,
+    borderWidth: 1,
+    borderColor: '#454545',
+    borderRadius: 10,
+    backgroundColor: '#292929',
+    justifyContent: 'center',
+  },
+
+  selectedAddressInput: {
+    color: colors.white,
+    fontSize: 15,
+    marginLeft: 14,
+  },
+
+  selectInput: {
+    paddingHorizontal: 14,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  selectLabel: {
+    color: colors.gray,
+    fontSize: 15,
+    fontFamily: commonStyle.fontFamily,
+  },
+
   switchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -351,15 +348,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 
-  footer: {
-    marginTop: 'auto',
-    paddingHorizontal: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginBottom: 6,
-  },
-
   submitButton: {
     backgroundColor: colors.primary,
     color: colors.white,
@@ -368,6 +356,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 12,
     borderRadius: 24,
-    flex: 1,
   },
 });

@@ -9,8 +9,8 @@ import MyOrdersScreen from '../../screens/profile/orders/MyOrdersScreen';
 import OrderDetailScreen from '../../screens/profile/orders/OrderDetailScreen';
 import SettingProfileScreen from '../../screens/profile/setting/SettingProfileScreen';
 import AddressProfileScreen from '../../screens/profile/address/AddressProfileScreen';
-import AddAddressProfile from '../../components/address/AddAddressProfile';
-import UpdateAddressProfile from '../../components/address/UpdateAddressProfile';
+import AddAddressProfile from '../../components/profile/address/AddAddressProfile';
+import UpdateAddressProfile from '../../components/profile/address/UpdateAddressProfile';
 
 const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
 
