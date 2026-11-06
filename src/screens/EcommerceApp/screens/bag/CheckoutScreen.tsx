@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { Lucide } from '@react-native-vector-icons/lucide/static';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
@@ -106,7 +105,7 @@ const CheckoutScreen = ({ route, navigation }: CheckoutProps) => {
   );
 
   return (
-    <GestureHandlerRootView>
+    <>
       <SafeAreaView style={styles.container}>
         <Header onBack={handleBack} isShowleftElement heightContainer={40} title="Checkout" />
 
@@ -159,7 +158,7 @@ const CheckoutScreen = ({ route, navigation }: CheckoutProps) => {
           <PaymentMethodBottomSheet paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} />
         </BottomSheetView>
       </BottomSheet>
-    </GestureHandlerRootView>
+    </>
   );
 };
 

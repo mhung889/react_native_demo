@@ -11,6 +11,7 @@ import AddressProfileLogic from './AddressProfile.logic';
 import { commonStyle } from '../../../themes/commonStyle';
 import { ProfileStackParamList } from '../../../navigation/types';
 import { AddressItem } from '../../../store/profile/address.store';
+import ButtonAddress from '../../../components/common/ProfileAddress/ButtonAddress';
 
 export type AddressProfileScreensProps = NativeStackScreenProps<ProfileStackParamList, typeof SCREENS.PROFILE_ADDRESS>;
 
@@ -39,7 +40,7 @@ const AddressProfileScreen = ({ route, navigation }: AddressProfileScreensProps)
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.content}>
         <Header onBack={handleBack} isShowleftElement heightContainer={33} />
 
@@ -69,9 +70,11 @@ const AddressProfileScreen = ({ route, navigation }: AddressProfileScreensProps)
         )}
       </View>
 
-      <Pressable style={styles.addButton} onPress={handleNavigateToAddAddress}>
+      {/* <Pressable style={styles.addButton} onPress={handleNavigateToAddAddress}>
         <Text style={styles.addButtonText}>{'Add Address'}</Text>
-      </Pressable>
+      </Pressable> */}
+
+      <ButtonAddress title="Add Address" onPress={handleNavigateToAddAddress} />
     </SafeAreaView>
   );
 };
@@ -166,7 +169,7 @@ const styles = StyleSheet.create({
 
   addButton: {
     backgroundColor: colors.primary,
-    marginBottom: -26,
+    marginBottom: 6,
     borderRadius: 26,
     marginHorizontal: 16,
   },

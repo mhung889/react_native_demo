@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { CompositeNavigationProp, useNavigation } from '@react-navigation/native';
 import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text } from 'react-native';
 
 import HomeBanner from '../../components/home/HomeBanner';
@@ -8,11 +8,17 @@ import ProductListHeader from '../../components/home/ProductListHeader';
 
 import { colors } from '../../themes/color';
 import { commonStyle } from '../../themes/commonStyle';
-import { MainTabParamList } from '../../navigation/types';
+import { HomeStackParamList, MainTabParamList } from '../../navigation/types';
 import { SCREENS } from '../../navigation/SCREENS';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-type HomeNavigationProp = BottomTabNavigationProp<MainTabParamList>;
+// type HomeNavigationProp = BottomTabNavigationProp<MainTabParamList>;
+
+type HomeNavigationProp = CompositeNavigationProp<
+  NativeStackNavigationProp<HomeStackParamList>,
+  BottomTabNavigationProp<MainTabParamList>
+>;
 
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProp>();

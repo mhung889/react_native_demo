@@ -96,7 +96,7 @@ export const useCategoryProducts = (category: string) => {
     const store = useProductStore.getState();
 
     if (!store.isCacheValid(category)) {
-      void fetchPage(category, 1, requestId, true);
+      fetchPage(category, 1, requestId, true);
     }
 
     return () => {
@@ -119,7 +119,7 @@ export const useCategoryProducts = (category: string) => {
       return;
     }
 
-    void fetchPage(key, cached.page + 1, requestIdRef.current);
+    fetchPage(key, cached.page + 1, requestIdRef.current);
   }, [fetchPage, loadingProduct, loadingHasMore]);
 
   return {

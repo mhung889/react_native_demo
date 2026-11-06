@@ -7,7 +7,7 @@ import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { SCREENS } from '../../../navigation/SCREENS';
 import { ProductType } from '../../../types/product';
-import { HomeStackParamList } from '../../../navigation/types';
+import { ShopStackParamList } from '../../../navigation/types';
 
 import RatingStar from './RatingStar';
 import { colors } from '../../../themes/color';
@@ -17,7 +17,7 @@ import { formatPrice, getDiscountPrice } from '../../../utils';
 import { useFavoriteStore } from '../../../store/favorite/favorite.store';
 import { selectFavorite } from '../../../store/favorite/selector.favorite';
 
-type ProductCardNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
+type ProductCardNavigationProp = NativeStackNavigationProp<ShopStackParamList>;
 
 type ProductCardProps = {
   item: ProductType;

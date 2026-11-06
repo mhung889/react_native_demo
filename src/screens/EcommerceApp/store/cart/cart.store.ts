@@ -9,7 +9,7 @@ export interface CartItem extends ProductType {
 
 interface CartStore {
   items: CartItem[];
-  addItem: (product: Omit<CartItem, 'quantity'>) => void;
+  addItem: (product: CartItem) => void;
   removeItem: (id: number, size: string) => void;
   updateItem: (id: number, oldSize: string, newSize: string) => void;
   incrementQuantity: (id: number, size: string) => void;
@@ -28,12 +28,14 @@ export const useCartStore = create<CartStore>((set) => ({
       if (existing) {
         return {
           items: state.items.map((item) =>
-            item.id === product.id && item.size === product.size ? { ...item, quantity: item.quantity + 1 } : item,
+            item.id === product.id && item.size === product.size
+              ? { ...item, quantity: Math.min(item.quantity + product.quantity, MAX_QUANTITY) }
+              : item,
           ),
         };
       }
       return {
-        items: [...state.items, { ...product, quantity: 1 }],
+        items: [...state.items, { ...product, quantity: product.quantity }],
       };
     });
   },
@@ -102,7 +104,7 @@ export const useCartStore = create<CartStore>((set) => ({
   decrementQuantity: (id, size) => {
     set((state) => {
       const existing = state.items.find((item) => item.id === id && item.size === size);
-      if (!existing || existing.quantity <= 1) {
+      if (!existing || existing.quantity < 1) {
         return state;
       }
       return {

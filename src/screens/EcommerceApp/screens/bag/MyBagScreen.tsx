@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Dimensions, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
 
@@ -40,7 +39,7 @@ const MyBagScreen = () => {
   );
 
   const renderCardItem = ({ item }: { item: CartItem }) => {
-    return <CardItem item={item} handleBottomSheet={handleBottomSheet} />;
+    return <CardItem item={item} handleBottomSheet={handleBottomSheet} navigation={navigation} />;
   };
 
   if (cartItemList.length === 0) {
@@ -55,7 +54,7 @@ const MyBagScreen = () => {
   }
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={[styles.headerBag]}>{'My Bag'}</Text>
       </View>
@@ -103,11 +102,11 @@ const MyBagScreen = () => {
             })}
           </View>
           <Pressable style={styles.buttonCheckout} onPress={handleUpdateCartItem}>
-            <Text style={styles.buttonCheckoutText}>{'Xac nhan'}</Text>
+            <Text style={styles.buttonCheckoutText}>{'Confirm'}</Text>
           </Pressable>
         </BottomSheetView>
       </BottomSheet>
-    </GestureHandlerRootView>
+    </View>
   );
 };
 
@@ -305,7 +304,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     marginHorizontal: 16,
     borderRadius: 32,
-    marginBottom: 16,
+    marginBottom: 6,
   },
   buttonCheckoutText: {
     color: colors.ordinaryText,

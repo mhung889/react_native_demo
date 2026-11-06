@@ -25,6 +25,13 @@ const CardItemLogic = (item: CartItem) => {
   };
 
   const handleDecrementQuantity = () => {
+    if (item.quantity - 1 <= 0) {
+      Alert.alert('', 'Do you want delete product from the bag?', [
+        { style: 'cancel', text: 'Cancel' },
+        { style: 'destructive', text: 'OK', onPress: handleRemoveItemToList },
+      ]);
+      return;
+    }
     decrement(item.id, item.size);
   };
 

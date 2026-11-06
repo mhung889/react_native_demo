@@ -3,20 +3,19 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useCallback, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Alert, Pressable, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
 
-import Header from '../common/Header';
-import { colors } from '../../themes/color';
-import { SCREENS } from '../../navigation/SCREENS';
-import { commonStyle } from '../../themes/commonStyle';
-import { ProfileStackParamList } from '../../navigation/types';
+import Header from '../../common/Header';
+import { colors } from '../../../themes/color';
+import { SCREENS } from '../../../navigation/SCREENS';
+import { commonStyle } from '../../../themes/commonStyle';
+import { ProfileStackParamList } from '../../../navigation/types';
 import BottomSheetAddress from './bottomsheet/BottomSheetAddress';
 import { FormValues, SelectedAddress } from './AddAddressProfile';
-import { addAddressProfileSchema } from '../../validation/addAddressProfileSchema';
-import { useAddressStore } from '../../store/profile/address.store';
+import { useAddressStore } from '../../../store/profile/address.store';
+import { addAddressProfileSchema } from '../../../validation/addAddressProfileSchema';
 
 type UpdateAddressProfileProps = NativeStackScreenProps<ProfileStackParamList, typeof SCREENS.PROFILE_ADDRESS_UPDATE>;
 
@@ -151,8 +150,8 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
   }, [navigation]);
 
   return (
-    <GestureHandlerRootView>
-      <SafeAreaView style={styles.container}>
+    <>
+      <SafeAreaView style={styles.container} edges={['top']}>
         <Header onBack={handleBack} isShowleftElement heightContainer={33} />
 
         <Text style={styles.header}>{'Update Address'}</Text>
@@ -232,7 +231,7 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
           />
         </BottomSheetView>
       </BottomSheet>
-    </GestureHandlerRootView>
+    </>
   );
 };
 
@@ -358,6 +357,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+    marginBottom: 6,
   },
 
   submitButton: {
@@ -366,8 +366,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
-    paddingVertical: 12,
-    borderRadius: 24,
+    paddingVertical: 10,
+    borderRadius: 20,
     flex: 1,
   },
 });

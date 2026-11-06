@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
 
@@ -41,7 +40,7 @@ const SettingProfileScreen = ({ route, navigation }: SettingProfileScreenProps) 
   );
 
   return (
-    <GestureHandlerRootView>
+    <>
       <SafeAreaView style={styles.container}>
         <Header onBack={handleBack} isShowleftElement heightContainer={33} />
 
@@ -109,7 +108,7 @@ const SettingProfileScreen = ({ route, navigation }: SettingProfileScreenProps) 
           <PasswordChange />
         </BottomSheetView>
       </BottomSheet>
-    </GestureHandlerRootView>
+    </>
   );
 };
 
