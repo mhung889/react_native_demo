@@ -19,7 +19,11 @@ export type ProfileStackParamList = {
   };
   [SCREENS.PROFILE_MY_ORDERS]: undefined;
   [SCREENS.PROFILE_ORDER_DETAIL]: undefined;
-  [SCREENS.PROFILE_PAYMENT_METHOD]: undefined;
+  [SCREENS.PROFILE_PAYMENT_METHOD]:
+    | {
+        fromCheckout?: boolean;
+      }
+    | undefined;
   [SCREENS.PROFILE_ADDRESS]:
     | {
         fromCheckout?: boolean;

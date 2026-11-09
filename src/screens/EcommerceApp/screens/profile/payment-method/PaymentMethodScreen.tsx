@@ -18,6 +18,7 @@ import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheet
 
 import { colors } from '../../../themes/color';
 import { transformCardNumber } from '../../../utils';
+import { SCREENS } from '../../../navigation/SCREENS';
 import Header from '../../../components/common/Header';
 import PaymentMethodLogic from './PaymentMethod.logic';
 import { commonStyle } from '../../../themes/commonStyle';
@@ -26,7 +27,7 @@ import { ProfileStackParamList } from '../../../navigation/types';
 import { PaymentCardItem } from '../../../store/profile/paymentCard.store';
 import BottomSheetAddPayment, { FormValues } from '../../../components/profile/payment-method/BottomSheetAddPayment';
 
-export type PaymentMethodProps = NativeStackScreenProps<ProfileStackParamList>;
+export type PaymentMethodProps = NativeStackScreenProps<ProfileStackParamList, typeof SCREENS.PROFILE_PAYMENT_METHOD>;
 
 const PaymentMethodScreen = ({ route, navigation }: PaymentMethodProps) => {
   const {

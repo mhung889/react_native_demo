@@ -5,7 +5,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { PaymentMethodProps } from './PaymentMethodScreen';
 import { usePaymentCardStore } from '../../../store/profile/paymentCard.store';
 
-export default function PaymentMethodLogic({ navigation }: PaymentMethodProps) {
+export default function PaymentMethodLogic({ route, navigation }: PaymentMethodProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   const { paymentMethodList, addPaymentMethod, deletePayment, handleDefaultPayment } = usePaymentCardStore(
@@ -21,9 +21,13 @@ export default function PaymentMethodLogic({ navigation }: PaymentMethodProps) {
     bottomSheetRef.current?.expand();
   }, []);
 
-  const handleBack = useCallback(() => {
+  const handleBack = () => {
+    if (route.params?.fromCheckout) {
+      navigation.getParent()?.getParent()?.goBack();
+      return;
+    }
     navigation.goBack();
-  }, [navigation]);
+  };
 
   return {
     handleBack,

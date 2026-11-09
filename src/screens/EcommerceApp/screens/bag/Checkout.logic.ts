@@ -5,6 +5,7 @@ import { useCallback, useRef, useState } from 'react';
 import { SCREENS } from '../../navigation/SCREENS';
 import { CheckoutProps, PaymentMethod } from './CheckoutScreen';
 import { useAddressStore } from '../../store/profile/address.store';
+import { usePaymentCardStore } from '../../store/profile/paymentCard.store';
 
 export default function CheckoutLogic({ route, navigation }: CheckoutProps) {
   const { itemList } = route.params;
@@ -14,6 +15,7 @@ export default function CheckoutLogic({ route, navigation }: CheckoutProps) {
 
   const defaultAddress = useAddressStore((state) => state.addressList.find((item) => item.isDefault));
   const totalAmount = itemList.reduce((total, item) => total + item.quantity * item.price, 0);
+  const defaultPaymentCard = usePaymentCardStore((state) => state.paymentList.find((item) => item.isDefault));
 
   const handleBack = useCallback(() => {
     navigation.goBack();
@@ -24,6 +26,18 @@ export default function CheckoutLogic({ route, navigation }: CheckoutProps) {
       screen: SCREENS.PROFILE_TAB,
       params: {
         screen: SCREENS.PROFILE_ADDRESS,
+        params: {
+          fromCheckout: true,
+        },
+      },
+    });
+  }, [navigation]);
+
+  const handleNavigatePaymentMethod = useCallback(() => {
+    navigation.push(SCREENS.MAIN_TAB, {
+      screen: SCREENS.PROFILE_TAB,
+      params: {
+        screen: SCREENS.PROFILE_PAYMENT_METHOD,
         params: {
           fromCheckout: true,
         },
@@ -59,5 +73,7 @@ export default function CheckoutLogic({ route, navigation }: CheckoutProps) {
     handleOpenPaymentMethod,
     handleNavigateAddress,
     bottomSheetRef,
+    defaultPaymentCard,
+    handleNavigatePaymentMethod,
   };
 }
