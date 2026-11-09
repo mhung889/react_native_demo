@@ -71,7 +71,7 @@ const ProfileScreen = () => {
 
       <ProfileMenuItem
         title="Payment methods"
-        subtitle={`Visa ...`}
+        subtitle={`Visa `}
         isItemDivider
         isShowIconRight
         onPress={handleNavigatePaymentMethod}
