@@ -32,7 +32,6 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
   const [product, setProduct] = useState<ProductType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
   const [quantityProduct, setQuantityProduct] = useState<number>(1);
 
@@ -56,25 +55,6 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
       setLoading(false);
     }
   }, [productId]);
-
-  useEffect(() => {
-    fetchSingleProduct();
-  }, [fetchSingleProduct]);
-
-  useEffect(() => {
-    if (product) {
-      const fetchProductLikeCategory = async () => {
-        try {
-          const categoryName = product?.category;
-          const response = await productServices.getProductByCategory(categoryName, 0, 0);
-          setProductsLikeCategory(response);
-        } catch {
-          setError('Khong the lay san pham cung category');
-        }
-      };
-      fetchProductLikeCategory();
-    }
-  }, [product]);
 
   const handleOpenSizeSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
@@ -106,6 +86,32 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
     if (!product) return [];
     return productsLikeCategory.filter((p) => p.id !== product.id);
   }, [product, productsLikeCategory]);
+
+  useEffect(() => {
+    fetchSingleProduct();
+  }, [fetchSingleProduct]);
+
+  useEffect(() => {
+    if (!product) return;
+
+    const fetchProductLikeCategory = async () => {
+      try {
+        const categoryName = product?.category;
+        const response = await productServices.getProductByCategory(categoryName, 0, 0);
+        setProductsLikeCategory(response);
+      } catch {
+        setError('Khong the lay san pham cung category');
+      }
+    };
+    fetchProductLikeCategory();
+  }, [product]);
+
+  useEffect(() => {
+    const unsubcribe = navigation.addListener('blur', () => {
+      bottomSheetRef.current?.close();
+    });
+    return unsubcribe;
+  }, [navigation]);
 
   if (loading) {
     return (
@@ -157,7 +163,7 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
 
         <ProductListHeader
           name="You can also like this"
-          rightElement={<Text style={styles.rightElement}>{productsLikeCategory.length || 0}</Text>}
+          rightElement={<Text style={styles.rightElement}>{`${productsLikeCategory.length} items` || `0 item`}</Text>}
           products={filterProductLikeCategory}
         />
       </ScrollView>
