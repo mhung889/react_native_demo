@@ -10,6 +10,7 @@ import CheckoutScreen from './screens/bag/CheckoutScreen';
 
 import { useAuthStore } from './store/auth/auth.store';
 import { useFavoriteStore } from './store/favorite/favorite.store';
+import OrderSuccess from './screens/bag/OrderSuccess';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -28,6 +29,7 @@ const RootNavigator = () => {
         <RootStack.Group screenOptions={screenOption.default}>
           <RootStack.Screen name={SCREENS.MAIN_TAB} component={MainBottomTabNavigator} />
           <RootStack.Screen name={SCREENS.CHECKOUT} component={CheckoutScreen} />
+          <RootStack.Screen name={SCREENS.ORDER_SUCCESS} component={OrderSuccess} />
         </RootStack.Group>
       ) : (
         <RootStack.Group screenOptions={screenOption.default}>

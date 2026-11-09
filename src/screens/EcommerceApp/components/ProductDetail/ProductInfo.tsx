@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../../themes/color';
@@ -28,7 +28,7 @@ const ProductInfo = ({ product }: Props) => {
   );
 };
 
-export default ProductInfo;
+export default memo(ProductInfo);
 
 const styles = StyleSheet.create({
   container: {

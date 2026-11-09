@@ -8,6 +8,7 @@ import MasterCardIcon from './MasterCardLogo.svg';
 import IconCVV from './IconCVVNewCard.svg';
 import ChipIcon from './chip.svg';
 import VisaIcon from './Visa Logo.svg';
+import BagsIconSuccess from './bags.svg';
 
 export {
   UpDownIcon,
@@ -19,4 +20,5 @@ export {
   IconCVV,
   ChipIcon,
   VisaIcon,
+  BagsIconSuccess,
 };

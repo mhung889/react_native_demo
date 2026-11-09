@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 
@@ -20,7 +20,7 @@ const ProductInfoRow = ({ title, onPress }: Props) => {
   );
 };
 
-export default ProductInfoRow;
+export default memo(ProductInfoRow);
 
 const styles = StyleSheet.create({
   container: {

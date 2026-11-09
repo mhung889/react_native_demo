@@ -45,9 +45,6 @@ export type FavoritesStackParamList = {
 
 export type BagStackParamList = {
   [SCREENS.BAG]: undefined;
-  // [SCREENS.CHECKOUT]: {
-  //   itemList: CartItem[];
-  // };
   [SCREENS.PRODUCT_DETAIL]: {
     productId: number;
   };
@@ -84,4 +81,5 @@ export type RootStackParamList = {
   [SCREENS.CHECKOUT]: {
     itemList: CartItem[];
   };
+  [SCREENS.ORDER_SUCCESS]: undefined;
 };

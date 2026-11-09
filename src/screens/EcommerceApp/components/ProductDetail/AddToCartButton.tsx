@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 
 import { colors } from '../../themes/color';
@@ -17,7 +17,7 @@ const AddToCartButton = ({ onPress, title = 'ADD TO CART' }: AddToCartButtonProp
   );
 };
 
-export default AddToCartButton;
+export default memo(AddToCartButton);
 
 const styles = StyleSheet.create({
   button: {
