@@ -1,19 +1,21 @@
 export const SCREENS = {
-  // Auth stack
+  //Root stack
   AUTH: 'Auth',
+  CHECKOUT: 'Checkout',
+  MAIN_TAB: 'MainTab',
+  ORDER_SUCCESS: 'OrderSuccess',
+
+  // Auth stack
   SIGN_UP: 'SignUp',
   SIGN_IN: 'SignIn',
   FORGOT_PASSWORD: 'ForgotPassword',
 
   // Bottom tabs
-  MAIN_TAB: 'MainTab',
   HOME_TAB: 'HomeTab',
   SHOP_TAB: 'ShopTab',
   BAG_TAB: 'BagTab',
   FAVORITES_TAB: 'FavoritesTab',
   PROFILE_TAB: 'ProfileTab',
-
-  CHECKOUT: 'Checkout',
 
   // Home stack
   HOME: 'Home',

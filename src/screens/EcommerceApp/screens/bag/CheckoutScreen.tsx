@@ -6,18 +6,17 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
 
-import { formatPrice } from '../../utils';
 import { colors } from '../../themes/color';
 import CheckoutLogic from './Checkout.logic';
+import { VisaIcon } from '../../assets/icons';
 import { SCREENS } from '../../navigation/SCREENS';
 import Header from '../../components/common/Header';
 import { CartItem } from '../../store/cart/cart.store';
 import { RootStackParamList } from '../../navigation/types';
+import { formatPrice, transformCardNumber } from '../../utils';
 import PaymentMethodBottomSheet from '../../components/checkout/PaymentMethodBottomSheet';
 
 export type CheckoutProps = NativeStackScreenProps<RootStackParamList, typeof SCREENS.CHECKOUT>;
-
-export type PaymentMethod = 'cod' | 'card';
 
 const CheckoutScreen = ({ route, navigation }: CheckoutProps) => {
   const {
@@ -31,6 +30,8 @@ const CheckoutScreen = ({ route, navigation }: CheckoutProps) => {
     handleOpenPaymentMethod,
     bottomSheetRef,
     handleNavigateAddress,
+    defaultPaymentCard,
+    handleNavigatePaymentMethod,
   } = CheckoutLogic({ route, navigation });
 
   const renderBackDrop = useCallback(
@@ -40,7 +41,7 @@ const CheckoutScreen = ({ route, navigation }: CheckoutProps) => {
     [],
   );
 
-  const renderItem = ({ item }: { item: CartItem }) => {
+  const renderItem = useCallback(({ item }: { item: CartItem }) => {
     return (
       <>
         <View style={styles.productCard}>
@@ -69,7 +70,7 @@ const CheckoutScreen = ({ route, navigation }: CheckoutProps) => {
         </View>
       </>
     );
-  };
+  }, []);
 
   const renderAddress = () => (
     <Pressable style={styles.addressCard} onPress={handleNavigateAddress}>
@@ -104,6 +105,52 @@ const CheckoutScreen = ({ route, navigation }: CheckoutProps) => {
     </Pressable>
   );
 
+  const renderSelectedCard = () => {
+    if (!defaultPaymentCard) {
+      return (
+        <Pressable style={styles.emptyCard} onPress={handleNavigatePaymentMethod}>
+          <Lucide name="plus-circle" size={22} color={colors.primary} />
+
+          <View style={styles.emptyCardInfo}>
+            <Text style={styles.emptyCardTitle}>{'No default card selected'}</Text>
+            <Text style={styles.emptyCardDescription}>{'Please select a card to continue'}</Text>
+          </View>
+
+          <Lucide name="chevron-right" size={20} color={colors.gray} />
+        </Pressable>
+      );
+    }
+
+    return (
+      <View style={styles.selectedCard}>
+        <View style={styles.selectedCardHeader}>
+          <VisaIcon />
+        </View>
+
+        <Text style={styles.cardNumber}>{transformCardNumber(defaultPaymentCard.cardNumber)}</Text>
+
+        <View style={styles.selectedCardFooter}>
+          <View style={styles.cardHolder}>
+            <Text style={styles.cardLabel}>{'Card Holder Name'}</Text>
+            <Text style={styles.cardValue} numberOfLines={1}>
+              {defaultPaymentCard.nameCard}
+            </Text>
+          </View>
+
+          <View>
+            <Text style={styles.cardLabel}>{'Expire Date'}</Text>
+            <Text style={styles.cardValue}>{defaultPaymentCard.expireDate}</Text>
+          </View>
+        </View>
+
+        <Pressable style={styles.changeCardButton} onPress={handleNavigatePaymentMethod}>
+          <Text style={styles.changeCardText}>{'Change card'}</Text>
+          <Lucide name="chevron-right" size={17} color={colors.white} />
+        </Pressable>
+      </View>
+    );
+  };
+
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -124,6 +171,8 @@ const CheckoutScreen = ({ route, navigation }: CheckoutProps) => {
             <Lucide name="ellipsis" size={23} color={colors.gray} />
           </Pressable>
         </View>
+
+        {paymentMethod === 'card' && renderSelectedCard()}
 
         {/* Bottom checkout */}
         <View style={styles.footer}>
@@ -359,5 +408,111 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 12,
+  },
+
+  // Selected payment card
+  selectedCard: {
+    backgroundColor: colors.primary,
+    marginHorizontal: 12,
+    marginBottom: 12,
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#3A3A3A',
+    gap: 18,
+  },
+
+  selectedCardHeader: {
+    alignSelf: 'flex-end',
+  },
+
+  defaultBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: '#263A32',
+    paddingHorizontal: 9,
+    paddingVertical: 5,
+    borderRadius: 20,
+  },
+
+  defaultBadgeText: {
+    color: colors.primary,
+    fontSize: 11,
+    fontWeight: '600',
+  },
+
+  cardNumber: {
+    color: colors.white,
+    fontSize: 20,
+    fontWeight: '600',
+    letterSpacing: 2,
+  },
+
+  selectedCardFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  cardHolder: {
+    flex: 1,
+    marginRight: 12,
+  },
+
+  cardLabel: {
+    color: colors.white,
+    fontSize: 12,
+    marginBottom: 5,
+    letterSpacing: 1,
+  },
+
+  cardValue: {
+    color: colors.white,
+    fontSize: 13,
+    fontWeight: '500',
+  },
+
+  changeCardButton: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#3A3A3A',
+    paddingTop: 12,
+  },
+
+  changeCardText: {
+    color: colors.white,
+    fontSize: 13,
+    fontWeight: '600',
+  },
+
+  // Empty card
+  emptyCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.dark,
+    marginHorizontal: 12,
+    marginBottom: 12,
+    padding: 16,
+    borderRadius: 12,
+    gap: 12,
+  },
+
+  emptyCardInfo: {
+    flex: 1,
+    gap: 4,
+  },
+
+  emptyCardTitle: {
+    color: colors.white,
+    fontSize: 14,
+    fontWeight: '600',
+  },
+
+  emptyCardDescription: {
+    color: colors.gray,
+    fontSize: 12,
   },
 });

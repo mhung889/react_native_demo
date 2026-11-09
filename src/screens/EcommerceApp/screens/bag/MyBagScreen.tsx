@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Dimensions, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
 
-import CardItem from '../../components/bag/CardItem';
+import CartItemComponent from '../../components/bag/CartItem';
 import { DATA_SIZES } from '../../components/ProductDetail/SelecteSizeModal';
 
 import { formatPrice } from '../../utils';
@@ -39,7 +39,7 @@ const MyBagScreen = () => {
   );
 
   const renderCardItem = ({ item }: { item: CartItem }) => {
-    return <CardItem item={item} handleBottomSheet={handleBottomSheet} navigation={navigation} />;
+    return <CartItemComponent item={item} handleBottomSheet={handleBottomSheet} navigation={navigation} />;
   };
 
   if (cartItemList.length === 0) {
@@ -48,7 +48,9 @@ const MyBagScreen = () => {
         <View style={styles.header}>
           <Text style={styles.headerBag}>{'My Bag'}</Text>
         </View>
-        <Text style={styles.textEmpty}>{'Không có sản phẩm nào'}</Text>
+        <View style={styles.textEmptyContainer}>
+          <Text style={styles.textEmpty}>{'Không có sản phẩm nào'}</Text>
+        </View>
       </View>
     );
   }
@@ -229,11 +231,15 @@ const styles = StyleSheet.create({
     right: 10,
   },
 
+  textEmptyContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
   textEmpty: {
     color: colors.white,
     fontSize: 18,
-    textAlign: 'center',
-    paddingTop: 170,
   },
 
   iconSearch: {

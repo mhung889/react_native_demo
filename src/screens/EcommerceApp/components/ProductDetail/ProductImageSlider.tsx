@@ -32,7 +32,7 @@ const ProductImageSlider = ({ images }: ProductImageSliderProps) => {
   if (imageList.length === 0) {
     return (
       <View style={[styles.imageContainer, { width }]}>
-        <Text>Không có hình ảnh</Text>
+        <Text>{'Không có hình ảnh'}</Text>
       </View>
     );
   }

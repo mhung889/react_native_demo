@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -42,7 +42,7 @@ const HomeBanner = ({ product }: { product: ProductType }) => {
   );
 };
 
-export default HomeBanner;
+export default memo(HomeBanner);
 
 const styles = StyleSheet.create({
   //Banner

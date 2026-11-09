@@ -1,18 +1,19 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { PaymentMethod } from '../../screens/bag/CheckoutScreen';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+
 import { colors } from '../../themes/color';
+import { OrderPaymentMethod } from '../../types/payment-method';
 
 const paymentMethods = [
   {
-    id: 'cod' as PaymentMethod,
+    id: 'cod' as OrderPaymentMethod,
     title: 'Cash on Delivery',
     description: 'Pay when you receive your order',
     icon: 'cash-outline' as const,
   },
   {
-    id: 'card' as PaymentMethod,
+    id: 'card' as OrderPaymentMethod,
     title: 'Credit / Debit Card',
     description: 'Pay securely with Visa or Mastercard',
     icon: 'card-outline' as const,
@@ -20,9 +21,9 @@ const paymentMethods = [
 ];
 
 type PaymentMethodBottomSheetProps = {
-  paymentMethod: PaymentMethod;
+  paymentMethod: OrderPaymentMethod;
 
-  setPaymentMethod: React.Dispatch<React.SetStateAction<PaymentMethod>>;
+  setPaymentMethod: React.Dispatch<React.SetStateAction<OrderPaymentMethod>>;
 };
 
 const PaymentMethodBottomSheet = ({ paymentMethod, setPaymentMethod }: PaymentMethodBottomSheetProps) => {
