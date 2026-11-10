@@ -26,6 +26,7 @@ import { ChipIcon, VisaIcon } from '../../../assets/icons';
 import { ProfileStackParamList } from '../../../navigation/types';
 import { PaymentCardItem } from '../../../store/profile/paymentCard.store';
 import BottomSheetAddPayment, { FormValues } from '../../../components/profile/payment-method/BottomSheetAddPayment';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export type PaymentMethodProps = NativeStackScreenProps<ProfileStackParamList, typeof SCREENS.PROFILE_PAYMENT_METHOD>;
 
@@ -119,7 +120,7 @@ const PaymentMethodScreen = ({ route, navigation }: PaymentMethodProps) => {
     <GestureHandlerRootView style={styles.root}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={commonStyle.flex1}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <View style={styles.container}>
+          <SafeAreaView style={styles.container}>
             <Header onBack={handleBack} isShowleftElement title="Payment methods" />
 
             <View style={styles.content}>
@@ -157,7 +158,7 @@ const PaymentMethodScreen = ({ route, navigation }: PaymentMethodProps) => {
                 <BottomSheetAddPayment handleAddPaymentMethod={handleAddPaymentMethod} />
               </BottomSheetView>
             </BottomSheet>
-          </View>
+          </SafeAreaView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </GestureHandlerRootView>

@@ -1,6 +1,7 @@
 /*
   React-hook-form & yup
 */
+import { useForm } from 'react-hook-form';
 import React, { useCallback } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -13,7 +14,6 @@ import TextInputTitle from '../../../components/TextInputTitle';
 
 import { colors } from '../../../themes/color';
 import { SCREENS } from '../../../navigation/SCREENS';
-import { useForm } from 'react-hook-form';
 import { signInSchema } from '../../../validation/signInSchema';
 import { useSignInLogic } from './SignIn.logic';
 import { authService } from '../../../services/authService';
@@ -26,7 +26,6 @@ const SignIn = () => {
     control,
     handleSubmit,
     // formState: { errors },
-    watch,
   } = useForm({
     resolver: yupResolver(signInSchema),
     mode: 'onBlur',

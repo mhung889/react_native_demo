@@ -1,8 +1,9 @@
-import { CartItem } from '../store/cart/cart.store';
-import { AddressItem } from '../store/profile/address.store';
+import { NavigatorScreenParams } from '@react-navigation/native';
+
 import { User } from '../types/auth';
 import { SCREENS } from './SCREENS';
-import { NavigatorScreenParams } from '@react-navigation/native';
+import { CartItem } from '../store/cart/cart.store';
+import { AddressItem } from '../store/profile/address.store';
 
 export type HomeStackParamList = {
   [SCREENS.HOME]: undefined;
@@ -18,7 +19,9 @@ export type ProfileStackParamList = {
     user: User;
   };
   [SCREENS.PROFILE_MY_ORDERS]: undefined;
-  [SCREENS.PROFILE_ORDER_DETAIL]: undefined;
+  [SCREENS.PROFILE_ORDER_DETAIL]: {
+    orderId: string;
+  };
   [SCREENS.PROFILE_PAYMENT_METHOD]:
     | {
         fromCheckout?: boolean;

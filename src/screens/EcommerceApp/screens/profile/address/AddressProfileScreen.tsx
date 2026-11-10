@@ -42,7 +42,7 @@ const AddressProfileScreen = ({ route, navigation }: AddressProfileScreensProps)
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.content}>
-        <Header onBack={handleBack} isShowleftElement heightContainer={33} />
+        <Header onBack={handleBack} isShowleftElement />
 
         <Text style={styles.header}>{'My Addresses'}</Text>
 

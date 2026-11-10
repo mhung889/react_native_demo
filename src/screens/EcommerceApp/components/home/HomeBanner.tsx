@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
   imageBanner: {
     width: '100%',
     height: '100%',
-    // position: 'relative',
   },
   textBanner: {
     position: 'absolute',
@@ -69,8 +68,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     backgroundColor: colors.primary,
-    alignSelf: 'center',
-    marginRight: 20,
+    alignSelf: 'flex-start',
   },
   textButton: {
     color: colors.ordinaryText,

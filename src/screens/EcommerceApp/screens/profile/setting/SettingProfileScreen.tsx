@@ -42,7 +42,7 @@ const SettingProfileScreen = ({ route, navigation }: SettingProfileScreenProps) 
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <Header onBack={handleBack} isShowleftElement heightContainer={33} />
+        <Header onBack={handleBack} isShowleftElement />
 
         <Text style={styles.header}>{'Settings'}</Text>
 

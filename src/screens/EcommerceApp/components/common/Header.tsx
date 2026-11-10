@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { memo, ReactNode } from 'react';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -27,7 +27,6 @@ const Header = ({
   isShowleftElement = false,
   isCategory = false,
   isSearch = false,
-  heightContainer = 90,
   navigation,
 }: Props) => {
   const handleNavigationToSearch = () => {
@@ -35,7 +34,7 @@ const Header = ({
   };
 
   return (
-    <View style={[styles.container, { height: heightContainer }]}>
+    <View style={[styles.container]}>
       {isShowleftElement && (
         <Pressable onPress={onBack} hitSlop={12}>
           <Ionicons name="chevron-back" size={24} color={colors.white} />
@@ -54,11 +53,10 @@ const Header = ({
   );
 };
 
-export default Header;
+export default memo(Header);
 
 const styles = StyleSheet.create({
   container: {
-    height: 90,
     marginHorizontal: 16,
     paddingBottom: 12,
     flexDirection: 'row',

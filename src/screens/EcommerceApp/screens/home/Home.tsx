@@ -33,7 +33,7 @@ const Home = () => {
   const renderRightElement = () => {
     return (
       <Pressable onPress={handleNagivateAllProduct}>
-        <Text style={styles.viewAll}> View all</Text>
+        <Text style={styles.viewAll}> {'View all'}</Text>
       </Pressable>
     );
   };

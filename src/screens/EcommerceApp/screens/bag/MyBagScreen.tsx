@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
 
@@ -8,9 +9,9 @@ import { DATA_SIZES } from '../../components/ProductDetail/SelecteSizeModal';
 import { formatPrice } from '../../utils';
 import { colors } from '../../themes/color';
 import MyBagScreenLogic from './MyBagScreen.logic';
+import { SCREENS } from '../../navigation/SCREENS';
 import { commonStyle } from '../../themes/commonStyle';
 import { CartItem } from '../../store/cart/cart.store';
-import { SCREENS } from '../../navigation/SCREENS';
 
 const MyBagScreen = () => {
   const {
@@ -42,73 +43,69 @@ const MyBagScreen = () => {
     return <CartItemComponent item={item} handleBottomSheet={handleBottomSheet} navigation={navigation} />;
   };
 
-  if (cartItemList.length === 0) {
-    return (
-      <View style={[styles.container]}>
-        <View style={styles.header}>
-          <Text style={styles.headerBag}>{'My Bag'}</Text>
-        </View>
+  return (
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <Text style={[styles.headerBag]}>{'My Bag'}</Text>
+
+      {cartItemList.length > 0 ? (
+        <>
+          <FlatList
+            data={cartItemList}
+            keyExtractor={(item) => `${item.id}-${item.size}`}
+            renderItem={renderCardItem}
+            contentContainerStyle={styles.containerList}
+          />
+
+          <View style={styles.footerContainer}>
+            <View style={styles.totalAmountContainer}>
+              <Text style={styles.totalAmountText}>{'Total amount:'}</Text>
+              <Text style={styles.totalAmountPrice}>{formatPrice(totalAmountPrice)}</Text>
+            </View>
+
+            <Pressable style={styles.buttonCheckout} onPress={handleNavigateCheckout}>
+              <Text style={styles.buttonCheckoutText}>{'CHECK OUT'}</Text>
+            </Pressable>
+          </View>
+
+          <BottomSheet
+            ref={bottomSheetRef}
+            index={-1}
+            enablePanDownToClose
+            backdropComponent={renderBackdrop}
+            backgroundStyle={{
+              backgroundColor: colors.background,
+            }}
+          >
+            <BottomSheetView style={styles.contentBottom}>
+              <Text style={styles.title}>{selectedItem?.title}</Text>
+
+              <View style={styles.sizeContainer}>
+                {DATA_SIZES.map((size) => {
+                  const select = size === selectedSize;
+
+                  return (
+                    <Pressable
+                      key={`${size} - ${Math.random()}`}
+                      style={[styles.sizeButton, select && styles.selectedSizeButton]}
+                      onPress={() => setSelectedSize(size)}
+                    >
+                      <Text style={styles.sizeText}>{size}</Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+              <Pressable style={styles.buttonCheckout} onPress={handleUpdateCartItem}>
+                <Text style={styles.buttonCheckoutText}>{'Confirm'}</Text>
+              </Pressable>
+            </BottomSheetView>
+          </BottomSheet>
+        </>
+      ) : (
         <View style={styles.textEmptyContainer}>
           <Text style={styles.textEmpty}>{'Không có sản phẩm nào'}</Text>
         </View>
-      </View>
-    );
-  }
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={[styles.headerBag]}>{'My Bag'}</Text>
-      </View>
-      <FlatList
-        data={cartItemList}
-        keyExtractor={(item) => `${item.id}-${item.size}`}
-        renderItem={renderCardItem}
-        contentContainerStyle={styles.containerList}
-      />
-
-      <View style={styles.totalAmountContainer}>
-        <Text style={styles.totalAmountText}>{'Total amount:'}</Text>
-        <Text style={styles.totalAmountPrice}>{formatPrice(totalAmountPrice)}</Text>
-      </View>
-
-      <Pressable style={styles.buttonCheckout} onPress={handleNavigateCheckout}>
-        <Text style={styles.buttonCheckoutText}>{'CHECK OUT'}</Text>
-      </Pressable>
-
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={-1}
-        enablePanDownToClose
-        backdropComponent={renderBackdrop}
-        backgroundStyle={{
-          backgroundColor: colors.background,
-        }}
-      >
-        <BottomSheetView style={styles.contentBottom}>
-          <Text style={styles.title}>{selectedItem?.title}</Text>
-
-          <View style={styles.sizeContainer}>
-            {DATA_SIZES.map((size) => {
-              const select = size === selectedSize;
-
-              return (
-                <Pressable
-                  key={`${size} - ${Math.random()}`}
-                  style={[styles.sizeButton, select && styles.selectedSizeButton]}
-                  onPress={() => setSelectedSize(size)}
-                >
-                  <Text style={styles.sizeText}>{size}</Text>
-                </Pressable>
-              );
-            })}
-          </View>
-          <Pressable style={styles.buttonCheckout} onPress={handleUpdateCartItem}>
-            <Text style={styles.buttonCheckoutText}>{'Confirm'}</Text>
-          </Pressable>
-        </BottomSheetView>
-      </BottomSheet>
-    </View>
+      )}
+    </SafeAreaView>
   );
 };
 
@@ -125,18 +122,13 @@ const styles = StyleSheet.create({
     gap: 16,
   },
 
-  header: {
-    minHeight: 140,
-    marginBottom: 10,
-  },
-
   headerBag: {
     color: colors.white,
     fontFamily: commonStyle.fontFamily,
     fontWeight: '700',
     fontSize: 34,
     marginHorizontal: 16,
-    marginTop: Dimensions.get('window').height * 0.13, //13% screen
+    marginVertical: Dimensions.get('window').height * 0.01, //1 % screen
   },
 
   card: {
@@ -286,6 +278,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
 
+  footerContainer: {
+    marginBottom: 6,
+  },
+
   totalAmountContainer: {
     marginVertical: 10,
     marginHorizontal: 16,
@@ -310,7 +306,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     marginHorizontal: 16,
     borderRadius: 32,
-    marginBottom: 6,
   },
   buttonCheckoutText: {
     color: colors.ordinaryText,

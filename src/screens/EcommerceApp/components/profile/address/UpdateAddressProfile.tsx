@@ -4,7 +4,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Alert, Pressable, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
 
 import Header from '../../common/Header';
@@ -16,6 +16,7 @@ import BottomSheetAddress from './bottomsheet/BottomSheetAddress';
 import { FormValues, SelectedAddress } from './AddAddressProfile';
 import { useAddressStore } from '../../../store/profile/address.store';
 import { addAddressProfileSchema } from '../../../validation/addAddressProfileSchema';
+import SwitchButton from '../../common/SwitchButton';
 
 type UpdateAddressProfileProps = NativeStackScreenProps<ProfileStackParamList, typeof SCREENS.PROFILE_ADDRESS_UPDATE>;
 
@@ -104,7 +105,6 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
       return;
     }
     // update Address Store
-    console.log({ data });
     updateAddress({
       id: item.id,
       fullName: data.fullName,
@@ -190,16 +190,7 @@ const UpdateAddressProfile = ({ route, navigation }: UpdateAddressProfileProps) 
                   <Text style={styles.switchTitle}>{'Set as default address'}</Text>
                 </View>
 
-                <Switch
-                  trackColor={{
-                    false: '#BDBDBD',
-                    true: colors.primary,
-                  }}
-                  thumbColor="#FFFFFF"
-                  ios_backgroundColor="#BDBDBD"
-                  onValueChange={onChange}
-                  value={value}
-                />
+                <SwitchButton value={value} onValueChange={onChange} />
               </View>
             )}
           />
@@ -357,7 +348,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    marginBottom: 6,
+    marginBottom: 20,
   },
 
   submitButton: {

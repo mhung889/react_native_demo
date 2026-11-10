@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'visible',
     position: 'relative',
-    marginTop: 10,
   },
 
   image: {

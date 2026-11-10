@@ -131,10 +131,10 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <Header
         onBack={() => navigation.goBack()}
-        title="Product Details"
+        title="Product Detail"
         rightElement={<Ionicons name="share-social-outline" size={22} color={colors.white} />}
         isShowleftElement={true}
       />
@@ -176,7 +176,7 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
         quantityProduct={quantityProduct}
         setQuantityProduct={setQuantityProduct}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
