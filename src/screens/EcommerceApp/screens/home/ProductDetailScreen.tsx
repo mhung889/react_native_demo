@@ -96,7 +96,7 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
 
     const fetchProductLikeCategory = async () => {
       try {
-        const categoryName = product?.category;
+        const categoryName = product.category;
         const response = await productServices.getProductByCategory(categoryName, 0, 0);
         setProductsLikeCategory(response);
       } catch {
@@ -163,7 +163,9 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
 
         <ProductListHeader
           name="You can also like this"
-          rightElement={<Text style={styles.rightElement}>{`${productsLikeCategory.length} items` || `0 item`}</Text>}
+          rightElement={
+            <Text style={styles.rightElement}>{`${filterProductLikeCategory.length} items` || `0 item`}</Text>
+          }
           products={filterProductLikeCategory}
         />
       </ScrollView>

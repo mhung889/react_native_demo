@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -11,14 +11,14 @@ import { RootStackParamList } from '../../navigation/types';
 type OrderSuccessProps = NativeStackScreenProps<RootStackParamList, typeof SCREENS.ORDER_SUCCESS>;
 
 const OrderSuccess = ({ navigation }: OrderSuccessProps) => {
-  const handleNavigateContinuteShopping = () => {
+  const handleNavigateContinuteShopping = useCallback(() => {
     navigation.navigate(SCREENS.MAIN_TAB, {
       screen: SCREENS.SHOP_TAB,
       params: {
         screen: SCREENS.SHOP,
       },
     });
-  };
+  }, [navigation]);
 
   return (
     <SafeAreaView style={styles.container}>

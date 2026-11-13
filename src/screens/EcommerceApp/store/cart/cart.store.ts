@@ -11,6 +11,7 @@ interface CartStore {
   items: CartItem[];
   addItem: (product: CartItem) => void;
   removeItem: (id: number, size: string) => void;
+  removeSelectedItem: (selectedProductList: CartItem[]) => void;
   updateItem: (id: number, oldSize: string, newSize: string) => void;
   incrementQuantity: (id: number, size: string) => void;
   decrementQuantity: (id: number, size: string) => void;
@@ -44,6 +45,16 @@ export const useCartStore = create<CartStore>((set) => ({
     set((state) => {
       return {
         items: state.items.filter((item) => !(item.id === id && item.size === size)),
+      };
+    });
+  },
+
+  removeSelectedItem: (selectedProductList) => {
+    set((state) => {
+      return {
+        items: state.items.filter(
+          (item) => !selectedProductList.some((order) => order.id === item.id && order.size === item.size),
+        ),
       };
     });
   },
@@ -104,7 +115,7 @@ export const useCartStore = create<CartStore>((set) => ({
   decrementQuantity: (id, size) => {
     set((state) => {
       const existing = state.items.find((item) => item.id === id && item.size === size);
-      if (!existing || existing.quantity < 1) {
+      if (!existing || existing.quantity <= 1) {
         return state;
       }
       return {

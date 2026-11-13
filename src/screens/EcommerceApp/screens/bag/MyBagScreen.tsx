@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Dimensions, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, Dimensions, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetView } from '@gorhom/bottom-sheet';
 
 import CartItemComponent from '../../components/bag/CartItem';
@@ -12,25 +12,39 @@ import MyBagScreenLogic from './MyBagScreen.logic';
 import { SCREENS } from '../../navigation/SCREENS';
 import { commonStyle } from '../../themes/commonStyle';
 import { CartItem } from '../../store/cart/cart.store';
+import { Lucide } from '@react-native-vector-icons/lucide';
 
 const MyBagScreen = () => {
   const {
     handleBottomSheet,
     handleUpdateCartItem,
     bottomSheetRef,
-    totalAmountPrice,
     cartItemList,
     selectedItem,
     selectedSize,
     setSelectedSize,
     navigation,
+    selectedOrderList,
+    totalAmoutPrice,
+    isItemSelected,
+    toggleSelectedItem,
+    isSelectedAll,
+    toggleSelectedAll,
+
+    activeFix,
+    setActiveFix,
+    toggleDeleteSelected,
   } = MyBagScreenLogic();
 
   const handleNavigateCheckout = useCallback(() => {
-    navigation.navigate(SCREENS.CHECKOUT, {
-      itemList: cartItemList,
-    });
-  }, [navigation, cartItemList]);
+    if (selectedOrderList.length > 0) {
+      navigation.navigate(SCREENS.CHECKOUT, {
+        itemList: selectedOrderList,
+      });
+      return;
+    }
+    Alert.alert('', 'Plese select item you want buy?', [{ style: 'destructive', text: 'OK' }]);
+  }, [navigation, selectedOrderList]);
 
   const renderBackdrop = useCallback(
     (props: BottomSheetBackdropProps) => (
@@ -40,12 +54,33 @@ const MyBagScreen = () => {
   );
 
   const renderCardItem = ({ item }: { item: CartItem }) => {
-    return <CartItemComponent item={item} handleBottomSheet={handleBottomSheet} navigation={navigation} />;
+    return (
+      <CartItemComponent
+        item={item}
+        handleBottomSheet={handleBottomSheet}
+        navigation={navigation}
+        isItemSelected={isItemSelected}
+        toggleSelectedItem={toggleSelectedItem}
+      />
+    );
   };
+
+  // neu cartItemList co san pham thi moi cho an edit
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <Text style={[styles.headerBag]}>{'My Bag'}</Text>
+      <View style={styles.header}>
+        <Text style={[styles.headerBag]}>{'My Bag'}</Text>
+        {activeFix ? (
+          <Pressable onPress={() => setActiveFix(!activeFix)}>
+            <Text style={styles.fixText}>{'Complete'}</Text>
+          </Pressable>
+        ) : (
+          <Pressable onPress={() => setActiveFix(!activeFix)}>
+            <Text style={styles.fixText}>{'Edit'}</Text>
+          </Pressable>
+        )}
+      </View>
 
       {cartItemList.length > 0 ? (
         <>
@@ -57,9 +92,21 @@ const MyBagScreen = () => {
           />
 
           <View style={styles.footerContainer}>
-            <View style={styles.totalAmountContainer}>
-              <Text style={styles.totalAmountText}>{'Total amount:'}</Text>
-              <Text style={styles.totalAmountPrice}>{formatPrice(totalAmountPrice)}</Text>
+            <View style={styles.footer}>
+              <View style={styles.checkboxContainer}>
+                <Pressable style={styles.checkbox} onPress={toggleSelectedAll}>
+                  {isSelectedAll && <Lucide name="check" size={20} color={colors.white} />}
+                </Pressable>
+                <Text style={styles.selectAllText}>{'All'}</Text>
+              </View>
+
+              {activeFix ? (
+                <Pressable style={styles.buttonDelete} onPress={toggleDeleteSelected}>
+                  <Text style={styles.deleteText}>{'Delete'}</Text>
+                </Pressable>
+              ) : (
+                <Text style={styles.totalAmountPrice}>{formatPrice(totalAmoutPrice)}</Text>
+              )}
             </View>
 
             <Pressable style={styles.buttonCheckout} onPress={handleNavigateCheckout}>
@@ -122,13 +169,24 @@ const styles = StyleSheet.create({
     gap: 16,
   },
 
+  header: {
+    marginHorizontal: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   headerBag: {
     color: colors.white,
     fontFamily: commonStyle.fontFamily,
     fontWeight: '700',
     fontSize: 34,
-    marginHorizontal: 16,
     marginVertical: Dimensions.get('window').height * 0.01, //1 % screen
+  },
+
+  fixText: {
+    color: colors.white,
+    fontSize: 18,
+    fontWeight: '500',
   },
 
   card: {
@@ -187,10 +245,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.darkColor,
     justifyContent: 'center',
     alignItems: 'center',
-
     // Android
     elevation: 5,
-
     // iOS
     shadowColor: '#000',
     shadowOffset: {
@@ -278,23 +334,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
 
-  footerContainer: {
-    marginBottom: 6,
-  },
+  footerContainer: {},
 
-  totalAmountContainer: {
-    marginVertical: 10,
+  footer: {
+    marginVertical: 5,
     marginHorizontal: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
-  totalAmountText: {
-    color: colors.gray,
-    fontSize: 15,
-    fontFamily: commonStyle.fontFamily,
-    fontWeight: '600',
-  },
   totalAmountPrice: {
     color: colors.white,
     fontSize: 19,
@@ -306,6 +355,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     marginHorizontal: 16,
     borderRadius: 32,
+    marginBottom: 20,
   },
   buttonCheckoutText: {
     color: colors.ordinaryText,
@@ -313,5 +363,40 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+
+  checkboxContainer: {
+    flexDirection: 'row',
+    gap: 5,
+    alignItems: 'center',
+  },
+
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: colors.white,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  selectAllText: {
+    color: colors.white,
+    fontSize: 15,
+    fontWeight: '500',
+  },
+
+  buttonDelete: {
+    backgroundColor: colors.primary,
+    borderRadius: 7,
+  },
+
+  deleteText: {
+    color: colors.white,
+    paddingVertical: 3,
+    paddingHorizontal: 7,
+    fontSize: 15,
+    fontWeight: '500',
   },
 });
