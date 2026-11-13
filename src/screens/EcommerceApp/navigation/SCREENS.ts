@@ -26,7 +26,7 @@ export const SCREENS = {
   SEARCH_PRODUCT: 'SearchProduct',
   SEARCH_PRODUCT_LIST: 'SearchProductList',
 
-  //Favaroties stack
+  //Favorites stack
   FAVORITES: 'Favorites',
 
   // Bag stack

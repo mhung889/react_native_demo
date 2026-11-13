@@ -15,6 +15,7 @@ import ProductVerticalList from '../../components/shop/product/ProductVerticalLi
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ShopStackParamList } from '../../navigation/types';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export type SortType = 'asc' | 'desc';
 
@@ -69,7 +70,7 @@ const ShopScreen = () => {
   );
 
   return (
-    <>
+    <SafeAreaView style={styles.container} edges={['top']}>
       {renderHeader()}
 
       <FilterShop
@@ -96,7 +97,7 @@ const ShopScreen = () => {
           loadMore={loadMore}
         />
       )}
-    </>
+    </SafeAreaView>
   );
 };
 
