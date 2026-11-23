@@ -1,0 +1,85 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/AgravePro-Light.ttf",
+      "sha1": "ac5c6eac81511cf5fa75439fb3ef9fe2422a9f3a"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/AgravePro-VariableFont_wght.ttf",
+      "sha1": "e9dded9d5ecc5a6244f3f3578104565446b15450"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-Black.ttf",
+      "sha1": "928765ebc49e7c22a223052891a9b7e9c1ced790"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-BlackItalic.ttf",
+      "sha1": "1bad15380e07bb2b34d49f1688f8d6a7fc8c918e"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-Bold.ttf",
+      "sha1": "10e061ac7f01fd542e0c1956e89b12a272607f5d"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-BoldItalic.ttf",
+      "sha1": "684044088b8dd291e8f9fc420e333fb5da8246f5"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-ExtraBold.ttf",
+      "sha1": "283ba20eb28248c93a2f109c6694c2aaa1107561"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-ExtraBoldItalic.ttf",
+      "sha1": "a6136ebe162e9d9be785b6779a8901b569608ec1"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-ExtraLight.ttf",
+      "sha1": "c88b3ca1abf5b2073b98c8ad52747ba26230f755"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-ExtraLightItalic.ttf",
+      "sha1": "ec98406f92b6afbddfe844dcc9aaf6b22ae66895"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-Italic.ttf",
+      "sha1": "ec05a36d3abcf8146acc5ef9669d3996003a001f"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-Light.ttf",
+      "sha1": "5c144a0909fca26b32c9d5a42cd85e18f7ca924f"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-LightItalic.ttf",
+      "sha1": "6efa8022814e34a2df3705a3a7223969459d4730"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-Medium.ttf",
+      "sha1": "dad2637623defedd4720447c5bbaa3d96b1594ee"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-MediumItalic.ttf",
+      "sha1": "28caf006dd930393c33f6f42728080ffd3dc08b3"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-Regular.ttf",
+      "sha1": "76c500a4e46a2ef4252e909109926e08272ac849"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-SemiBold.ttf",
+      "sha1": "d0f49c8f35f1155a2c0a945051319e134d3ba0cf"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-SemiBoldItalic.ttf",
+      "sha1": "a296a5a6a61b4cf6b430563e43392b73ac2cf9ad"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-Thin.ttf",
+      "sha1": "064ce26456e9ec9ba9e8d01ef953ab2ec99fdc81"
+    },
+    {
+      "path": "src/screens/FoodDeliveryApp/assets/fonts/DMSans-ThinItalic.ttf",
+      "sha1": "5bdd32d409cc062ca0402dbaeb9ef5a68ffdf322"
+    }
+  ]
+}
