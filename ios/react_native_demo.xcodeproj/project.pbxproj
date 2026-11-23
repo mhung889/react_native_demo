@@ -7,10 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00B25312805A45D8A9F08A08 /* DMSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70793D6C798F463CA7C67E73 /* DMSans-ExtraLight.ttf */; };
+		0AA0B631038E449786538E30 /* DMSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFE646099B6842CB890DCDEF /* DMSans-Regular.ttf */; };
+		0B5041AB5F5247BABDBF85FF /* DMSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C00420629CEB4BB28034C666 /* DMSans-ExtraBold.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-react_native_demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-react_native_demo.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		347CC453B058408DBB1BB35A /* DMSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D20152C352684A8F98AE9A58 /* DMSans-Black.ttf */; };
+		3C2BA254F38F4D0199FBDEDE /* DMSans-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFAE0C4D6F0E4844877A081D /* DMSans-BlackItalic.ttf */; };
+		46BE006E2FB8454DA81CD7D5 /* AgravePro-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6A12772CF3649D7AB9B038C /* AgravePro-VariableFont_wght.ttf */; };
+		5015757E529E4A28BABD7843 /* DMSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4730DB4E12145D991EAAF32 /* DMSans-MediumItalic.ttf */; };
+		6571CB0060574E2C9D02425C /* DMSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D6CEC86468B4CCB8033F367 /* DMSans-LightItalic.ttf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8DB94B986CD54C21A6B11754 /* DMSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B65166C62FDA4D19B49D5AA3 /* DMSans-BoldItalic.ttf */; };
+		91512FB7419E46BE8C5BD9C0 /* AgravePro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63CDDF51B22C450ABA2C5EE0 /* AgravePro-Light.ttf */; };
+		9D3FA0DE0ECE495EAA0EB57C /* DMSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7415D6F6E4304CA89947DBD7 /* DMSans-Medium.ttf */; };
+		A6AE8675BA244DB59EBF1C1C /* DMSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F47D259EEC7B48C5BFEC8BAD /* DMSans-Italic.ttf */; };
+		C1C9F4311BBD43BBB41E23D0 /* DMSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D56F616A9E149318CEEDF96 /* DMSans-SemiBoldItalic.ttf */; };
+		C854A73C786B4A5587524B49 /* DMSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50CB87B47AA74D7788B0BD08 /* DMSans-Thin.ttf */; };
+		CCB30313C7CD4F05B2338269 /* DMSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1792AC49462A4DF480061D13 /* DMSans-SemiBold.ttf */; };
+		CF0EFA557E3E407992730A67 /* DMSans-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8BFA17225AD4073B7B3F960 /* DMSans-ThinItalic.ttf */; };
+		E0A40FA5CF874316A64390AA /* DMSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B14630D3F1B443AA4A692F8 /* DMSans-Bold.ttf */; };
+		E40FE25B16624F39ADF83C45 /* DMSans-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7CE843DD39C42EEB8C1CEFE /* DMSans-ExtraLightItalic.ttf */; };
+		F0BCC599011443838B8C5EB1 /* DMSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66CB33528B204926886DA9E0 /* DMSans-Light.ttf */; };
+		F3E664E4A2DD4993A1D31F7A /* DMSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44EB9174CCBA447286EE1100 /* DMSans-ExtraBoldItalic.ttf */; };
 		F445BF715DF869CDD6CF2BCD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
@@ -19,12 +39,32 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = react_native_demo/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = react_native_demo/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = react_native_demo/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1792AC49462A4DF480061D13 /* DMSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-SemiBold.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-react_native_demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_demo.debug.xcconfig"; path = "Target Support Files/Pods-react_native_demo/Pods-react_native_demo.debug.xcconfig"; sourceTree = "<group>"; };
+		3D6CEC86468B4CCB8033F367 /* DMSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-LightItalic.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		44EB9174CCBA447286EE1100 /* DMSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-ExtraBoldItalic.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		50CB87B47AA74D7788B0BD08 /* DMSans-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Thin.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-Thin.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-react_native_demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_demo.release.xcconfig"; path = "Target Support Files/Pods-react_native_demo/Pods-react_native_demo.release.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-react_native_demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-react_native_demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		63CDDF51B22C450ABA2C5EE0 /* AgravePro-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "AgravePro-Light.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/AgravePro-Light.ttf"; sourceTree = "<group>"; };
+		66CB33528B204926886DA9E0 /* DMSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Light.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-Light.ttf"; sourceTree = "<group>"; };
+		70793D6C798F463CA7C67E73 /* DMSans-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-ExtraLight.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-ExtraLight.ttf"; sourceTree = "<group>"; };
+		7415D6F6E4304CA89947DBD7 /* DMSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Medium.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-Medium.ttf"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = react_native_demo/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = react_native_demo/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8D56F616A9E149318CEEDF96 /* DMSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-SemiBoldItalic.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		9B14630D3F1B443AA4A692F8 /* DMSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Bold.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-Bold.ttf"; sourceTree = "<group>"; };
+		B65166C62FDA4D19B49D5AA3 /* DMSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-BoldItalic.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		BFE646099B6842CB890DCDEF /* DMSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Regular.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-Regular.ttf"; sourceTree = "<group>"; };
+		C00420629CEB4BB28034C666 /* DMSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-ExtraBold.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		D20152C352684A8F98AE9A58 /* DMSans-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Black.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-Black.ttf"; sourceTree = "<group>"; };
+		D8BFA17225AD4073B7B3F960 /* DMSans-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-ThinItalic.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-ThinItalic.ttf"; sourceTree = "<group>"; };
+		E4730DB4E12145D991EAAF32 /* DMSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-MediumItalic.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		E6A12772CF3649D7AB9B038C /* AgravePro-VariableFont_wght.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "AgravePro-VariableFont_wght.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/AgravePro-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EFAE0C4D6F0E4844877A081D /* DMSans-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-BlackItalic.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-BlackItalic.ttf"; sourceTree = "<group>"; };
+		F47D259EEC7B48C5BFEC8BAD /* DMSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Italic.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-Italic.ttf"; sourceTree = "<group>"; };
+		F7CE843DD39C42EEB8C1CEFE /* DMSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-ExtraLightItalic.ttf"; path = "../src/screens/FoodDeliveryApp/assets/fonts/DMSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +100,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4F83F487A8DD4D96B9EB1845 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BFE646099B6842CB890DCDEF /* DMSans-Regular.ttf */,
+				7415D6F6E4304CA89947DBD7 /* DMSans-Medium.ttf */,
+				8D56F616A9E149318CEEDF96 /* DMSans-SemiBoldItalic.ttf */,
+				E6A12772CF3649D7AB9B038C /* AgravePro-VariableFont_wght.ttf */,
+				9B14630D3F1B443AA4A692F8 /* DMSans-Bold.ttf */,
+				50CB87B47AA74D7788B0BD08 /* DMSans-Thin.ttf */,
+				66CB33528B204926886DA9E0 /* DMSans-Light.ttf */,
+				63CDDF51B22C450ABA2C5EE0 /* AgravePro-Light.ttf */,
+				F7CE843DD39C42EEB8C1CEFE /* DMSans-ExtraLightItalic.ttf */,
+				D8BFA17225AD4073B7B3F960 /* DMSans-ThinItalic.ttf */,
+				70793D6C798F463CA7C67E73 /* DMSans-ExtraLight.ttf */,
+				B65166C62FDA4D19B49D5AA3 /* DMSans-BoldItalic.ttf */,
+				1792AC49462A4DF480061D13 /* DMSans-SemiBold.ttf */,
+				C00420629CEB4BB28034C666 /* DMSans-ExtraBold.ttf */,
+				EFAE0C4D6F0E4844877A081D /* DMSans-BlackItalic.ttf */,
+				E4730DB4E12145D991EAAF32 /* DMSans-MediumItalic.ttf */,
+				3D6CEC86468B4CCB8033F367 /* DMSans-LightItalic.ttf */,
+				D20152C352684A8F98AE9A58 /* DMSans-Black.ttf */,
+				F47D259EEC7B48C5BFEC8BAD /* DMSans-Italic.ttf */,
+				44EB9174CCBA447286EE1100 /* DMSans-ExtraBoldItalic.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +143,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				4F83F487A8DD4D96B9EB1845 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -161,6 +230,26 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				F445BF715DF869CDD6CF2BCD /* PrivacyInfo.xcprivacy in Resources */,
+				0AA0B631038E449786538E30 /* DMSans-Regular.ttf in Resources */,
+				9D3FA0DE0ECE495EAA0EB57C /* DMSans-Medium.ttf in Resources */,
+				C1C9F4311BBD43BBB41E23D0 /* DMSans-SemiBoldItalic.ttf in Resources */,
+				46BE006E2FB8454DA81CD7D5 /* AgravePro-VariableFont_wght.ttf in Resources */,
+				E0A40FA5CF874316A64390AA /* DMSans-Bold.ttf in Resources */,
+				C854A73C786B4A5587524B49 /* DMSans-Thin.ttf in Resources */,
+				F0BCC599011443838B8C5EB1 /* DMSans-Light.ttf in Resources */,
+				91512FB7419E46BE8C5BD9C0 /* AgravePro-Light.ttf in Resources */,
+				E40FE25B16624F39ADF83C45 /* DMSans-ExtraLightItalic.ttf in Resources */,
+				CF0EFA557E3E407992730A67 /* DMSans-ThinItalic.ttf in Resources */,
+				00B25312805A45D8A9F08A08 /* DMSans-ExtraLight.ttf in Resources */,
+				8DB94B986CD54C21A6B11754 /* DMSans-BoldItalic.ttf in Resources */,
+				CCB30313C7CD4F05B2338269 /* DMSans-SemiBold.ttf in Resources */,
+				0B5041AB5F5247BABDBF85FF /* DMSans-ExtraBold.ttf in Resources */,
+				3C2BA254F38F4D0199FBDEDE /* DMSans-BlackItalic.ttf in Resources */,
+				5015757E529E4A28BABD7843 /* DMSans-MediumItalic.ttf in Resources */,
+				6571CB0060574E2C9D02425C /* DMSans-LightItalic.ttf in Resources */,
+				347CC453B058408DBB1BB35A /* DMSans-Black.ttf in Resources */,
+				A6AE8675BA244DB59EBF1C1C /* DMSans-Italic.ttf in Resources */,
+				F3E664E4A2DD4993A1D31F7A /* DMSans-ExtraBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
