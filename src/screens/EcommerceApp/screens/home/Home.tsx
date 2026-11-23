@@ -12,6 +12,7 @@ import { colors } from '../../themes/color';
 import { SCREENS } from '../../navigation/SCREENS';
 import { commonStyle } from '../../themes/commonStyle';
 import { HomeStackParamList, MainTabParamList } from '../../navigation/types';
+import { useTranslation } from 'react-i18next';
 
 // type HomeNavigationProp = BottomTabNavigationProp<MainTabParamList>;
 
@@ -21,6 +22,7 @@ type HomeNavigationProp = CompositeNavigationProp<
 >;
 
 const Home = () => {
+  const { t } = useTranslation();
   const navigation = useNavigation<HomeNavigationProp>();
   const { products, loading, hanleRefresh, refreshing } = useHomeLogic();
 
@@ -33,7 +35,7 @@ const Home = () => {
   const renderRightElement = () => {
     return (
       <Pressable onPress={handleNagivateAllProduct}>
-        <Text style={styles.viewAll}> {'View all'}</Text>
+        <Text style={styles.viewAll}> {t('home.viewAll')}</Text>
       </Pressable>
     );
   };
@@ -54,8 +56,8 @@ const Home = () => {
           {products.length > 3 && <HomeBanner product={products[3]} />}
 
           <ProductListHeader
-            name="Sale"
-            title="Super summer sale"
+            name={t('home.sale')}
+            title={t('home.saleDes')}
             rightElement={renderRightElement()}
             products={products.slice(0, 10)}
           />

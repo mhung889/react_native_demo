@@ -29,7 +29,7 @@ export const productServices = {
       },
     });
 
-    return response.data.products;
+    return response.data.products || [];
   },
 
   getAllProductsByCategory: async (categoryName: string) => {

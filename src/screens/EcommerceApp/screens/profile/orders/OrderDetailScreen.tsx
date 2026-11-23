@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { CompositeScreenProps } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Alert, Dimensions, FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
@@ -9,12 +10,16 @@ import Header from '../../../components/common/Header';
 import { CartItem } from '../../../store/cart/cart.store';
 import { formatDateOrder, formatPrice } from '../../../utils';
 import { useOrderStore } from '../../../store/order/order.store';
-import { ProfileStackParamList } from '../../../navigation/types';
+import { ProfileStackParamList, RootStackParamList } from '../../../navigation/types';
 
-type OrderDetailScreenProps = NativeStackScreenProps<ProfileStackParamList, typeof SCREENS.PROFILE_ORDER_DETAIL>;
+type OrderDetailScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<ProfileStackParamList, typeof SCREENS.PROFILE_ORDER_DETAIL>,
+  NativeStackScreenProps<RootStackParamList>
+>;
 
 const OrderDetailScreen = ({ route, navigation }: OrderDetailScreenProps) => {
   const { orderId } = route.params;
+
   const orderDetail = useOrderStore((state) => state.orders.find((order) => order.id === orderId));
   const cancelOrder = useOrderStore((state) => state.cancelOrder);
 
@@ -45,6 +50,12 @@ const OrderDetailScreen = ({ route, navigation }: OrderDetailScreenProps) => {
     ]);
   };
 
+  const handleReorder = () => {
+    navigation.push(SCREENS.CHECKOUT, {
+      itemList: orderDetail.items,
+    });
+  };
+
   const renderItem = ({ item }: { item: CartItem }) => {
     return (
       <>
@@ -59,12 +70,13 @@ const OrderDetailScreen = ({ route, navigation }: OrderDetailScreenProps) => {
             <Text style={styles.itemCategory}>{item.category ?? item.brand}</Text>
 
             <Text style={styles.itemSize}>
-              Size: <Text style={styles.itemValue}>{item.size}</Text>
+              {'Size:'} <Text style={styles.itemValue}>{item.size}</Text>
             </Text>
 
             <View style={styles.itemFooter}>
               <Text style={styles.itemQuantity} numberOfLines={1}>
-                Quantity: <Text style={styles.itemValue}>{item.quantity}</Text>
+                {'Quantity: '}
+                <Text style={styles.itemValue}>{item.quantity}</Text>
               </Text>
 
               <Text style={styles.itemPrice} numberOfLines={1} adjustsFontSizeToFit>
@@ -145,7 +157,7 @@ const OrderDetailScreen = ({ route, navigation }: OrderDetailScreenProps) => {
 
       {orderDetail.status === 'delivered' && (
         <View style={styles.actionContainer}>
-          <Pressable style={styles.outlineButton}>
+          <Pressable style={styles.outlineButton} onPress={handleReorder}>
             <Text style={styles.buttonText}>{'Reorder'}</Text>
           </Pressable>
 

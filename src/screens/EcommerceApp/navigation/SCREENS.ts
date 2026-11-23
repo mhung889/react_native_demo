@@ -37,8 +37,10 @@ export const SCREENS = {
   PROFILE_SETTINGS: 'ProfileSettings',
   PROFILE_MY_ORDERS: 'ProfileMyOrders',
   PROFILE_ORDER_DETAIL: 'ProfileOrderDetail',
-  PROFILE_ADDRESS: 'ProfileAddress',
   PROFILE_PAYMENT_METHOD: 'ProfilePaymentMethod',
+  PROFILE_PASSCODE: 'ProfilePassCode',
+  PROFILE_LANGUAGE: 'ProfileLanguage',
+  PROFILE_ADDRESS: 'ProfileAddress',
 
   // Profile Address management
   PROFILE_ADDRESS_ADD: 'ProfileAddressAdd',

@@ -42,7 +42,7 @@ export const useOrderStore = create<OrderStoreProps>((set) => ({
         ...order.address,
       },
       paymentCard: order.paymentCard ? { ...order.paymentCard } : undefined,
-      status: 'pending',
+      status: 'delivered',
       createdAt: new Date().toISOString(),
     };
     set((state) => ({
