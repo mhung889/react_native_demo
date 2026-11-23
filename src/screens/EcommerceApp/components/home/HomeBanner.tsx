@@ -8,10 +8,12 @@ import { ProductType } from '../../types/product';
 import { SCREENS } from '../../navigation/SCREENS';
 import { commonStyle } from '../../themes/commonStyle';
 import { HomeStackParamList } from '../../navigation/types';
+import { useTranslation } from 'react-i18next';
 
 type HomeBannerNavigationProp = NativeStackNavigationProp<HomeStackParamList>;
 
 const HomeBanner = ({ product }: { product: ProductType }) => {
+  const { t } = useTranslation();
   const navigation = useNavigation<HomeBannerNavigationProp>();
 
   const handleNavigate = () => {
@@ -35,7 +37,7 @@ const HomeBanner = ({ product }: { product: ProductType }) => {
       <View style={styles.textBanner}>
         <Text style={styles.titleBanner}>{'Comestic\nsale'}</Text>
         <Pressable style={styles.button} onPress={handleNavigate}>
-          <Text style={styles.textButton}> {'Check'} </Text>
+          <Text style={styles.textButton}> {t('common.check')} </Text>
         </Pressable>
       </View>
     </View>

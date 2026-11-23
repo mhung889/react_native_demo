@@ -18,6 +18,8 @@ export type ProfileStackParamList = {
   [SCREENS.PROFILE_SETTINGS]: {
     user: User;
   };
+  [SCREENS.PROFILE_PASSCODE]: undefined;
+  [SCREENS.PROFILE_LANGUAGE]: undefined;
   [SCREENS.PROFILE_MY_ORDERS]: undefined;
   [SCREENS.PROFILE_ORDER_DETAIL]: {
     orderId: string;

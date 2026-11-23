@@ -7,12 +7,14 @@ import { commonStyle } from '../../themes/commonStyle';
 import { formatPrice, getDiscountPrice } from '../../utils';
 
 import RatingStar from '../common/ProductCard/RatingStar';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   product: ProductType;
 };
 
 const ProductInfo = ({ product }: Props) => {
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <View style={styles.titleRow}>
@@ -22,7 +24,7 @@ const ProductInfo = ({ product }: Props) => {
       </View>
       <Text style={styles.name}>{product.title}</Text>
       <RatingStar reviews={product.reviews} />
-      <Text style={styles.descriptionTitle}>{'Description'}</Text>
+      <Text style={styles.descriptionTitle}>{t('productDetail.description')}</Text>
       <Text style={styles.description}>{product.description}</Text>
     </View>
   );

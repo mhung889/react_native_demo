@@ -6,8 +6,11 @@ import { colors } from '../../themes/color';
 import { ProductType } from '../../types/product';
 import { useFavoriteStore } from '../../store/favorite/favorite.store';
 import ProductCardItem from '../../components/common/ProductCard/ProductCardItem';
+import { useTranslation } from 'react-i18next';
 
 const FavoritesScreen = () => {
+  const { t } = useTranslation();
+
   const { getFavoriteProductList } = useFavoriteStore();
   const products = getFavoriteProductList();
 
@@ -18,13 +21,17 @@ const FavoritesScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>{'Yêu thích'}</Text>
-        <Text style={styles.subtitle}>{`${products.length} sản phẩm`}</Text>
+        <Text style={styles.title}>{t('favorites.favoriteText')}</Text>
+        <Text style={styles.subtitle}>
+          {t('favorites.countProduct', {
+            countProduct: products.length,
+          })}
+        </Text>
       </View>
 
       {products.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Text style={styles.emptyTitle}>{'Danh sách yêu thích trống'}</Text>
+          <Text style={styles.emptyTitle}>{t('favorites.favoritesEmpty')}</Text>
         </View>
       ) : (
         <FlatList

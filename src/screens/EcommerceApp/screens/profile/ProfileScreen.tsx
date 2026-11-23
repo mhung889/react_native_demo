@@ -12,11 +12,14 @@ import { useAuthStore } from '../../store/auth/auth.store';
 import { ProfileStackParamList } from '../../navigation/types';
 import ProfileMenuItem from '../../components/profile/ProfileMenuItem';
 import { useAddressStore } from '../../store/profile/address.store';
+import { useTranslation } from 'react-i18next';
 
 type ProfileNavigationProp = NativeStackNavigationProp<ProfileStackParamList>;
 
 const ProfileScreen = () => {
   const navigation = useNavigation<ProfileNavigationProp>();
+
+  const { t } = useTranslation();
 
   const user = useAuthStore((state) => state.user);
   const addressList = useAddressStore((state) => state.addressList);
@@ -40,9 +43,17 @@ const ProfileScreen = () => {
     });
   }, [navigation, user]);
 
+  const handleNavigatePassCode = useCallback(() => {
+    navigation.navigate(SCREENS.PROFILE_PASSCODE);
+  }, [navigation]);
+
+  const handleNavigateChangeLanguage = useCallback(() => {
+    navigation.navigate(SCREENS.PROFILE_LANGUAGE);
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={[styles.header]}>{'My Profile'}</Text>
+      <Text style={[styles.header]}>{t('profile.myProfile')}</Text>
 
       <View style={styles.profileContainer}>
         <AvatarDefaultIcon width={64} height={64} style={styles.avatarDefaultIcon} />
@@ -54,35 +65,52 @@ const ProfileScreen = () => {
       </View>
 
       <ProfileMenuItem
-        title="My orders"
-        subtitle={`Already have orders`}
+        title={t('profile.myOrders')}
+        subtitle={t('profile.myOrderDescription')}
         isItemDivider
         onPress={handleNavigateMyOrder}
         isShowIconRight
       />
 
       <ProfileMenuItem
-        title="Shipping address"
-        subtitle={`${addressList.length} addresses`}
+        title={t('profile.addresses')}
+        subtitle={t('profile.addressesDescription', {
+          count: addressList.length,
+        })}
         isItemDivider
         onPress={handleNavigateAddress}
         isShowIconRight
       />
 
       <ProfileMenuItem
-        title="Payment methods"
-        subtitle={`Visa `}
+        title={t('profile.paymentMethods')}
+        subtitle={t('profile.paymentMethodsDescription')}
         isItemDivider
         isShowIconRight
         onPress={handleNavigatePaymentMethod}
       />
 
-      <ProfileMenuItem title="My reviews" subtitle={`Reviews for `} isItemDivider isShowIconRight />
+      {/* <ProfileMenuItem title="My reviews" subtitle={`Reviews for `} isItemDivider isShowIconRight /> */}
 
       <ProfileMenuItem
-        title="Settings"
-        subtitle={`Notification, password`}
+        title={t('profile.settings')}
+        subtitle={t('profile.settingsDescription')}
         onPress={handleNavigateSetting}
+        isShowIconRight
+        isItemDivider
+      />
+
+      <ProfileMenuItem
+        title={t('profile.passcode')}
+        subtitle={`Test PassCode`}
+        onPress={handleNavigatePassCode}
+        isShowIconRight
+      />
+
+      <ProfileMenuItem
+        title={t('profile.language')}
+        subtitle={t('profile.languageDescription')}
+        onPress={handleNavigateChangeLanguage}
         isShowIconRight
       />
     </SafeAreaView>

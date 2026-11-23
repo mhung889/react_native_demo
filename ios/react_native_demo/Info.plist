@@ -62,5 +62,10 @@
     <string>Ionicons.ttf</string>
     <string>Lucide.ttf</string>
 </array>
+
+ <key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>sms</string>
+</array>
 </dict>
 </plist>

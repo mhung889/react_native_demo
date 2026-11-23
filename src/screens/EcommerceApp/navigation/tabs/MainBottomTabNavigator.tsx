@@ -12,6 +12,7 @@ import HomeStackNavigator from '../stacks/HomeStackNavigator';
 import ShopStackNavigator from '../stacks/ShopStackNavigator';
 import ProfileStackNavigator from '../stacks/ProfileStackNavigator';
 import FavoriteStackNavigator from '../stacks/FavoriteStackNavigator';
+import { useTranslation } from 'react-i18next';
 
 const MainTab = createBottomTabNavigator<MainTabParamList>();
 
@@ -21,6 +22,7 @@ const MainBottomTabNavigator = () => {
   );
 
   const { bottom } = useSafeAreaInsets();
+  const { t } = useTranslation();
 
   return (
     <MainTab.Navigator
@@ -29,22 +31,39 @@ const MainBottomTabNavigator = () => {
         tabBarIcon: ({ focused, color, size }) => renderIcon(route.name, focused, color, size),
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: colors.backgroundBottom,
+          backgroundColor: colors.background,
           paddingBottom: bottom,
         },
+        tabBarItemStyle: {},
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.gray,
       })}
     >
-      <MainTab.Screen name={SCREENS.HOME_TAB} component={HomeStackNavigator} options={{ title: 'Home' }} />
-      <MainTab.Screen name={SCREENS.SHOP_TAB} component={ShopStackNavigator} options={{ title: 'Shop' }} />
-      <MainTab.Screen name={SCREENS.BAG_TAB} component={BagStackNavigator} options={{ title: 'Bag' }} />
+      <MainTab.Screen
+        name={SCREENS.HOME_TAB}
+        component={HomeStackNavigator}
+        options={{ title: t('bottomMainTabs.home') }}
+      />
+      <MainTab.Screen
+        name={SCREENS.SHOP_TAB}
+        component={ShopStackNavigator}
+        options={{ title: t('bottomMainTabs.shop') }}
+      />
+      <MainTab.Screen
+        name={SCREENS.BAG_TAB}
+        component={BagStackNavigator}
+        options={{ title: t('bottomMainTabs.bag') }}
+      />
       <MainTab.Screen
         name={SCREENS.FAVORITES_TAB}
         component={FavoriteStackNavigator}
-        options={{ title: 'Favorites' }}
+        options={{ title: t('bottomMainTabs.favorites') }}
       />
-      <MainTab.Screen name={SCREENS.PROFILE_TAB} component={ProfileStackNavigator} options={{ title: 'Profile' }} />
+      <MainTab.Screen
+        name={SCREENS.PROFILE_TAB}
+        component={ProfileStackNavigator}
+        options={{ title: t('bottomMainTabs.profile') }}
+      />
     </MainTab.Navigator>
   );
 };

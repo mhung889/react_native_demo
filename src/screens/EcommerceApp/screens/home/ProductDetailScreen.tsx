@@ -1,9 +1,10 @@
 import BottomSheet from '@gorhom/bottom-sheet';
+import Share from 'react-native-share';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Header from '../../components/common/Header';
 import { productServices } from '../../services/productService';
@@ -23,10 +24,13 @@ import { SCREENS } from '../../navigation/SCREENS';
 import { commonStyle } from '../../themes/commonStyle';
 import { useCartStore } from '../../store/cart/cart.store';
 import { HomeStackParamList } from '../../navigation/types';
+import { useFavoriteStore } from '../../store/favorite/favorite.store';
+import { useTranslation } from 'react-i18next';
 
 export type ProductDetailProps = NativeStackScreenProps<HomeStackParamList, typeof SCREENS.PRODUCT_DETAIL>;
 
 const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
+  const { t } = useTranslation();
   const { productId } = route.params;
 
   const [product, setProduct] = useState<ProductType | null>(null);
@@ -38,6 +42,7 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   const [productsLikeCategory, setProductsLikeCategory] = useState<ProductType[]>([]);
+  const favoriteProductList = useFavoriteStore((state) => state.favoriteProductList);
 
   const addItem = useCartStore((state) => state.addItem);
 
@@ -58,6 +63,17 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
 
   const handleOpenSizeSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
+  }, []);
+
+  const handleShare = useCallback(async () => {
+    try {
+      await Share.open({
+        title: 'Test Share Product',
+        message: 'Test 23122312312312321321',
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const handleAddToCart = useCallback(() => {
@@ -84,8 +100,10 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
 
   const filterProductLikeCategory = useMemo(() => {
     if (!product) return [];
-    return productsLikeCategory.filter((p) => p.id !== product.id);
-  }, [product, productsLikeCategory]);
+    // loc bo nhung san pham da o trong favorites ra.
+    const favoriteProductListId = favoriteProductList.map((product) => product.id);
+    return productsLikeCategory.filter((p) => p.id !== product.id && !favoriteProductListId.includes(p.id));
+  }, [product, productsLikeCategory, favoriteProductList]);
 
   useEffect(() => {
     fetchSingleProduct();
@@ -134,8 +152,12 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
     <SafeAreaView style={styles.container} edges={['top']}>
       <Header
         onBack={() => navigation.goBack()}
-        title="Product Detail"
-        rightElement={<Ionicons name="share-social-outline" size={22} color={colors.white} />}
+        title={t('productDetail.header')}
+        rightElement={
+          <Pressable onPress={handleShare}>
+            <Ionicons name="share-social-outline" size={22} color={colors.white} />
+          </Pressable>
+        }
         isShowleftElement={true}
       />
 
@@ -144,13 +166,16 @@ const ProductDetailScreen = ({ route, navigation }: ProductDetailProps) => {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <ProductImageSlider images={product.images} />
+        <ProductImageSlider images={product.images} product={product} />
 
         <View style={styles.productContent}>
           <ProductOptions selectedSize={selectedSize} onSelectSize={handleOpenSizeSheet} product={product} />
           <ProductInfo product={product} />
           <View style={styles.mainButton}>
-            <AddToCartButton title={'ADD TO CART'} onPress={selectedSize ? handleAddToCart : handleOpenSizeSheet} />
+            <AddToCartButton
+              title={t('productDetail.addToCart')}
+              onPress={selectedSize ? handleAddToCart : handleOpenSizeSheet}
+            />
           </View>
           <View style={styles.sectionIndicator} />
         </View>

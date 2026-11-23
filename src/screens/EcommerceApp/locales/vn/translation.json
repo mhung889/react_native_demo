@@ -1,0 +1,69 @@
+{
+    "common": {
+      "save": "Lưu",
+      "cancel": "Hủy",
+      "confirm": "Xác nhận",
+      "delete": "Xóa",
+      "back": "Quay lại",
+      "check": "Chi tiết"
+    },
+    
+    "order": {
+      "title": "Chi tiết đơn hàng",
+      "notFound": "Không tìm thấy đơn hàng",
+      "cancelOrder": "Hủy đơn hàng",
+      "reorder": "Đặt hàng lại",
+      "cancelConfirmation": "Bạn có chắc chắn muốn hủy đơn hàng này?"
+    },
+
+    "profile": {
+      "title": "Hồ sơ",
+      "myProfile": "Thông tin cá nhân",
+      "myOrders": "Đơn hàng của tôi",
+      "myOrderDescription": "Xem các đơn hàng đã đặt",
+      "addresses": "Địa chỉ của tôi",
+      "addressesDescription": "{{count}} địa chỉ đã lưu",
+      "paymentMethods": "Phương thức thanh toán",
+      "paymentMethodsDescription": "Visa, MasterCard",
+      "settings": "Cài đặt",
+      "settingsDescription": "Thông báo, mật khẩu",
+      "passcode": "Mã khóa",
+      "language": "Ngôn ngữ",
+      "languageDescription": "Thay đổi ngôn ngữ"
+    },
+
+    "language": {
+      "selectLanguage": "Chọn ngôn ngữ",
+      "english": "Tiếng Anh",
+      "vietnamese": "Tiếng Việt"
+    },
+
+    "bottomMainTabs": {
+      "home": "Trang chủ",
+      "shop": "Cửa hàng",
+      "bag": "Giỏ hàng",
+      "favorites": "Yêu thích",
+      "profile": "Hồ sơ"
+    },
+
+    "home": {
+     "sale": "Khuyến mãi",
+     "saleDes": "Siêu ưu đãi mùa hè",
+     "viewAll": "Xem tất cả",
+     "comesticSale": "Khuyến mãi mỹ phẩm"
+    },
+
+    "productDetail": {
+      "header": "Chi tiết sản phẩm",
+      "selectSize": "Chọn Size",
+      "description": "Mô tả",
+      "addToCart": "THÊM VÀO GIỎ HÀNG"
+    },
+
+    "favorites": {
+      "favoriteText": "Danh sách yêu thích",
+      "countProduct": "{{countProduct}} sản phẩm",
+      "favoritesEmpty": "Danh sách yêu thích trống"
+    }
+
+  }

@@ -12,6 +12,8 @@ import AddressProfileScreen from '../../screens/profile/address/AddressProfileSc
 import AddAddressProfile from '../../components/profile/address/AddAddressProfile';
 import UpdateAddressProfile from '../../components/profile/address/UpdateAddressProfile';
 import PaymentMethodScreen from '../../screens/profile/payment-method/PaymentMethodScreen';
+import PassCodeScreen from '../../screens/profile/passcode/PassCodeScreen';
+import LanguageScreen from '../../screens/profile/language/LanguageScreen';
 
 const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
 
@@ -20,14 +22,15 @@ const ProfileStackNavigator = () => {
     <ProfileStack.Navigator initialRouteName={SCREENS.PROFILE} screenOptions={screenOption.default}>
       <ProfileStack.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
       <ProfileStack.Screen name={SCREENS.PROFILE_MY_ORDERS} component={MyOrdersScreen} />
+      <ProfileStack.Screen name={SCREENS.PROFILE_ORDER_DETAIL} component={OrderDetailScreen} />
       <ProfileStack.Screen name={SCREENS.PROFILE_PAYMENT_METHOD} component={PaymentMethodScreen} />
+      <ProfileStack.Screen name={SCREENS.PROFILE_SETTINGS} component={SettingProfileScreen} />
+      <ProfileStack.Screen name={SCREENS.PROFILE_PASSCODE} component={PassCodeScreen} />
+      <ProfileStack.Screen name={SCREENS.PROFILE_LANGUAGE} component={LanguageScreen} />
 
       <ProfileStack.Screen name={SCREENS.PROFILE_ADDRESS} component={AddressProfileScreen} />
       <ProfileStack.Screen name={SCREENS.PROFILE_ADDRESS_ADD} component={AddAddressProfile} />
       <ProfileStack.Screen name={SCREENS.PROFILE_ADDRESS_UPDATE} component={UpdateAddressProfile} />
-
-      <ProfileStack.Screen name={SCREENS.PROFILE_SETTINGS} component={SettingProfileScreen} />
-      <ProfileStack.Screen name={SCREENS.PROFILE_ORDER_DETAIL} component={OrderDetailScreen} />
     </ProfileStack.Navigator>
   );
 };

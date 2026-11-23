@@ -1,0 +1,75 @@
+{
+    "common": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "delete": "Delete",
+      "back": "Back",
+      "check": "Check"
+    },
+    "settings": {
+      "title": "Settings",
+      "language": "Language",
+      "selectLanguage": "Select Language",
+      "english": "English",
+      "vietnamese": "Vietnamese"
+    },
+ 
+    "order": {
+      "title": "Order Details",
+      "notFound": "Order not found",
+      "cancelOrder": "Cancel Order",
+      "reorder": "Reorder",
+      "cancelConfirmation": "Do you want to cancel this order?"
+    },
+
+    "profile": {
+      "title": "Profile",
+      "myProfile": "My Profile",
+      "myOrders": "My Orders",
+      "myOrderDescription": "Already have orders",
+      "addresses": "My Addresses",
+      "addressesDescription": "{{count}} saved addresses",
+      "paymentMethods": "Payment Methods",
+      "paymentMethodsDescription": "Visa, MasterCard",
+      "settings": "Settings",
+      "settingsDescription": "Notification, password",
+      "passcode": "PassCode",
+      "language": "Language",
+      "languageDescription": "Change Language"
+    },
+
+    "language": {
+      "selectLanguage": "Select Language",
+      "english": "English",
+      "vietnamese": "Vietnamese"
+    },
+
+    "bottomMainTabs": {
+      "home": "Home",
+      "shop": "Shop",
+      "bag": "Bag",
+      "favorites": "Favorites",
+      "profile": "Profile"
+    },
+
+    "home": {
+      "sale": "Sale",
+      "saleDes": "Super summer sale",
+      "viewAll": "View All",
+      "comesticSale": "Comestic Sale"
+    },
+
+    "productDetail": {
+      "header": "Product Detail",
+      "selectSize": "Select size",
+      "description": "Description",
+      "addToCart": "ADD TO CART"
+    },
+
+    "favorites": {
+      "favoriteText": "FaVorites List",
+      "countProduct": "{{countProduct}} products",
+      "favoritesEmpty": "Favorites Empty"
+    }
+  }
