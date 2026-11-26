@@ -1,13 +1,28 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../../theme/colors';
 import { Fonts } from '../../theme/fonts';
+import { SCREENS } from '../../navigation/SCREENS';
 import { SlideDataType, SLIDES_DATA } from '../../constant';
+import { RootStackParamList } from '../../navigation/types';
+import ButtonHeader from '../../components/common/ButtonHeader';
+
+type OnboardingNavigation = NativeStackNavigationProp<RootStackParamList>;
 
 const OnboardingScreen = () => {
+  const navigation = useNavigation<OnboardingNavigation>();
+
+  const handleNavigateGetStarted = () => {
+    navigation.push(SCREENS.AUTH_STACK, {
+      screen: SCREENS.GET_STARTED,
+    });
+  };
+
   const _renderItem = ({ item }: { item: SlideDataType }) => {
     return (
       <View style={styles.itemContainer}>
@@ -17,9 +32,9 @@ const OnboardingScreen = () => {
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.description}>{item.description}</Text>
 
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText}>{'Get started'}</Text>
-        </TouchableOpacity>
+        <View style={styles.btn}>
+          <ButtonHeader handleNavigate={handleNavigateGetStarted} title="Get started" />
+        </View>
       </View>
     );
   };
@@ -87,14 +102,8 @@ const styles = StyleSheet.create({
     color: colors['Neutral-100'],
   },
 
-  btn: { backgroundColor: colors['Red-400'], borderRadius: 16, marginTop: 109 },
-  btnText: {
-    fontSize: 15,
-    fontWeight: '500',
-    fontFamily: Fonts.Light,
-    paddingVertical: 12,
-    textAlign: 'center',
-    color: colors['Neutral-00'],
+  btn: {
+    marginTop: 109,
   },
 
   panigationContainer: {
